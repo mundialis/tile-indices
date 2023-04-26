@@ -1,10 +1,10 @@
 ############################################################################
 #
-# MODULE:      r.dop.import
+# MODULE:      DOP_tileindex_BE_BB
 # AUTHOR(S):   Johannes Halbauer
 #
 # PURPOSE:     Creats a DOP tile index for Brandenburg and Berlin based on the file names of DOPs from https://geoportal.brandenburg.de/de/cms/portal/start stored in a .csv file.
-# COPYRIGHT:   (C) 2022 by mundialis GmbH & Co. KG
+# COPYRIGHT:   (C) 2023 by mundialis GmbH & Co. KG
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
