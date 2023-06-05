@@ -6,4 +6,4 @@ COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-# RUN sh /scr/tile-indices/DOP/NW/openNRW_DOP_tindex.sh
+RUN sh DOP/NW/openNRW_DOP_tindex.sh
