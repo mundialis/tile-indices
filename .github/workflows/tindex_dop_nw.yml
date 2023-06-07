@@ -41,7 +41,7 @@ jobs:
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
-        docker cp $ID:/src/tile-indices/DOP/NW/NW_DOP_tileindex2.gpkg.gz DOP/NW/
+        docker cp $ID:/src/tile-indices/DOP/NW/test3.txt DOP/NW/
     #   id: docker_build
     #   uses: docker/build-push-action@v2
     #   with:
