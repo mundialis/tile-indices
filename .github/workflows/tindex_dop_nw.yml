@@ -41,18 +41,16 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: false
+        repository: tile-indix-dop-nw
         tags: tindex_creation
         context: .
         file: docker/Dockerfile
         no-cache: true
-        with:
-          repository: tile-indix-dop-nw
-          tags: latest
     - name: Export tile index from docker image
       uses: shrink/actions-docker-extract@v2
       id: extract
       with:
-        image: tile-indix-dop-nw
+        image: tile-indix-dop-nw:tindex_creation
         path: /src/tile-indices/DOP/NW/NW_DOP_tileindex2.gpkg.gz
     - name: LS
       run: |
