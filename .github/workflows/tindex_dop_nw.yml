@@ -17,6 +17,8 @@ jobs:
         ID=$(docker create test-tindex)
         echo $ID
         docker cp $ID:/src/tile-indices/DOP/NW/openNRW_DOP10_tileindex.gpkg.gz DOP/NW/
+        docker cp $ID:/src/tile-indices/DOP/NW/test.txt .
+        echo test.txt
     # Commit and push all changed files.
     - name: Upload tindex
       # Only run on main branch push (e.g. after pull request merge).
