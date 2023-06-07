@@ -37,7 +37,7 @@ jobs:
     - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
       # Only run on main branch push (e.g. after pull request merge).
       run: |
-        echo hello > DOP/NW/test.txt
+        echo hello > DOP/NW/test2.txt
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git add DOP/NW/test2.txt
