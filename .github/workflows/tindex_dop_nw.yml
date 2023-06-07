@@ -39,7 +39,7 @@ jobs:
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
-        docker cp $ID:/src/tile-indices/DOP/NW/test3.txt DOP/NW/
+        docker cp $ID:/src/tile-indices/DOP/NW/openNRW_DOP10_tileindex2.gpkg.gz DOP/NW/
     - name: LS
       run: |
         ls
@@ -53,7 +53,7 @@ jobs:
         echo ${ID}
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-        git add DOP/NW/test3.txt
+        git add openNRW_DOP10_tileindex2.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git push
 
