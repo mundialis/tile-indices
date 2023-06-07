@@ -18,7 +18,6 @@ jobs:
     # Commit and push all changed files.
     - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
       # Only run on main branch push (e.g. after pull request merge).
-      if: github.event_name == 'push'
       run: |
         echo hello > DOP/NW/test.txt
         git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
