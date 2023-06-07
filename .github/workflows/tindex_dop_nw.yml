@@ -30,6 +30,8 @@ on:
 jobs:
   update-tindex-dop-nw:
     runs-on: ubuntu-latest
+    env:
+      CI_COMMIT_MESSAGE: Update NW DOP tile index 
     steps:
     - uses: actions/checkout@v3
 
