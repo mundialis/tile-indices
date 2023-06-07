@@ -43,6 +43,7 @@ jobs:
     - name: LS
       run: |
         ls
+        echo "dOP_NW folder:"
         ls DOP/NW/
     # Commit and push all changed files.
     - name: Upload tindex
