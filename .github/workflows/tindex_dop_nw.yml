@@ -37,4 +37,4 @@ jobs:
         git config user.email weinmann@mundialis.de
         git add DOP/NW/test.txt
         git commit -m "Upade tile index DOP NW"
-        git push
+        git push origin main
