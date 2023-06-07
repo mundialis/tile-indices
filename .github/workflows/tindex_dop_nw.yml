@@ -53,8 +53,7 @@ jobs:
         echo ${ID}
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-        # git add DOP/NW/test2.txt
-        git add test3.txt
+        git add DOP/NW/test3.txt
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git push
 
