@@ -24,9 +24,17 @@ jobs:
         file: docker/Dockerfile
         no-cache: true
         # pull: true
-    - run: mkdir -p artifact
-    - run: echo hello > artifact/world.txt
-    - uses: actions/upload-artifact@v3
-      with:
-        name: helloworld
-        path: artifact/world.txt
+    # - run: mkdir -p artifact
+    # - run: echo hello > artifact/world.txt
+    # - uses: actions/upload-artifact@v3
+    #   with:
+    #     name: helloworld
+    #     path: artifact/world.txt
+    - name: Upload tindex
+      run: |
+        echo hello > DOP/NW/test.txt
+        git config user.name github-actions
+        git config user.email weinmann@mundialis.de
+        git add DOP/NW/test.txt
+        git commit -m "Upade tile index DOP NW"
+        git push
