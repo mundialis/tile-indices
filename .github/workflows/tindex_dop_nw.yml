@@ -34,44 +34,29 @@ jobs:
       CI_COMMIT_MESSAGE: Update NW DOP tile index
     steps:
     - uses: actions/checkout@v3
-    # - name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v2
     - name: Creation of tindex
       run: |
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
         docker cp $ID:/src/tile-indices/DOP/NW/test3.txt DOP/NW/
-    #   id: docker_build
-    #   uses: docker/build-push-action@v2
-    #   with:
-    #     repository: tile-indix-dop-nw
-    #     tags: latest
-    #     file: docker/Dockerfile
-    #     context: .
-    #     no-cache: true
-    #     # push: false
-    # - uses: shrink/actions-docker-extract@v2
-    #   id: extract
-    #   with:
-    #     image: tile-indix-dop-nw
-    #     path: /src/tile-indices/DOP/NW/NW_DOP_tileindex2.gpkg.gz
     - name: LS
       run: |
         ls
         ls DOP/NW/
+    # Commit and push all changed files.
+    - name: Upload tindex
+      # Only run on main branch push (e.g. after pull request merge).
+      run: |
+        ID=$(docker create test-tindex)
+        echo ${ID}
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        # git add DOP/NW/test2.txt
+        git add test3.txt
+        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git push
 
-
- # - name: Build Docker Image
- #        uses: docker/build-push-action@v2
- #        with:
- #          repository: my-example-image
- #          tags: latest
- #      - uses: shrink/actions-docker-extract@v2
- #        id: extract
- #        with:
- #          image: my-example-image
- #          path: /app/.
 
 
     #   id: docker_build
