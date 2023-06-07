@@ -52,8 +52,8 @@ echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp
 echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5745_1_nw_2022.jp2" >> opengeodata_nrw_dop10_URLs.csv
 
 # create tindex
-gdaltindex -f GPKG openNRW_DOP10_tileindex2.gpkg --optfile opengeodata_nrw_dop10_URLs.csv
-gzip openNRW_DOP10_tileindex2.gpkg
+gdaltindex -f GPKG openNRW_DOP10_tileindex.gpkg --optfile opengeodata_nrw_dop10_URLs.csv
+gzip openNRW_DOP10_tileindex.gpkg
 
 # cleanup
 rm opengeodata_nrw_dop10_URLs.csv
