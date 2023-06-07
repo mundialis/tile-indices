@@ -37,20 +37,25 @@ jobs:
     # - name: Set up Docker Buildx
     #   uses: docker/setup-buildx-action@v2
     - name: Creation of tindex
-      id: docker_build
-      uses: docker/build-push-action@v2
-      with:
-        repository: tile-indix-dop-nw
-        tags: latest
-        file: docker/Dockerfile
-        context: .
-        no-cache: true
-        # push: false
-    - uses: shrink/actions-docker-extract@v2
-      id: extract
-      with:
-        image: tile-indix-dop-nw
-        path: /src/tile-indices/DOP/NW/NW_DOP_tileindex2.gpkg.gz
+      run: |
+        docker build -f docker/Dockerfile -t test-tindex .
+        ID=$(docker create test-tindex)
+        echo $ID
+        docker cp $ID:/src/tile-indices/DOP/NW/NW_DOP_tileindex2.gpkg.gz DOP/NW/
+    #   id: docker_build
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     repository: tile-indix-dop-nw
+    #     tags: latest
+    #     file: docker/Dockerfile
+    #     context: .
+    #     no-cache: true
+    #     # push: false
+    # - uses: shrink/actions-docker-extract@v2
+    #   id: extract
+    #   with:
+    #     image: tile-indix-dop-nw
+    #     path: /src/tile-indices/DOP/NW/NW_DOP_tileindex2.gpkg.gz
     - name: LS
       run: |
         ls
