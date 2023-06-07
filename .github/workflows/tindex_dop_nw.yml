@@ -1,30 +1,54 @@
-name: Continuous Integration
+name: Update Tile Index
+
 on:
   push:
     branches:
       - dop_nw
-  pull_request:
-    branches:
-      - main
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
-      CI_COMMIT_AUTHOR: Continuous Integration
-    steps:
-    - uses: actions/checkout@v3
 
-    # Commit and push all changed files.
-    - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
-      # Only run on main branch push (e.g. after pull request merge).
-      run: |
-        echo hello > DOP/NW/test.txt
-        git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-        git config --global user.email "username@users.noreply.github.com"
-        git add DOP/NW/test.txt
-        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-        git push
+jobs:
+  update-version-number:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Update DOP Tile Index NW
+        run: |
+          echo hello > DOP/NW/test.txt
+      - name: Commit Changes
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git checkout -b pypi
+          git commit -a -m "Update tile index"
+          git push origin dop_nw
+
+# name: Continuous Integration
+# on:
+#   push:
+#     branches:
+#       - dop_nw
+#   pull_request:
+#     branches:
+#       - main
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     env:
+#       CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+#       CI_COMMIT_AUTHOR: Continuous Integration
+#     steps:
+#     - uses: actions/checkout@v3
+#
+#     # Commit and push all changed files.
+#     - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
+#       # Only run on main branch push (e.g. after pull request merge).
+#       run: |
+#         echo hello > DOP/NW/test.txt
+#         git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+#         git config --global user.email "username@users.noreply.github.com"
+#         git add DOP/NW/test.txt
+#         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+#         git push
 
 # name: Tile index DOP NW
 #
