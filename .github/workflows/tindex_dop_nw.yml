@@ -1,36 +1,69 @@
-name: Tile index DOP NW
-
+name: Continuous Integration
 on:
-  release:
-    types: [published]
-
+  push:
+    branches:
+      - dop_nw
+  pull_request:
+    branches:
+      - main
 jobs:
-  tindex_dop_nw:
+  build:
     runs-on: ubuntu-latest
+    env:
+      CI_COMMIT_MESSAGE: Continuous Integration Build Artifacts
+      CI_COMMIT_AUTHOR: Continuous Integration
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      # with:
-      #   path: "."
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    - name: Creation of tindex
-      id: docker_build
-      uses: docker/build-push-action@v2
-      with:
-        push: false
-        tags: tindex_creation
-        context: .
-        file: docker/Dockerfile
-        no-cache: true
-        # pull: true
-    - name: Upload Release Asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-        asset_path: ./NW_DOP_tileindex.gpkg.gz
-        asset_name: NW_DOP_tileindex.gpkg.gz
-        asset_content_type: application/gzip
+    - uses: actions/checkout@v3
+
+    # Commit and push all changed files.
+    - name: GIT Commit Build Artifacts (coverage, dist, devdist, docs)
+      # Only run on main branch push (e.g. after pull request merge).
+      if: github.event_name == 'push'
+      run: |
+        echo hello > DOP/NW/test.txt
+        git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+        git config --global user.email "username@users.noreply.github.com"
+        git add DOP/NW/test.txt
+        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git push
+
+# name: Tile index DOP NW
+#
+# on:
+#   release:
+#     types: [published]
+#
+# jobs:
+#   tindex_dop_nw:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v3
+#       # with:
+#       #   path: "."
+#     - name: Set up Docker Buildx
+#       uses: docker/setup-buildx-action@v2
+#     - name: Creation of tindex
+#       id: docker_build
+#       uses: docker/build-push-action@v2
+#       with:
+#         push: false
+#         tags: tindex_creation
+#         context: .
+#         file: docker/Dockerfile
+#         no-cache: true
+#         # pull: true
+#     # - run: mkdir -p artifact
+#     # - run: echo hello > artifact/world.txt
+#     # - uses: actions/upload-artifact@v3
+#     #   with:
+#     #     name: helloworld
+#     #     path: artifact/world.txt
+#     - name: Upload tindex
+#       run: |
+#         echo hello > DOP/NW/test.txt
+#         git config user.name github-actions
+#         git config user.email weinmann@mundialis.de
+#         git add DOP/NW/test.txt
+#         git commit -m "Upade tile index DOP NW"
+#         git push origin main
