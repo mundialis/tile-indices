@@ -42,6 +42,7 @@ jobs:
         image: osgeo/grass-gis:stable-alpine
         options: -v ${{ github.workspace }}:/src/tile-indices
         run: |
+          apk add lynx
           sh /src/tile-indices/DOP/NW/openNRW_DOP_tindex.sh
     - name: LS
       run: |
