@@ -30,13 +30,17 @@
 ############################################################################
 
 # Usage:
-#   sh openNRW_DOP_tindex.sh
+#   bash openNRW_DOP_tindex.sh
 # Output:
 #   NW_DOP10_tileindex.gpkg.gz
 #
 ######
 # fail early
-set -x
+# set -x
+
+# set parallel processes
+PJOBS=4
+NUM_DOPS=10000
 
 ########################################
 cd DOP/NW/
@@ -52,24 +56,51 @@ fi
 
 # gdalinfo /vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2 # > test.txt
 
-## test case: a few DOPs only
-echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2" > opengeodata_nrw_dop10_URLs.csv
-echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5745_1_nw_2022.jp2" >> opengeodata_nrw_dop10_URLs.csv
+# ## test case: a few DOPs only
+# echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2" > opengeodata_nrw_dop10_URLs.csv
+# echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5745_1_nw_2022.jp2" >> opengeodata_nrw_dop10_URLs.csv
 
 # full tile index with 35860 NRW DOPs
 lynx -dump -nonumbers -listonly $URL | grep www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/ | grep 'jp2$' | sed 's+^+/vsicurl/+g' > opengeodata_nrw_dop10_URLs.csv
 
-# create tindex
-NUMDOPS=$(wc -l opengeodata_nrw_dop10_URLs.csv)
-echo "Processing the following list of $NUMDOPS DOPs (first 5 entries):"
-cat opengeodata_nrw_dop10_URLs.csv | head -n 5
-gdaltindex -f GPKG openNRW_DOP10_tileindex.gpkg --optfile opengeodata_nrw_dop10_URLs.csv
+# divide csv file in more files
+mkdir -p tmp_dop_nw_tindices
+NUM=0
+FILE_NUM=0
+while read -r line
+do
+  ((NUM++))
+  if [[ ${NUM} -le ${NUM_DOPS} ]]
+  then
+    ((FILE_NUM++))
+    NUM=0
+  fi
+  FILE_NAME="tmp_dop_nw_tindices/tindex_${FILE_NUM}.csv"
+  echo $line >> ${FILE_NAME}
+done <opengeodata_nrw_dop10_URLs.csv
+
+# create tindices
+for CSV_FILE in $(ls tmp_dop_nw_tindices/*.csv) ; do
+  echo "Tindex for $CSV_FILE ..."
+  sem -j$PJOBS "gdaltindex -f GPKG ${CSV_FILE/csv/gpkg} --optfile ${CSV_FILE}"
+done
+sem --wait
+
+# merge tindices to one tindex
+for GPKG_FILE in $(ls tmp_dop_nw_tindices/*.gpkg)
+do
+  echo $GPKG_FILE
+  ogr2ogr -f gpkg -update -append -unsetFid -nln openNRW_DOP10_tileindex openNRW_DOP10_tileindex.gpkg ${GPKG_FILE}
+done
+
 # verify
 echo "Verifying vector tile index:"
 ogrinfo -so -al openNRW_DOP10_tileindex.gpkg
 # package
-rm openNRW_DOP10_tileindex.gpkg.gz
+rm -f openNRW_DOP10_tileindex.gpkg.gz
 gzip openNRW_DOP10_tileindex.gpkg
+echo "<openNRW_DOP10_tileindex.gpkg.gz> created"
 
 # cleanup
 rm opengeodata_nrw_dop10_URLs.csv
+rm -rf tmp_dop_nw_tindices

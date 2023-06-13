@@ -3,10 +3,9 @@ FROM mundialis/grass-py3-pdal:releasebranch_8_2-ubuntu as grass
 
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends --no-install-suggests \
-    lynx
-
+    lynx parallel
 COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-RUN sh DOP/NW/openNRW_DOP_tindex.sh
+RUN bash DOP/NW/openNRW_DOP_tindex.sh
