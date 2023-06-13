@@ -1,7 +1,9 @@
-FROM mundialis/grass-py3-pdal:releasebranch_8_2-alpine as grass
-# FROM osgeo/grass-gis:stable-alpine as grass
+FROM mundialis/grass-py3-pdal:releasebranch_8_2-ubuntu as grass
+# FROM osgeo/grass-gis:stable-ubuntu as grass
 
-RUN apk add lynx
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y --no-install-recommends --no-install-suggests \
+    lynx
 
 COPY . /src/tile-indices
 
