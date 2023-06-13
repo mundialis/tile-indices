@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dop_nw
+
 jobs:
   update-tindex-dop-nw:
     runs-on: ubuntu-latest
