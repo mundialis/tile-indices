@@ -53,6 +53,14 @@ if [ ! -x "`which lynx`" ] ; then
     echo "lynx required, please install lynx first"
     exit 1
 fi
+# get GitHub actions hardware info
+echo -n "Number of CPUs: "
+nproc
+echo "RAM and swap:"
+free -m
+
+# show file system(s)
+mount | sort
 
 # gdalinfo /vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2 # > test.txt
 
