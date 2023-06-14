@@ -70,7 +70,7 @@ FILE_NUM=0
 while read -r line
 do
   ((NUM++))
-  if [[ ${NUM} -le ${NUM_DOPS} ]]
+  if [[ ${NUM} -eq ${NUM_DOPS} ]]
   then
     ((FILE_NUM++))
     NUM=0
