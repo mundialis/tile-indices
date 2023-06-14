@@ -59,6 +59,9 @@ nproc
 echo "RAM and swap:"
 free -m
 
+# show file system(s)
+mount | sort
+
 # gdalinfo /vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2 # > test.txt
 
 # ## test case: a few DOPs only
