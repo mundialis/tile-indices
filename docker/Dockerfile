@@ -8,4 +8,4 @@ COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-RUN bash DOP/NW/openNRW_DOP_tindex.sh
+RUN python3 DOP/NW/openNRW_DOP_tindex.py
