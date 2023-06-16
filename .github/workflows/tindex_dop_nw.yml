@@ -1,12 +1,12 @@
 name: Update Tile Index
 
 on:
-  push:
-    branches:
-      - dop_nw  
-  # schedule:
-  #   # run tile index creation every month
-  #   - cron:  '5 22 13 * *'
+  # push:
+  #   branches:
+  #     - dop_nw
+  schedule:
+    # run tile index creation every month
+    - cron:  '0 16 16 * *'
 
 jobs:
   update-tindex-dop-nw:
