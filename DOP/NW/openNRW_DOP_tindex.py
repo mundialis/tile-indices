@@ -78,7 +78,7 @@ for num, dop in enumerate(DOP_list):
             "location": dop
         },
         "geometry": {
-            "type": "Polygon", "coordinates": [[[x1, y1], [x2, y1], [x2, y2], [x1, y2], [x2, y1]]]
+            "type": "Polygon", "coordinates": [[[x1, y1], [x2, y1], [x2, y2], [x1, y2], [x1, y1]]]
         }
     }
     geojson_dict["features"].append(feat)
