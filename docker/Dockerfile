@@ -1,11 +1,14 @@
-FROM mundialis/grass-py3-pdal:releasebranch_8_2-ubuntu as grass
-# FROM osgeo/grass-gis:stable-ubuntu as grass
+FROM osgeo/grass-gis:stable-alpine
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends --no-install-suggests \
-    lynx parallel
+# installations for DOP NW tindex
+RUN apk add lynx parallel
+
+# installations for ALKIS LK HE tindex
+RUN pip3 install requests remotezip
+
+# copy scripts
 COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-RUN python3 DOP/NW/openNRW_DOP_tindex.py
+RUN grass -c epsg:25832 /grassdb/HE_ALKIS --exec python3 ALKIS/Liegenschaftskataster/HE/HE_ALKIS_LK_tindex.py

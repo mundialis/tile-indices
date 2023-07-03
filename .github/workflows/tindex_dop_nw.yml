@@ -1,4 +1,4 @@
-name: Update Tile Index
+name: Update DOP NW Tile Index
 
 on:
   # push:
