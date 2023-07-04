@@ -22,14 +22,10 @@ License:
 Links:
 - [metadata, license, ...](https://geoportal.brandenburg.de/detailansichtdienst/render?view=gdibb&url=https%3A%2F%2Fgeoportal.brandenburg.de%2Fgs-json%2Fxml%3Ffileid%3D518094b9-d294-4e99-aeb2-550592a00682)
 - [download data](https://data.geobasis-bb.de/geobasis/daten/dgm/)
-~                                                                    
-
-
-BB:
 
 # Brandenburg (BB) Tile index of Digital Terrain Model from Brandenburg Geobasis data
 
 * Geobasis data: image based Digital Terrain Model, 1m resolution,  EPSG:25833
 * [Scripts](https://github.com/mundialis/tile-indices/tree/main/DTM/BB) to create the tile index
 * Download link: https://github.com/mundialis/tile-indices/blob/main/DTM/BB/BB_tileindex_dgm_proj.gpkg.gz
-~                                                                                                                    
+                                                                                                                    

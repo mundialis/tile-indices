@@ -22,11 +22,7 @@ License:
 Links:
 - [metadata, license, ...](https://geoportal.brandenburg.de/detailansichtdienst/render?url=https://geoportal.brandenburg.de/gs-json/xml?fileid=03de0e12-fb9f-47ae-b564-851365e2ae66)
 - [download data](https://data.geobasis-bb.de/geobasis/daten/bdom/)
-~                                                                    
-
-
-BB:
-
+                                                                   
 # Brandenburg (BB) Tile index of Digital Surface Model from Brandenburg Geobasis data
 
 * Geobasis data: image based Digital Surface Model, 1m resolution,  EPSG:25833

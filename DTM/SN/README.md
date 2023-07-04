@@ -18,14 +18,9 @@ License:
 Links:
 - [metadata, license, ...](https://geomis.sachsen.de/geomis-client/?lang=de#/datasets/iso/a3dba5b2-0118-4d76-ab78-ba656a1b489e)
 - [download data](https://www.geodaten.sachsen.de/downloadbereich-digitale-hoehenmodelle-4851.html)
-~                                                                    
-
-
-SN:
 
 # Sachsen (SN) Tile index of Digital Terrain Model from Landesvermessung Sachsen data
 
 * Geobasis data: image based Digital Terrain Model, 1m resolution,  EPSG:25833
 * [files](https://github.com/mundialis/tile-indices/tree/main/DTM/SN) to create the tile index
 * Download link: https://github.com/mundialis/tile-indices/blob/main/DTM/SN/SN_DGM_tileindex.gpkg.gz
-~                                                                                                                    
