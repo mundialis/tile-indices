@@ -98,7 +98,7 @@ def get_url(gem, zip_files, krs_url):
         if not check_url(url):
             url = None
     else:
-        print(f"No url found for {gem}!")
+        grass.message(_(f"No url found for {gem}!"))
     return url
 
 
@@ -201,7 +201,7 @@ i = 0
 for cat, val in vals.items():
     i += 1
     if i % 10 == 0:
-        print(f"{i}/{num_HE_gem} ...")
+        grass.message(_(f"{i}/{num_HE_gem} ..."))
     krs_type = val[0]
     krs = val[1]
     gem = val[2]
@@ -232,7 +232,7 @@ for cat, val in vals.items():
             krs_base_urls[f"{krs_type}_{krs}"],
         )
     if not url:
-        print(f"{krs_type} {krs}: {gem}")
+        grass.message(_(f"{krs_type} {krs}: {gem}"))
     grass.run_command(
         "v.db.update",
         map=overlay,
@@ -242,7 +242,7 @@ for cat, val in vals.items():
         quiet=True,
     )
 
-print("Exporting tindex as <HE_ALKIS_LK_tindex.gpkg>")
+grass.message(_("Exporting tindex as <HE_ALKIS_LK_tindex.gpkg>"))
 grass.run_command(
     "v.out.ogr",
     input=overlay,
@@ -255,11 +255,11 @@ if os.path.isfile("HE_ALKIS_LK_tindex.gpkg.gz"):
     os.remove("HE_ALKIS_LK_tindex.gpkg.gz")
 stream = os.popen("gzip HE_ALKIS_LK_tindex.gpkg")
 create_gz = stream.read()
-print("<HE_ALKIS_LK_tindex.gpkg.gz> created")
+grass.message(_("<HE_ALKIS_LK_tindex.gpkg.gz> created"))
 
 # cleanup
 if os.path.isfile("HE_ALKIS_LK_tindex.gpkg"):
     os.remove("HE_ALKIS_LK_tindex.gpkg")
 if os.path.isdir("tmp"):
     shutil.rmtree("tmp")
-print("Tindex creating done")
+grass.message(_("Tindex creating done"))
