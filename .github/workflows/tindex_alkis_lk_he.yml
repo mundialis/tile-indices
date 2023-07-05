@@ -9,7 +9,7 @@ on:
     - cron:  '0 1 6 * *'
 
 jobs:
-  update-tindex-dop-nw:
+  update-tindex-alkis-lk-he:
     runs-on: ubuntu-latest
     env:
       CI_COMMIT_MESSAGE: Update HE ALKIS-LK tile index
