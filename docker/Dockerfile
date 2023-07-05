@@ -11,4 +11,5 @@ COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-RUN grass -c epsg:25832 /grassdb/HE_ALKIS --exec python3 ALKIS/Liegenschaftskataster/HE/HE_ALKIS_LK_tindex.py
+# overwrite the script in workflow yaml to create other tindices
+RUN python3 DOP/NW/openNRW_DOP_tindex.py
