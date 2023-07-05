@@ -232,7 +232,7 @@ for cat, val in vals.items():
             krs_base_urls[f"{krs_type}_{krs}"],
         )
     if not url:
-        grass.message(_(f"{krs_type} {krs}: {gem}"))
+        grass.message(_(f"Not found: {krs_type} {krs} - {gem}"))
     grass.run_command(
         "v.db.update",
         map=overlay,
@@ -257,7 +257,7 @@ stream = os.popen("gzip HE_ALKIS_LK_tindex.gpkg")
 create_gz = stream.read()
 grass.message(_("<HE_ALKIS_LK_tindex.gpkg.gz> created"))
 
-# cleanup
+# cleanupy
 if os.path.isfile("HE_ALKIS_LK_tindex.gpkg"):
     os.remove("HE_ALKIS_LK_tindex.gpkg")
 if os.path.isdir("tmp"):
