@@ -1,0 +1,1 @@
+{"id":"dl-by-de/2.0","name":"Datenlizenz Deutschland - Namensnennung - Version 2.0","url":"https://www.govdata.de/dl-de/by-2-0","quelle":"Quelle: Geoportal Berlin/DOM - Digitales Oberflächenmodell, dl-de/by-2-0"}
