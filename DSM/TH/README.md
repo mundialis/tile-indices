@@ -35,4 +35,3 @@ TH:
 * Geoportal data: image based Digital Surface Model, 1m resolution,  EPSG:25832
 * [Scripts](https://github.com/mundialis/tile-indices/tree/main/DSM/TH) to create the tile index
 * Download link: https://github.com/mundialis/tile-indices/blob/main/DSM/TH/TH_DOM_tileindex.gpkg.gz
-~                                                                                                                    
