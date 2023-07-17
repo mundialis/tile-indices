@@ -25,9 +25,6 @@ License:
 Links:
 - [metadata, license, ...](https://www.geoportal-th.de/de-de/Downloadbereiche/Download-Offene-Geodaten-Th%C3%BCringen/Download-H%C3%B6hendaten)
 - [download data](https://www.geoportal-th.de/de-de/Downloadbereiche/Download-Offene-Geodaten-Th%C3%BCringen/Download-H%C3%B6hendaten)
-~                                                                    
-
-
 TH:
 
 # Thüringen (TH) Tile index of Digital Surface Model from Brandenburg Geobasis data
