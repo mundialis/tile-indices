@@ -24,8 +24,6 @@ License:
 Links:
 - [metadata, license, ...](https://www.geoportal-th.de/de-de/Downloadbereiche/Download-Offene-Geodaten-Th%C3%BCringen/Download-H%C3%B6hendaten)
 - [download data](https://www.geoportal-th.de/de-de/Downloadbereiche/Download-Offene-Geodaten-Th%C3%BCringen/Download-H%C3%B6hendaten)
-~                                                                    
-
 
 TH:
 
@@ -34,4 +32,3 @@ TH:
 * Geoportal data: image based Digital Terrain Model, 1m resolution,  EPSG:25832
 * [Scripts](https://github.com/mundialis/tile-indices/tree/main/DSM/TH) to create the tile index
 * Download link: https://github.com/mundialis/tile-indices/blob/main/DSM/TH/TH_DOM_tileindex.gpkg.gz
-~                                                                                                                           
