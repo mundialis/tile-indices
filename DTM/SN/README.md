@@ -1,4 +1,4 @@
-This folder contains a tileindex for a DTM ("DGM") of Brandenburg. It was created based on a .csv file containing list of URLs.
+This folder contains a tileindex for a DTM ("DGM") of Sachsen. It was created based on a .csv file containing list of URLs.
 
 Tile index:
 - `SN_DGM_tileindex_proj.gpkg.gz`
