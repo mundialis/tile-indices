@@ -2,7 +2,7 @@ This folder contains a tileindex for a DSM ("DOM") of Sachsen. It was created ba
 
 Tile index:
 - `SN_DOM_tileindex_proj.gpkg.gz`
-- contains one poylgon for every DTM
+- contains one poylgon for every DSM
 - download URL for each poylgon is stored as attribute
 
 Generate Tile_index with .csv file:
