@@ -35,7 +35,7 @@
 #   BB_DOM_tiles.csv
 ########################################
 
-lynx -dump -nonumbers -listonly https://data.geobasis-bb.de/geobasis/daten/bdom/xyz/ | grep https://data.geobasis-bb.de/geobasis/daten/bdom/xyz/bdom_| sed 's+^+/vsizip/vsicurl/+g' > BB_DOM_tiles.csv
+lynx -dump -nonumbers -listonly https://data.geobasis-bb.de/geobasis/daten/bdom/tif/ | grep https://data.geobasis-bb.de/geobasis/daten/bdom/tif/bdom_| sed 's+^+/vsizip/vsicurl/+g' > BB_DOM_tiles.csv
 
 # generate download script
 # cat BB_DOM_tiles.csv | sed 's+^+wget -c +g' > fetch_bb_dom_urls.sh
