@@ -1,0 +1,35 @@
+name: Update DOP NW Tile Index
+
+on:
+  # push:
+  #   branches:
+  #     - dop_nw
+  schedule:
+    # run tile index creation every month
+    - cron:  '0 1 8 * *'
+
+jobs:
+  update-tindex-dop-nw:
+    runs-on: ubuntu-latest
+    env:
+      CI_COMMIT_MESSAGE: Update NW nDSM tile index
+    steps:
+    - uses: actions/checkout@v3
+    - name: Creation of tindex
+      run: |
+        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/NRW/openNRW_nDSM_tindex.py+g" docker/Dockerfile
+        docker build -f docker/Dockerfile -t test-tindex .
+        ID=$(docker create test-tindex)
+        echo $ID
+        docker cp $ID:/src/tile-indices/nDSM/NRW/nrw_ndom_tindex_proj.gpkg.gz nDSM/NRW/
+    # Commit and push all changed files.
+    - name: Upload tindex
+      # Only run on main branch push (e.g. after pull request merge).
+      run: |
+        ID=$(docker create test-tindex)
+        echo ${ID}
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git add nDSM/NRW/nrw_ndom_tindex_proj.gpkg.gz
+        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git push
