@@ -15,7 +15,7 @@ Overview of the tile-indices:
 | **Hessen**    | **HE**              | [automated HE tindex](https://github.com/mundialis/tile-indices/blob/main/ALKIS/Liegenschaftskataster/HE/HE_ALKIS_LK_tindex.gpkg.gz) |     |     |     |      |
 | **Mecklenburg-Vorpommern** | **MV** |                               |     |     |     |      |
 | **Niedersachsen** | **NI**          |                               |     |     |     |      |
-| **Nordrhein-Westfalen** | **NW**    |                               | [automated NW tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/NW/openNRW_DO(P10_tileindex.gpkg.gz) |     |     | [automated NW tindex](https://github.com/mundialis/tile-indices/blob/main/nDSM/NRW/nrw_ndom_tindex_proj.gpkg.gz) |
+| **Nordrhein-Westfalen** | **NW**    |                               | [automated NW tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/NW/openNRW_DO(P10_tileindex.gpkg.gz) |     |     | [automated NW tindex](https://github.com/mundialis/tile-indices/blob/main/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz) |
 | **Rheinland-Pfalz** | **RP**        |                               |     |     |     |      |
 | **Saarland**  | **SL**              |                               |     |     |     |      |
 | **Sachsen**   | **SN**              |                               | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/SN/DOP20_tileindex_SN.gpkg.gz) | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/SN/SN_DOM_tileindex_proj.gpkg.gz) | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/SN/SN_DGM_tileindex_proj.gpkg.gz) |      |

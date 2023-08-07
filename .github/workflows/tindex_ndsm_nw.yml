@@ -17,11 +17,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Creation of tindex
       run: |
-        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/NRW/openNRW_nDSM_tindex.py+g" docker/Dockerfile
+        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/NW/openNRW_nDSM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
-        docker cp $ID:/src/tile-indices/nDSM/NRW/nrw_ndom_tindex_proj.gpkg.gz nDSM/NRW/
+        docker cp $ID:/src/tile-indices/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz nDSM/NRW/
     # Commit and push all changed files.
     - name: Upload tindex
       # Only run on main branch push (e.g. after pull request merge).

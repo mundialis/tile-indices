@@ -27,7 +27,7 @@
 ############################################################################
 
 # Usage:
-#   python3 nDSM/NRW/openNRW_nDSM_tindex.py
+#   python3 nDSM/NW/openNRW_nDSM_tindex.py
 # Output:
 #   nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz
 
@@ -37,7 +37,7 @@ import json
 # Digitale Orthophotos (10-fache Kompression) - Paketierung: Einzelkacheln
 URL = "https://www.opengeodata.nrw.de/produkte/geobasis/hm/ndom50_tiff/ndom50_tiff/"
 
-os.chdir("nDSM/NRW/")
+os.chdir("nDSM/NW/")
 
 # check if we have lynx tool
 stream = os.popen("which lynx")
@@ -45,7 +45,7 @@ output = stream.read()
 if output is None or output == "":
     raise Exception("lynx required, please install lynx first")
 
-# full tile index with 35860 NRW nDSMs
+# full tile index with 35860 NW nDSMs
 get_ndsm_cmd = f"lynx -dump -nonumbers -listonly {URL} | grep www.opengeodata.nrw.de/produkte/geobasis/hm/ndom50_tiff/ndom50_tiff/ | grep 'tif$'"
 stream = os.popen(get_ndsm_cmd)
 ndsm_str = stream.read()
