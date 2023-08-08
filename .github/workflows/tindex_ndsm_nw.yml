@@ -1,15 +1,12 @@
-name: Update DOP NW Tile Index
+name: Update nDSM NW Tile Index
 
 on:
-  # push:
-  #   branches:
-  #     - dop_nw
   schedule:
     # run tile index creation every month
-    - cron:  '0 1 8 * *'
+    - cron:  '0 1 9 * *'
 
 jobs:
-  update-tindex-dop-nw:
+  update-tindex-ndsm-nw:
     runs-on: ubuntu-latest
     env:
       CI_COMMIT_MESSAGE: Update NW nDSM tile index
