@@ -1,4 +1,4 @@
-FROM osgeo/grass-gis:stable-alpine
+FROM osgeo/grass-gis:current-alpine
 
 # installations for DOP NW tindex
 RUN apk add lynx parallel
