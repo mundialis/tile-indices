@@ -20,5 +20,5 @@ Overview of the tile-indices:
 | **Saarland**  | **SL**              |                               |     |     |     |      |
 | **Sachsen**   | **SN**              |                               | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/SN/DOP20_tileindex_SN.gpkg.gz) | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/SN/SN_DOM_tileindex_proj.gpkg.gz) | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/SN/SN_DGM_tileindex_proj.gpkg.gz) |      |
 | **Sachsen-Anhalt** | **ST**         |                               |     |     |     |      |
-| **Schleswig-Holstein** | **SH**     |                               |     | [SH tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/TH/TH_DOM_tileindex_proj.gpkg.gz) |     |      |
-| **Thüringen** | **TH**              |                               |     |  | [TH tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/TH/TH_DGM_tileindex_proj.gpkg.gz) |      |
+| **Schleswig-Holstein** | **SH**     |                               |     |  |     |      |
+| **Thüringen** | **TH**              |                               |     | [TH tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/TH/TH_DOM_tileindex_proj.gpkg.gz) | [TH tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/TH/TH_DGM_tileindex_proj.gpkg.gz) |      |
