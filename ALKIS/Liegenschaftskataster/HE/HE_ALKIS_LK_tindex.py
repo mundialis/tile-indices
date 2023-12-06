@@ -36,6 +36,7 @@ import shutil
 
 from datetime import datetime
 from io import BytesIO
+import ssl
 from urllib.request import urlopen, HTTPError
 from urllib.error import URLError
 from zipfile import ZipFile
@@ -47,6 +48,7 @@ from requests.utils import requote_uri
 
 
 def download_and_unzip(url, extract_to='.'):
+    ssl._create_default_https_context = ssl._create_unverified_context
     try:
         http_response = urlopen(url)
     except URLError as e:
@@ -68,7 +70,7 @@ def check_url(url):
     if test_url == 200:
         return True
     else:
-        grass.message(_(f"{url_today} is not reachable.))
+        grass.message(_(f"{url_today} is not reachable."))
         return False
 
 
