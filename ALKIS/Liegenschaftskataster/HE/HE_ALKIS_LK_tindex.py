@@ -234,7 +234,7 @@ for cat, val in vals.items():
             krs_base_urls[f"{krs_type}_{krs}"],
         )
     if not url:
-        grass.message(_(f"Not found: {krs_type} {krs} - {gem}"))
+        grass.fatal(_(f"Not found: {krs_type} {krs} - {gem}"))
     grass.run_command(
         "v.db.update",
         map=overlay,
