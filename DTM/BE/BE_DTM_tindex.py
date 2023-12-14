@@ -25,8 +25,11 @@
 #  GNU General Public License for more details.
 #
 ############################################################################
-# TODO
 # Usage:
+# Set Parameter `GDALTINDEX`
+# `GDALTINDEX=True`: using `gdaltindex` (more correct limits of the tiles)
+# `GDALTINDEX=False`: creating the tiles out of the file names (only small improvement in runtime, because you still have to check with `gdalinfo` whether the tiles are valid files at all )
+# Then call script like this:
 #   python3 DTM/BE/BE_DTM_tindex.py
 # Output:
 #   DTM/BE/be_dgm_tindex_proj.gpkg.gz
@@ -64,7 +67,7 @@ def create_tindex_by_filename(data_list):
         ds = gdal.Open(data)
         if ds is None:
             print(
-                f"<{data}> is not a valid file and will be leaft out for "
+                f"<{data}> is not a valid file and will be left out for "
                 "tindex creation."
             )
             continue
