@@ -1,12 +1,12 @@
 ############################################################################
 #
-# NAME:         BE_DTM_tindex.py
+# NAME:         BE_DSM_tindex.py
 #
 # AUTHOR(S):    Anika Weinmann
 #               mundialis GmbH & Co. KG, Bonn
 #               https://www.mundialis.de
 #
-# PURPOSE:      Create tile index of Berlin DGM/DTM xyz files
+# PURPOSE:      Create tile index of Berlin DOM/DSM txt files
 #
 # Data source:  https://www.opengeodata.nrw.de/produkte/geobasis/dop/dop/
 #
@@ -32,30 +32,31 @@
 #                     improvement in runtime, because you still have to check
 #                     with `gdalinfo` whether the tiles are valid files at all)
 # Then call script like this:
-#   python3 DTM/BE/BE_DTM_tindex.py
+#   python3 DSM/BE/BE_DSM_tindex.py
 # Output:
-#   DTM/BE/be_dgm_tindex_proj.gpkg.gz
+#   DSM/BE/be_dom_tindex_proj.gpkg.gz
 
 
 import os
 import json
 
 from osgeo import gdal
+from remotezip import RemoteZip
 
 
-# Parameter for Berlin DGM XYZ files
+# Parameter for Berlin DOM txt files
 URL = (
     "https://fbinter.stadt-berlin.de/fb/berlin/service_intern.jsp?"
-    "id=a_dgm@senstadt&type=FEED"
+    "id=a_dom1@senstadt&type=FEED"
 )
-GREP_STR = "https://fbinter.stadt-berlin.de/fb/atom/DGM1/DGM1_"
+GREP_STR = "https://fbinter.stadt-berlin.de/fb/atom/DOM/DOM1"
 EPSG_CODE = 25833
-FILE_EXTENSION = ".xyz"
+FILE_EXTENSION = ".txt"
 TILE_SIZE = 2000
-OUTPUT_FILE = "be_dgm_tindex_proj.gpkg.gz"
+OUTPUT_FILE = "be_dom_tindex_proj.gpkg.gz"
 GDALTINDEX = True
 VSI_PART = "/vsizip/vsicurl/"
-os.chdir("DTM/BE/")
+os.chdir("DSM/BE/")
 
 
 def create_tindex_by_filename(data_list):
@@ -142,10 +143,12 @@ get_data_cmd = (
 )
 stream = os.popen(get_data_cmd)
 data_str = stream.read()
-data_list = [
-    f"{x}/{os.path.basename(x).replace('.zip', FILE_EXTENSION)}"
-    for x in data_str.split()
-]
+data_list = []
+for data in data_str.split():
+    with RemoteZip(data.replace(VSI_PART, "")) as zip:
+        for zip_info in zip.infolist():
+            file_name = zip_info.filename
+            data_list.append(f"{data}/{file_name}")
 
 # create tindex
 if GDALTINDEX:
