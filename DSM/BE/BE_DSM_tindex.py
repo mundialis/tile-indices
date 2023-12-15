@@ -28,7 +28,9 @@
 # Usage:
 # Set Parameter `GDALTINDEX`
 # `GDALTINDEX=True`: using `gdaltindex` (more correct limits of the tiles)
-# `GDALTINDEX=False`: creating the tiles out of the file names (only small improvement in runtime, because you still have to check with `gdalinfo` whether the tiles are valid files at all )
+# `GDALTINDEX=False`: creating the tiles out of the file names (only small
+#                     improvement in runtime, because you still have to check
+#                     with `gdalinfo` whether the tiles are valid files at all)
 # Then call script like this:
 #   python3 DSM/BE/BE_DSM_tindex.py
 # Output:
@@ -39,10 +41,14 @@ import os
 import json
 
 from osgeo import gdal
+from remotezip import RemoteZip
 
 
 # Parameter for Berlin DOM txt files
-URL = "https://fbinter.stadt-berlin.de/fb/berlin/service_intern.jsp?id=a_dom1@senstadt&type=FEED"
+URL = (
+    "https://fbinter.stadt-berlin.de/fb/berlin/service_intern.jsp?"
+    "id=a_dom1@senstadt&type=FEED"
+)
 GREP_STR = "https://fbinter.stadt-berlin.de/fb/atom/DOM/DOM1"
 EPSG_CODE = 25833
 FILE_EXTENSION = ".txt"
@@ -131,11 +137,13 @@ if output is None or output == "":
     raise Exception("lynx required, please install lynx first")
 
 # full tile index with 35860 NRW DOPs
-get_data_cmd = f"lynx -dump -nonumbers -listonly '{URL}' | grep {GREP_STR} | grep 'zip$' | sed 's+^+{VSI_PART}+g'"
+get_data_cmd = (
+    f"lynx -dump -nonumbers -listonly '{URL}' | grep {GREP_STR} | grep 'zip$' "
+    f"| sed 's+^+{VSI_PART}+g'"
+)
 stream = os.popen(get_data_cmd)
 data_str = stream.read()
 data_list = []
-from remotezip import RemoteZip
 for data in data_str.split():
     with RemoteZip(data.replace(VSI_PART, "")) as zip:
         for zip_info in zip.infolist():

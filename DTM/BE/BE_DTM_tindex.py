@@ -28,7 +28,9 @@
 # Usage:
 # Set Parameter `GDALTINDEX`
 # `GDALTINDEX=True`: using `gdaltindex` (more correct limits of the tiles)
-# `GDALTINDEX=False`: creating the tiles out of the file names (only small improvement in runtime, because you still have to check with `gdalinfo` whether the tiles are valid files at all )
+# `GDALTINDEX=False`: creating the tiles out of the file names (only small
+#                     improvement in runtime, because you still have to check
+#                     with `gdalinfo` whether the tiles are valid files at all)
 # Then call script like this:
 #   python3 DTM/BE/BE_DTM_tindex.py
 # Output:
@@ -42,13 +44,17 @@ from osgeo import gdal
 
 
 # Parameter for Berlin DGM XYZ files
-URL = "https://fbinter.stadt-berlin.de/fb/berlin/service_intern.jsp?id=a_dgm@senstadt&type=FEED"
+URL = (
+    "https://fbinter.stadt-berlin.de/fb/berlin/service_intern.jsp?"
+    "id=a_dgm@senstadt&type=FEED"
+)
 GREP_STR = "https://fbinter.stadt-berlin.de/fb/atom/DGM1/DGM1_"
 EPSG_CODE = 25833
 FILE_EXTENSION = ".xyz"
 TILE_SIZE = 2000
 OUTPUT_FILE = "be_dgm_tindex_proj.gpkg.gz"
 GDALTINDEX = True
+VSI_PART = "/vsizip/vsicurl/"
 os.chdir("DTM/BE/")
 
 
@@ -130,7 +136,10 @@ if output is None or output == "":
     raise Exception("lynx required, please install lynx first")
 
 # full tile index with 35860 NRW DOPs
-get_data_cmd = f"lynx -dump -nonumbers -listonly '{URL}' | grep {GREP_STR} | grep 'zip$' | sed 's+^+/vsizip/vsicurl/+g'"
+get_data_cmd = (
+    f"lynx -dump -nonumbers -listonly '{URL}' | grep {GREP_STR} | grep 'zip$' "
+    f"| sed 's+^+{VSI_PART}+g'"
+)
 stream = os.popen(get_data_cmd)
 data_str = stream.read()
 data_list = [
