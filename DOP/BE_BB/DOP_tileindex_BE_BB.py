@@ -23,7 +23,6 @@
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Polygon
-import csv
 
 
 # define csv file with DOP URLs
@@ -31,10 +30,10 @@ import csv
 # All DOP download URLs stored in a .csv file are required. Each URL is
 # stored in a new line without any seperator between the lines.
 # Depending on the URLs length the indexing in line 33 and 34 should be adjusted.
-csv_file = "/path/to/csv/file"
+csv_file = "/path/to/csv/file.csv"
 
 # define path for tileindex GeoPackage
-geopackage = "/path/to/output/tileindex/geopackage"
+geopackage = "/path/to/output/tileindex/geopackage.gpkg"
 
 # import csv of DOP URLs as list
 URLs = open(csv_file).readlines()
@@ -44,7 +43,7 @@ attr_url = []
 polygons = []
 
 print("Extracting coordinates of DOP tiles...")
-for record in URLs[:4]:
+for record in URLs:
     #extract coordinates of lower left corner (sw), write them to list
     east_sw = int(record[97:100]) * 1000
     north_sw = int(record[101:105]) * 1000
@@ -66,9 +65,6 @@ for record in URLs[:4]:
     north_ne = north_sw + 1000
     corner_ne = (east_ne, north_ne)
 
-    # create list of polygon coordinates
-    #polygon = [corner_sw, corner_se, corner_nw, corner_ne]
-
     # create shapely polygon object
     polygon = Polygon([corner_sw, corner_se, corner_ne, corner_nw])
 
@@ -82,7 +78,7 @@ for record in URLs[:4]:
 print("Creating dataframe and write it to GeoPackage...")
 
 # create dataframe including tile URL and corner coordinates
-columns = ["coordinates", "URL"]
+columns = ["coordinates", "location"]
 df = pd.DataFrame(list(zip(polygons, attr_url)), columns=columns, index=None)
 
 
