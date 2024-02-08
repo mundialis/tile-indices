@@ -5,8 +5,8 @@ on:
   #   branches:
   #     - dop_nw
   schedule:
-    # run tile index creation every month
-    - cron:  '0 9 19 * *'
+    # run tile index creation every month (Min HH DD Month DayOfWeek)
+    - cron:  '0 15 08 * *'
 
 jobs:
   update-tindex-dop-nw:
