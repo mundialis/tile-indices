@@ -28,11 +28,11 @@ import geopandas as gpd
 from shapely.geometry import Polygon
 
 # define path to downloaded directory
-files_dir = "/path/to/downloaded/directory"
-
+# files_dir = "/path/to/downloaded/directory"
+files_dir = "/home/johannes/Dokumente/mundialis/bbsr/DOM1_XYZ_HH_2020_04_30"
 # define path for output tileindex geopackage
-geopackage = "/path/to/output/tileindex/geopackage.gpkg"
-
+# geopackage = "/path/to/output/tileindex/geopackage.gpkg"
+geopackage = "/home/johannes/Dokumente/mundialis/bbsr/nDSM_tileindex_HH.gpkg"
 # create lists for GeoDataframe
 attr_url = []
 polygons = []
@@ -69,8 +69,12 @@ for record in file_names:
     # write polygon object to list
     polygons.append(polygon)
 
-    # write download URL to list for becoming an attribute of the tileindex
-    attr_url.append(record)
+    # write download URL and filename to list for becoming an attribute of the tileindex
+    attr_url.append(
+        "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitales_hoehenmodell_bdom/DOM1_XYZ_HH_2020_04_30.zip"
+        + "/"
+        + record
+    )
 
 print("Creating dataframe and write it to GeoPackage...")
 

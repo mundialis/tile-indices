@@ -3,7 +3,7 @@ This folder contains a tileindex for nDSM tiles (in this case bDSM with size of 
 Tile index:
 - `nDSM_tileindex_HH.gpkg.gz`
 - contains one poylgon for every tile
-- filename for each poylgon is stored as attribute ("location")
+- download URL + filename for each poylgon is stored as attribute ("location")
 
 Download script:
 - `nDSM_tileindex_HH.py`
