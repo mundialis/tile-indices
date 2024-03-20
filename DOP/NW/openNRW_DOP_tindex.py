@@ -8,7 +8,7 @@
 #
 # PURPOSE:      Create tile index of openNRW DOP 10cm imagery files
 #
-# Data source:  https://www.opengeodata.nrw.de/produkte/geobasis/dop/dop/
+# Data source:  https://www.opengeodata.nrw.de/produkte/geobasis/lusat/akt/dop/dop_jp2_f10/
 #
 # COPYRIGHT:    (C) 2023 by Markus Neteler, Anika Weinmann, mundialis
 #
@@ -35,7 +35,7 @@ import os
 import json
 
 # Digitale Orthophotos (10-fache Kompression) - Paketierung: Einzelkacheln
-URL = "https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/"
+URL = "https://www.opengeodata.nrw.de/produkte/geobasis/lusat/akt/dop/dop_jp2_f10/"
 
 os.chdir("DOP/NW/")
 
@@ -45,14 +45,14 @@ output = stream.read()
 if output is None or output == "":
     raise Exception("lynx required, please install lynx first")
 
-# gdalinfo /vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2 # > test.txt
+# gdalinfo /vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/akt/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2 # > test.txt
 
 # test case: a few DOPs only
-# echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2" > opengeodata_nrw_dop10_URLs.csv
-# echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/dop_jp2_f10/dop10rgbi_32_531_5745_1_nw_2022.jp2" >> opengeodata_nrw_dop10_URLs.csv
+# echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/akt/dop/dop_jp2_f10/dop10rgbi_32_531_5744_1_nw_2022.jp2" > opengeodata_nrw_dop10_URLs.csv
+# echo "/vsicurl/https://www.opengeodata.nrw.de/produkte/geobasis/lusat/akt/dop/dop_jp2_f10/dop10rgbi_32_531_5745_1_nw_2022.jp2" >> opengeodata_nrw_dop10_URLs.csv
 
 # full tile index with 35860 NRW DOPs
-get_dop_cmd = f"lynx -dump -nonumbers -listonly {URL} | grep www.opengeodata.nrw.de/produkte/geobasis/lusat/dop/ | grep 'jp2$' | sed 's+^+/vsicurl/+g'"
+get_dop_cmd = f"lynx -dump -nonumbers -listonly {URL} | grep www.opengeodata.nrw.de/produkte/geobasis/lusat/akt/dop/ | grep 'jp2$' | sed 's+^+/vsicurl/+g'"
 stream = os.popen(get_dop_cmd)
 DOP_str = stream.read()
 DOP_list = DOP_str.split()
