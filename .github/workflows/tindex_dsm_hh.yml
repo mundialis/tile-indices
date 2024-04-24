@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Creation of DSM tindex
       run: |
-        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/HH/HH_DSM_tindex.py+g" docker/Dockerfile
+        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/HH_DSM --exec python3 DSM/HH/HH_DSM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
