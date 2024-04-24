@@ -103,23 +103,6 @@ def create_tindex_by_filename(data_list):
     return tindex_gpkg
 
 
-def create_tindex_by_gdaltindex(data_list):
-    tiles_csv = "tiles.csv"
-    tindex_gpkg = OUTPUT_FILE.rsplit(".", 1)[0]
-    with open(tiles_csv, "w") as f:
-        for data in data_list:
-            f.write(f"{data}\n")
-    # create tile index
-    tindex_cmd = (
-        f"gdaltindex -f GPKG -t_srs EPSG:{EPSG_CODE} {tindex_gpkg} "
-        f"--optfile {tiles_csv}"
-    )
-    stream = os.popen(tindex_cmd)
-    stream.read()
-    os.remove(tiles_csv)
-    return tindex_gpkg
-
-
 # get XYZ data list
 data_list = []
 with RemoteZip(URL) as zip:
