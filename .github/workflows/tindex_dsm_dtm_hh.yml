@@ -17,16 +17,16 @@ jobs:
     - name: Creation of DSM tindex
       run: |
         sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/HH_DSM --exec python3 DSM/HH/HH_DSM_tindex.py+g" docker/Dockerfile
-        docker build -f docker/Dockerfile -t test-tindex .
-        ID=$(docker create test-tindex)
+        docker build -f docker/Dockerfile -t test-tindex-dsm .
+        ID=$(docker create test-tindex-dsm)
         echo $ID
         docker cp $ID:/src/tile-indices/DSM/HH/hh_dom_tindex_proj.gpkg.gz DSM/HH/
     # Commit and push all changed files.
     - name: Creation of DTM tindex
       run: |
         sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/HH_DSM --exec python3 DTM/HH/HH_DTM_tindex.py+g" docker/Dockerfile
-        docker build -f docker/Dockerfile -t test-tindex .
-        ID=$(docker create test-tindex)
+        docker build -f docker/Dockerfile -t test-tindex-dtm .
+        ID=$(docker create test-tindex-dtm)
         echo $ID
         docker cp $ID:/src/tile-indices/DTM/HH/hh_dgm1_tindex_proj.gpkg.gz DTM/HH/
     # Commit and push all changed files.
