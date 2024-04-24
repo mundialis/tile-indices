@@ -102,7 +102,8 @@ data_list = []
 with RemoteZip(URL) as zip:
     for zip_info in zip.infolist():
         file_name = zip_info.filename
-        data_list.append(file_name)
+        if file_name.endswith(FILE_EXTENSION):
+            data_list.append(file_name)
 
 # create tindex
 tindex_gpkg = create_tindex_by_filename(data_list)
