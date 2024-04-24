@@ -6,7 +6,7 @@
 #               mundialis GmbH & Co. KG, Bonn
 #               https://www.mundialis.de
 #
-# PURPOSE:      Create tile index of Hamburg DOM/DSM txt files
+# PURPOSE:      Create tile index of Hamburg DOM/DSM xyz files
 #
 # Data source:  https://daten-hamburg.de/geographie_geologie_geobasisdaten/
 #

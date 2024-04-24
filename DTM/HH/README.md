@@ -3,8 +3,8 @@ This folder contains a tileindex for DTM tiles (in this case DGM1 with size of 2
 Tile index:
 - `hh_dgm1_tindex_proj.gpkg.gz`
 - contains one poylgon for every tile
-- filenames of the [ZIP](https://daten-hamburg.de/geographie_geologie_geobasisdaten/Digitales_Hoehenmodell/DGM1/dgm1_2x2km_XYZ_hh_2021_04_01.zip)
-  for each poylgon is stored as attribute ("location")
+- filenames (of the [ZIP](https://daten-hamburg.de/geographie_geologie_geobasisdaten/Digitales_Hoehenmodell/DGM1/dgm1_2x2km_XYZ_hh_2021_04_01.zip))
+for each poylgon is stored as attribute ("location")
 
 Download script:
 - `HH_DTM_tindex.py`
