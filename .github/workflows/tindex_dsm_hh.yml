@@ -1,9 +1,11 @@
 name: Update nDSM NW Tile Index
 
 on:
-  schedule:
-    # run tile index creation every month
-    - cron:  '0 2 9 * *'
+  push:
+    branches: [ HH ]
+  # schedule:
+  #   # run tile index creation every month
+  #   - cron:  '0 2 9 * *'
 
 jobs:
   update-tindex-ndsm-nw:
