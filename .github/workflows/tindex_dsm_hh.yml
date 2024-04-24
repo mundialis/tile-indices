@@ -1,8 +1,8 @@
-name: Update nDSM NW Tile Index
+name: Update DSM HH Tile Index
 
 on:
   push:
-    branches: [ HH ]
+    branches: [ main ]
   # schedule:
   #   # run tile index creation every month
   #   - cron:  '0 2 9 * *'
