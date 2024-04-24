@@ -1,12 +1,12 @@
 ############################################################################
 #
-# NAME:         HH_DSM_tindex.py
+# NAME:         HH_DTM_tindex.py
 #
 # AUTHOR(S):    Anika Weinmann
 #               mundialis GmbH & Co. KG, Bonn
 #               https://www.mundialis.de
 #
-# PURPOSE:      Create tile index of Hamburg DOM/DSM txt files
+# PURPOSE:      Create tile index of Hamburg DGM/DTM txt files
 #
 # Data source:  https://daten-hamburg.de/geographie_geologie_geobasisdaten/
 #
@@ -27,9 +27,9 @@
 ############################################################################
 # Usage:
 # Then call script like this:
-#   python3 DSM/HH/HH_DSM_tindex.py
+#   python3 DTM/HH/HH_DTM_tindex.py
 # Output:
-#   DSM/HH/hh_dom_tindex_proj.gpkg.gz
+#   DTM/HH/hh_dgm1_tindex_proj.gpkg.gz
 
 
 import os
@@ -38,16 +38,16 @@ import json
 from remotezip import RemoteZip
 
 
-# Parameter for Hamburg DOM xyz files
+# Parameter for Hamburg DGM xyz files
 URL = (
     "https://daten-hamburg.de/geographie_geologie_geobasisdaten/"
-    "digitales_hoehenmodell_bdom/DOM1_XYZ_HH_2020_04_30.zip"
+    "Digitales_Hoehenmodell/DGM1/dgm1_2x2km_XYZ_hh_2021_04_01.zip"
 )
 EPSG_CODE = 25832
 FILE_EXTENSION = ".xyz"
-TILE_SIZE = 1000
-OUTPUT_FILE = "hh_dom_tindex_proj.gpkg.gz"
-os.chdir("DSM/HH/")
+TILE_SIZE = 2000
+OUTPUT_FILE = "hh_dgm1_tindex_proj.gpkg.gz"
+os.chdir("DTM/HH/")
 
 
 def create_tindex_by_filename(data_list):
