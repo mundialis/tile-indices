@@ -1,11 +1,11 @@
 name: Update DSM HH Tile Index
 
 on:
-  push:
-    branches: [ main ]
-  # schedule:
-  #   # run tile index creation every month
-  #   - cron:  '0 2 9 * *'
+  # push:
+  #   branches: [ main ]
+  schedule:
+    # run tile index creation every month
+    - cron:  '0 2 9 * *'
 
 jobs:
   update-tindex-dsm-and-dtm-hh:
