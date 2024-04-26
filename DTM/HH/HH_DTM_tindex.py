@@ -45,7 +45,7 @@ URL = (
 )
 EPSG_CODE = 25832
 FILE_EXTENSION = ".xyz"
-TILE_SIZE = 2000
+TILE_SIZE = 1000
 OUTPUT_FILE = "hh_dgm1_tindex_proj.gpkg.gz"
 os.chdir("DTM/HH/")
 
