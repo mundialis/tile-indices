@@ -251,6 +251,7 @@ for cat, val in vals.items():
     gem = val[2]
 
     # create url for krs and gem
+    print(type, krs, gem)
     poss_krs_urls = create_urls(krs_type, krs, gem)
 
     url = None
