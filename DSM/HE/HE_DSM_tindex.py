@@ -83,7 +83,7 @@ def check_url(url):
     tries = 0
     while tries < 15 and test_url == 400:
         try:
-            test_url = urlopen(url_today).getcode()
+            test_url = urlopen(url_today, timeout=600).getcode()
         except HTTPError:
             tries = 100
             pass

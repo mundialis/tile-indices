@@ -83,7 +83,7 @@ def check_url(url):
     tries = 0
     while tries < 15 and test_url == 400:
         try:
-            test_url = urlopen(url_today).getcode()
+            test_url = urlopen(url_today, timeout=600).getcode()
         except HTTPError:
             tries = 100
             pass
@@ -152,8 +152,8 @@ def generate_gem_var(gem):
 
 """MAIN PART"""
 
-# os.chdir("/src/tile-indices/DTM/HE/")
-os.chdir("DTM/HE/")
+os.chdir("/src/tile-indices/DTM/HE/")
+# os.chdir("DTM/HE/")
 
 if not os.path.isdir("tmp"):
     os.makedirs("tmp")
