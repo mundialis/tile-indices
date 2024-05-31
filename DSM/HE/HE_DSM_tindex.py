@@ -36,6 +36,7 @@ import os
 import shutil
 
 from datetime import datetime
+from time import sleep
 from io import BytesIO
 import ssl
 from urllib.request import urlopen, HTTPError
@@ -79,16 +80,23 @@ def check_url(url):
     """Function to check if url is reachable"""
     url_today = url.replace("DATE", date)
     test_url = 400
-    try:
-        test_url = urlopen(url_today).getcode()
-    except HTTPError:
-        pass
-    except URLError:
-        pass
+    tries = 0
+    while tries < 10 and test_url == 400:
+        try:
+            test_url = urlopen(url_today).getcode()
+        except HTTPError:
+            tries = 100
+            pass
+        except URLError:
+            tries = 100
+            pass
+        except Exception:
+            tries += 1
+            sleep(10)
     if test_url == 200:
         return True
     else:
-        # grass.message(_(f"{url_today} is not reachable."))
+        grass.message(_(f"{url_today} is not reachable."))
         return False
 
 
@@ -143,6 +151,7 @@ def generate_gem_var(gem):
 """MAIN PART"""
 
 os.chdir("/src/tile-indices/DSM/HE/")
+# os.chdir("DSM/HE/")
 
 if not os.path.isdir("tmp"):
     os.makedirs("tmp")
