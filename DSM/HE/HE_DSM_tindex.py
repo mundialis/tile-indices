@@ -142,8 +142,7 @@ def generate_gem_var(gem):
 
 """MAIN PART"""
 
-# os.chdir("/src/tile-indices/DSM/HE/")
-os.chdir("DSM/HE/")
+os.chdir("/src/tile-indices/DSM/HE/")
 
 if not os.path.isdir("tmp"):
     os.makedirs("tmp")
