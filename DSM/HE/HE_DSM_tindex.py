@@ -81,7 +81,7 @@ def check_url(url):
     url_today = url.replace("DATE", date)
     test_url = 400
     tries = 0
-    while tries < 10 and test_url == 400:
+    while tries < 15 and test_url == 400:
         try:
             test_url = urlopen(url_today).getcode()
         except HTTPError:
@@ -91,8 +91,10 @@ def check_url(url):
             tries = 100
             pass
         except Exception:
+            if tries == 14:
+                pass
             tries += 1
-            sleep(10)
+            sleep(15)
     if test_url == 200:
         return True
     else:
@@ -145,6 +147,8 @@ def generate_gem_var(gem):
         gem_vars.append("Neukirchen (Knüllgebirge)")
     if gem in ["Lorch"]:
         gem_vars.append(f"{gem} am Rhein")
+    if gem == "Heppenheim":
+        gem_vars.append(f"{gem} (Bergstraße)")
     return gem_vars
 
 
