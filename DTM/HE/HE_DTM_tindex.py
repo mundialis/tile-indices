@@ -90,8 +90,9 @@ def check_url(url):
         except URLError:
             tries = 100
             pass
-        except Exception:
+        except Exception as e:
             if tries == 14:
+                print(e)
                 pass
             tries += 1
             sleep(15)
