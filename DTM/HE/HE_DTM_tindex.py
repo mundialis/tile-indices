@@ -10,7 +10,7 @@
 #
 # Data source:  https://gds.hessen.de/downloadcenter
 #
-# COPYRIGHT:    (C) 2023 by Anika Weinmann, mundialis
+# COPYRIGHT:    (C) 2024 by Anika Weinmann, mundialis
 #
 # REQUIREMENTS: pip3 install requests remotezip
 #
@@ -135,15 +135,14 @@ def generate_gem_var(gem):
         gem_vars.append("Erbach (Odenwald)")
     if gem == "Neukirchen":
         gem_vars.append("Neukirchen (Knüllgebirge)")
-    # https://gds.hessen.de/downloadcenter/20240531/3D-Daten/Digitales%20Gel%C3%A4ndemodell%20(DGM1)/Stadt%20Darmstadt/Darmstadt%20-%20DGM1.zip
-    # https://gds.hessen.de/downloadcenter/DATE    /3D-Daten/Digitales%20Gel%C3%A4ndemodell%20(DGM1)/Stadt%20Darmstadt/Darmstadt%20-%20DGM1.zip
+    if gem in ["Lorch"]:
+        gem_vars.append(f"{gem} am Rhein")
     return gem_vars
 
 
 """MAIN PART"""
 
-# os.chdir("/src/tile-indices/DTM/HE/")
-os.chdir("DTM/HE/")
+os.chdir("/src/tile-indices/DTM/HE/")
 
 if not os.path.isdir("tmp"):
     os.makedirs("tmp")
@@ -267,7 +266,6 @@ for cat, val in vals.items():
                 geojson_dict["features"].append(feat)
                 count += 1
     if url is None:
-        import pdb; pdb.set_trace()
         grass.fatal(f"No url found for {krs_type, krs, gem}!")
 
 """CREATE TILE INDEX AS .gpkg.gz FILE"""
@@ -296,10 +294,9 @@ create_gz = stream.read()
 print(f"<{gpkg_name}.gz> created")
 
 # cleanup
-import pdb; pdb.set_trace()
 if os.path.isdir("tmp"):
     shutil.rmtree("tmp")
 if os.path.isfile(geojson_name):
     os.remove(geojson_name)
-# if os.path.isfile(gpkg_name):
-#     os.remove(gpkg_name)
+if os.path.isfile(gpkg_name):
+    os.remove(gpkg_name)
