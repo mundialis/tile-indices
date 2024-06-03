@@ -52,6 +52,7 @@ from requests.utils import requote_uri
 """CONSTANT VARIABLES"""
 
 FS = "Hessen"
+MAX_RETRIES = 15
 # Base url for Hessen DTM data
 BASE_URL = (
     "https://gds.hessen.de/downloadcenter/DATE/"
@@ -81,7 +82,7 @@ def check_url(url):
     url_today = url.replace("DATE", date)
     test_url = 400
     tries = 0
-    while tries < 15 and test_url == 400:
+    while tries <= MAX_RETRIES and test_url == 400:
         try:
             test_url = urlopen(url_today, timeout=600).getcode()
         except HTTPError as e:
@@ -98,7 +99,7 @@ def check_url(url):
             sleep(15)
             pass
         except Exception as e:
-            if tries == 14:
+            if tries == MAX_RETRIES:
                 grass.message("Exception !!!")
                 grass.message(url_today)
                 grass.fatal(e)
@@ -109,7 +110,7 @@ def check_url(url):
     if test_url == 200:
         return True
     else:
-        grass.message(_(f"{url_today} is not reachable."))
+        # grass.message(_(f"{url_today} is not reachable."))
         return False
 
 
@@ -158,6 +159,8 @@ def generate_gem_var(gem):
         gem_vars.append("Neukirchen (Knüllgebirge)")
     if gem in ["Lorch"]:
         gem_vars.append(f"{gem} am Rhein")
+    if gem == "Heppenheim":
+        gem_vars.append(f"{gem} (Bergstraße)")
     return gem_vars
 
 
@@ -269,10 +272,14 @@ for cat, val in vals.items():
     for poss_krs_url in set(poss_krs_urls):
         if check_url(poss_krs_url):
             url_today = poss_krs_url.replace("DATE", date)
-            try:
-                zip = RemoteZip(url_today, timeout=1200)
-            except:
-                grass.fatal(f"Error with RemoteZip for url <{url_today}> !")
+            tries = 0
+            zip = None
+            while tries <= MAX_RETRIES and zip is None:
+                try:
+                    zip = RemoteZip(url_today, timeout=1200)
+                except:
+                    sleep(15)
+                # grass.fatal(f"Error with RemoteZip for url <{url_today}> !")
             zip_files = [zip_info.filename for zip_info in zip.infolist() if zip_info.filename.endswith(".tif")]
             for zip_file in zip_files:
                 url = f"/vsizip/vsicurl/{poss_krs_url}/{zip_file}"
