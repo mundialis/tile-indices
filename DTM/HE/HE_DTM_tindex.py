@@ -87,18 +87,22 @@ def check_url(url):
         except HTTPError as e:
             tries = 100
             grass.message("HTTPError !!!")
+            grass.message(url_today)
             grass.fatal(e)
             pass
         except URLError as e:
             tries = 100
             grass.message("URLError !!!")
+            grass.message(url_today)
             grass.fatal(e)
             pass
         except Exception as e:
             if tries == 14:
                 grass.message("Exception !!!")
+                grass.message(url_today)
                 grass.fatal(e)
                 pass
+            grass.message("RETRYING: " + url_today)
             tries += 1
             sleep(15)
     if test_url == 200:
