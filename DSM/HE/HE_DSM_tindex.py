@@ -92,7 +92,7 @@ def check_url(url):
             pass
         except Exception as e:
             if tries == 14:
-                print(e)
+                grass.fatal(e)
                 pass
             tries += 1
             sleep(15)
