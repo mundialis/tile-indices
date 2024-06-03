@@ -85,13 +85,17 @@ def check_url(url):
         try:
             test_url = urlopen(url_today, timeout=600).getcode()
         except HTTPError as e:
+            # HTTPError means 404
             tries = 100
             pass
         except URLError as e:
-            tries = 100
-            grass.message("URLError !!!")
-            grass.message(url_today)
-            grass.fatal(e)
+            if tries == 14:
+                grass.message("URLError !!!")
+                grass.message(url_today)
+                grass.fatal(e)
+            grass.message("RETRYING: " + url_today)
+            tries += 1
+            sleep(15)
             pass
         except Exception as e:
             if tries == 14:
