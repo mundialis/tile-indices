@@ -86,9 +86,6 @@ def check_url(url):
             test_url = urlopen(url_today, timeout=600).getcode()
         except HTTPError as e:
             tries = 100
-            grass.message("HTTPError !!!")
-            grass.message(url_today)
-            grass.fatal(e)
             pass
         except URLError as e:
             tries = 100
