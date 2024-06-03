@@ -270,7 +270,7 @@ for cat, val in vals.items():
     url = None
     for poss_krs_url in set(poss_krs_urls):
         if check_url(poss_krs_url):
-            zip = RemoteZip(poss_krs_url.replace("DATE", date))
+            zip = RemoteZip(poss_krs_url.replace("DATE", date), timeout=600)
             zip_files = [zip_info.filename for zip_info in zip.infolist() if zip_info.filename.endswith(".tif")]
             for zip_file in zip_files:
                 url = f"/vsizip/vsicurl/{poss_krs_url}/{zip_file}"
