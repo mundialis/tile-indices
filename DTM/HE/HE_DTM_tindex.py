@@ -84,14 +84,19 @@ def check_url(url):
     while tries < 15 and test_url == 400:
         try:
             test_url = urlopen(url_today, timeout=600).getcode()
-        except HTTPError:
+        except HTTPError as e:
             tries = 100
+            grass.message("HTTPError !!!")
+            grass.fatal(e)
             pass
-        except URLError:
+        except URLError as e:
             tries = 100
+            grass.message("URLError !!!")
+            grass.fatal(e)
             pass
         except Exception as e:
             if tries == 14:
+                grass.message("Exception !!!")
                 grass.fatal(e)
                 pass
             tries += 1
