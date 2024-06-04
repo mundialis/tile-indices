@@ -1,4 +1,5 @@
 name: Update DSM and DTM HE Tile Index
+# funktioniert bisher nur lokal und nicht in GHA (da gibt es nach 6 h einen timeout)
 
 on:
   push:
