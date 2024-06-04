@@ -90,7 +90,7 @@ def check_url(url):
             tries = 100
             pass
         except URLError as e:
-            if tries == 14:
+            if tries == MAX_RETRIES:
                 grass.message("URLError !!!")
                 grass.message(url_today)
                 grass.fatal(e)
