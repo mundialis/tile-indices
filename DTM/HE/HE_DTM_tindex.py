@@ -27,7 +27,7 @@
 ############################################################################
 
 # Usage inside grass location:
-#   grass -c epsg:25832 /grassdb/HE_ALKIS --exec python3 DTM/HE/HE_DTM_tindex.py
+#   grass -c epsg:25832 /grassdb/HE_DTM --exec python3 DTM/HE/HE_DTM_tindex.py
 # Output:
 #   DTM/HE/HE_DTM_tileindex.gpkg.gz
 
