@@ -110,7 +110,6 @@ def check_url(url):
     if test_url == 200:
         return True
     else:
-        # grass.message(_(f"{url_today} is not reachable."))
         return False
 
 
