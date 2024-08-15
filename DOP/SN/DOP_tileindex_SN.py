@@ -4,7 +4,9 @@
 #
 # AUTHOR(S):    Johannes Halbauer
 #
-# PURPOSE:      Creates a DOP tile index for Sachsen based on the file names of DOPs from https://www.geodaten.sachsen.de/index.html stored in a .csv file.
+# PURPOSE:      Creates a DOP tile index for Sachsen based on the file names
+#               of DOPs from https://www.geodaten.sachsen.de/index.html
+#               stored in a .csv file.
 #               
 # Data source:  https://www.geodaten.sachsen.de/batch-download-4719.html
 #
