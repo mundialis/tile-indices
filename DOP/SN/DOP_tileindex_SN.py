@@ -54,8 +54,8 @@ print("Extracting coordinates of DOP tiles...")
 
 for record in URLs:
     #extract coordinates of lower left corner (sw), write them to list
-    east_sw = (int(record[125:128]) * 1000)
-    north_sw = (int(record[129:133]) * 1000)
+    east_sw = (int(record[113:117]) * 1000)
+    north_sw = (int(record[107:112]) * 1000)
     corner_sw = (east_sw, north_sw)
 
     # calculate coordinates for remaining corners (DOP = 2000 x 2000 m)
@@ -105,3 +105,5 @@ with open(geopackage, "rb") as f_in:
 # cleanup
 if os.path.isfile(geopackage):
     os.remove(geopackage)
+
+print("<DOP20_tileindex_SN.gpkg.gz> created")
