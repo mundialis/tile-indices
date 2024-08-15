@@ -3,8 +3,8 @@ FROM osgeo/grass-gis:current-alpine
 # installations for DOP NW tindex
 RUN apk add lynx parallel
 
-# installations for ALKIS LK HE tindex
-RUN pip3 install requests remotezip
+# installations for ALKIS LK HE tindex and SN DOP tindex
+RUN pip3 install requests remotezip pandas geopandas shapely
 
 # copy scripts
 COPY . /src/tile-indices
