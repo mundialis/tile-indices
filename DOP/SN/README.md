@@ -7,8 +7,8 @@ Tile index:
 
 Download script:
 - `DOP20_tileindex_SN.py`
-- it is the same script as for creating the tile index of BB and BE (see `../BE_BB/DOP20_tileindex_BE_BB.py`) including small modifications (tile size)
-- .csv file containing needed download URLs: `SN_DOP20_URLs.csv`
+- extracts DOP download URLs using `selenium`
+- creates tile index based on the DOP names in download URLs using `gdal`
 
 License:
 - `license.txt`
@@ -18,3 +18,4 @@ License:
 Links:
 - [metadate, license](https://geomis.sachsen.de/geomis-client/?lang=de#/datasets/iso/52749cf1-027a-400e-8424-1cd3feef1108)
 - [download data](https://www.geodaten.sachsen.de/batch-download-4719.html)
+- [tile index download](https://github.com/mundialis/tile-indices/raw/main/DOP/SN/DOP20_tileindex_SN.gpkg.gz)
