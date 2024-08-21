@@ -27,6 +27,7 @@
 
 import os
 import json
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -62,6 +63,7 @@ driver.execute_script(
 # select option by index ("Alle (Freistaat Sachsen)")
 dropdown_landkreis = Select(dropdown_landkreis_element)
 dropdown_landkreis.select_by_index(1)
+time.sleep(1)
 
 # scroll to second drop down menu (product)
 dropdown_product_element = wait.until(
@@ -74,11 +76,10 @@ driver.execute_script(
 # select option by index ("Digitale Orthophotos 4-Kanal (RGBI) (DOP_RGBI)")
 dropdown_product = Select(dropdown_product_element)
 dropdown_product.select_by_index(10)
+time.sleep(1)
 
 # select and click button to copy dop URLs to clipboard
-button = wait.until(
-    EC.element_to_be_clickable((By.ID, "button_downloads"))
-)  # Button-ID korrekt angegeben
+button = wait.until(EC.element_to_be_clickable((By.ID, "button_downloads")))
 button.click()
 
 # close webdriver
@@ -86,7 +87,8 @@ driver.close()
 
 # write URLs from clipboard to list and remove empty line element
 urls_list = pyperclip.paste().split("\n")
-urls_list.remove("")
+if "" in urls_list:
+    urls_list.remove("")
 
 # create GeoJson dict
 geojson_dict = {
@@ -103,13 +105,19 @@ print("Creating tileindex from DOP names...")
 # loop through URLs and create tile from dop names
 for num, dop in enumerate(urls_list):
     splitted_dop_name = os.path.basename(dop).split("_")
+    dop_file_name = (
+        os.path.basename(dop).split("=")[2].replace("_tiff.zip", ".tif")
+    )
     x1 = int(splitted_dop_name[1][2:]) * 1000
     y1 = int(splitted_dop_name[2]) * 1000
     x2 = x1 + 2000
     y2 = y1 + 2000
     feat = {
         "type": "Feature",
-        "properties": {"fid": num + 1, "location": dop},
+        "properties": {
+            "fid": num + 1,
+            "location": f"/vsizip/vsicurl/{dop}/{dop_file_name}",
+        },
         "geometry": {
             "type": "Polygon",
             "coordinates": [
