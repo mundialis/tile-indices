@@ -3,8 +3,8 @@ FROM osgeo/grass-gis:current-alpine
 # installations for DOP NW tindex
 RUN apk add lynx parallel
 
-# install firefox for DOP SN tindex
-RUN apk add firefox
+# install firefox and xsel for DOP SN tindex
+RUN apk add firefox xsel
 
 # installations for ALKIS LK HE tindex
 RUN pip3 install requests remotezip
