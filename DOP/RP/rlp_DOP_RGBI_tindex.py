@@ -106,7 +106,7 @@ print(tindex_verification)
 # package
 if os.path.isfile(parent_dir +"RLP_DOP20_tileindex.gpkg.gz"):
     os.remove(parent_dir +"RLP_DOP20_tileindex.gpkg.gz")
-stream = os.popen("gzip " + parent_dir + "/RLP_DOP20_tileindex.gpkg")
+stream = os.popen("gzip " + parent_dir + "/RLP_DOP20_tileindex.gpkg") #
 create_gz = stream.read()
 print("<RLP_DOP20_tileindex.gpkg.gz> created")
 
