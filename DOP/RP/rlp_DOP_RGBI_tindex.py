@@ -58,8 +58,8 @@ for item in extracted_data:
 
 ## --- create tileindex --- ##
 parent_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-dop_name = [i.split('jp2/',1)[1] for i in urls]
-num_dops = len(dop_name)
+#dop_name = [i.split('jp2/',1)[1] for i in urls]
+num_dops = len(urls)
 
 # create geojson and set structure
 geojson_dict = {
@@ -70,7 +70,7 @@ geojson_dict = {
 }
 
 # set ID and define geometry
-for num, dop in enumerate(dop_name):
+for num, dop in enumerate(urls):
     splitted_dop_name = os.path.basename(dop).split("_")
     x1 = int(splitted_dop_name[2]) * 1000
     y1 = int(splitted_dop_name[3]) * 1000
