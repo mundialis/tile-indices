@@ -101,3 +101,17 @@ print("Verifying vector tile index:")
 stream = os.popen("ogrinfo -so -al " + parent_dir + "/RLP_DOP20_tileindex.gpkg")
 tindex_verification = stream.read()
 print(tindex_verification)
+
+# zip .gpkg
+# package
+if os.path.isfile(parent_dir +"RLP_DOP20_tileindex.gpkg.gz"):
+    os.remove(parent_dir +"RLP_DOP20_tileindex.gpkg.gz")
+stream = os.popen("gzip " + parent_dir + "/RLP_DOP20_tileindex.gpkg")
+create_gz = stream.read()
+print("<RLP_DOP20_tileindex.gpkg.gz> created")
+
+# cleanup
+if os.path.isfile("tindex.geojson"):
+    os.remove("tindex.geojson")
+if os.path.isfile("RLP_DOP20_tileindex.gpkg"):
+    os.remove("RLP_DOP20_tileindex.gpkg")
