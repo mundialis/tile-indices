@@ -4,7 +4,7 @@ FROM osgeo/grass-gis:current-alpine
 RUN apk add lynx parallel
 
 # install firefox and xsel for DOP SN tindex
-RUN apk add firefox xsel
+RUN apk add firefox
 
 # installations for ALKIS LK HE tindex
 RUN pip3 install requests remotezip
