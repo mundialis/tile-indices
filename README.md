@@ -16,7 +16,7 @@ Overview of the tile-indices:
 | **Mecklenburg-Vorpommern** | **MV** |                               |     |     |     |      |
 | **Niedersachsen** | **NI**          |                               |     |     |     |      |
 | **Nordrhein-Westfalen** | **NW**    |                               | [automated NW tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/NW/openNRW_DOP10_tileindex.gpkg.gz) |     |     | [automated NW tindex](https://github.com/mundialis/tile-indices/blob/main/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz) |
-| **Rheinland-Pfalz** | **RP**        |                               |     |     |     |      |
+| **Rheinland-Pfalz** | **RP**        |                               | [RP tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/RP/RLP_DOP20_tileindex.gpkg.gz)     |     |     |      |
 | **Saarland**  | **SL**              |                               |     |     |     |      |
 | **Sachsen**   | **SN**              |                               | [automated SN tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/SN/DOP20_tileindex_SN.gpkg.gz) | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/SN/SN_DOM_tileindex_proj.gpkg.gz) | [SN tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/SN/SN_DGM_tileindex_proj.gpkg.gz) |      |
 | **Sachsen-Anhalt** | **ST**         |                               |     |     |     |      |
