@@ -37,7 +37,9 @@ jobs:
       run: |
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config pull.rebase false
         git add DTM/HE/HE_DSM_tindex.gpkg.gz
         git add DSM/HE/HE_DTM_tindex.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git pull origin main
         git push
