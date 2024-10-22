@@ -27,6 +27,8 @@ jobs:
         echo ${ID}
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config pull.rebase false
         git add nDSM/NRW/nrw_ndom_tindex_proj.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git pull origin main
         git push
