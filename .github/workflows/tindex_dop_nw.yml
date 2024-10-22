@@ -3,7 +3,7 @@ name: Update DOP NW Tile Index
 on:
   push:
     branches:
-    - main
+    - fix_DOP_SN_pull
   schedule:
     # run tile index creation every month (Min HH DD Month DayOfWeek)
     - cron:  '0 15 08 * *'

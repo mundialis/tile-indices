@@ -3,7 +3,7 @@ name: Update DOP SN Tile Index
 on:
   push:
     branches:
-    - main
+    - fix_DOP_SN_pull
   schedule:
     # run tile index creation every month (Min HH DD Month DayOfWeek)
     - cron:  '0 15 09 * *'
@@ -31,6 +31,7 @@ jobs:
         echo ${ID}
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config pull.rebase false
         git add DOP/SN/DOP20_tileindex_SN.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git pull origin main
