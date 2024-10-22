@@ -11,7 +11,7 @@
 #
 # COPYRIGHT:    (C) 2024 by mundialis GmbH & Co. KG
 #
-# REQUIREMENTS: selenium, pyperclip, gdal
+# REQUIREMENTS: selenium, gdal
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,7 +34,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pyperclip
 
 # DOP URL
 DOP_URL = "https://www.geodaten.sachsen.de/batch-download-4719.html"
@@ -82,13 +81,21 @@ time.sleep(1)
 button = wait.until(EC.element_to_be_clickable((By.ID, "button_downloads")))
 button.click()
 
+# wait for download links to become visible
+time.sleep(5)
+
+# find all download links (assuming they are in anchor tags after clicking the button)
+download_links = driver.find_elements(By.TAG_NAME, "a")
+urls_list = []
+
+# filter out links that contain "dop20rgbi" and "tiff" in the href attribute
+for link in download_links:
+    href = link.get_attribute("href")
+    if href and "download" in href and "dop20rgbi" in href and "tiff" in href:
+        urls_list.append(href)
+
 # close webdriver
 driver.close()
-
-# write URLs from clipboard to list and remove empty line element
-urls_list = pyperclip.paste().split("\n")
-if "" in urls_list:
-    urls_list.remove("")
 
 # create GeoJson dict
 geojson_dict = {
@@ -151,5 +158,5 @@ print("<DOP20_tileindex_SN.gpkg.gz> created.")
 # cleanup
 if os.path.isfile("tindex.geojson"):
     os.remove("tindex.geojson")
-if os.path.isfile("openNRW_DOP10_tileindex.gpkg"):
-    os.remove("openNRW_DOP10_tileindex.gpkg")
+if os.path.isfile("DOP20_tileindex_SN.gpkg"):
+    os.remove("DOP20_tileindex_SN.gpkg")
