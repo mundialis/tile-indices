@@ -103,3 +103,4 @@ if os.path.isfile("tindex.geojson"):
     os.remove("tindex.geojson")
 if os.path.isfile("nw_dtm_tindex_proj.gpkg"):
     os.remove("nw_dtm_tindex_proj.gpkg")
+    
