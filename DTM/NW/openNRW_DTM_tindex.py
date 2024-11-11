@@ -77,6 +77,7 @@ for num, dtm in enumerate(dtm_list):
         }
     }
     geojson_dict["features"].append(feat)
+print(geojson_dict)
 
 with open("tindex.geojson", "w") as f:
     json.dump(geojson_dict, f, indent=4)
@@ -103,4 +104,3 @@ if os.path.isfile("tindex.geojson"):
     os.remove("tindex.geojson")
 if os.path.isfile("nw_dtm_tindex_proj.gpkg"):
     os.remove("nw_dtm_tindex_proj.gpkg")
-    
