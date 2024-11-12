@@ -10,7 +10,7 @@
 #
 # Data source:  https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_tiff/dgm1_tiff/
 #
-# COPYRIGHT:    (C) 2023 by Markus Neteler, Anika Weinmann, mundialis
+# COPYRIGHT:    (C) 2024 by mundialis GmbH & Co. KG
 #
 # REQUIREMENTS: lynx, gdal, gzip, sed
 #
@@ -46,7 +46,7 @@ if output is None or output == "":
     raise Exception("lynx required, please install lynx first")
 
 # full tile index with NW DTM
-get_dtm_cmd = f"lynx -dump -nonumbers -listonly {URL} | grep https://www.opengeodata.nrw.de/produkte/geobasis/hm/dgm1_tiff/dgm1_tiff/ | grep 'tif$'"
+get_dtm_cmd = f"lynx -dump -nonumbers -listonly {URL} | grep {URL} | grep 'tif$'"
 stream = os.popen(get_dtm_cmd)
 dtm_str = stream.read()
 dtm_list = dtm_str.split()
