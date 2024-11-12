@@ -3,7 +3,7 @@
 ################################################################################
 #
 # name: rlp_DOP_RGBI_tindex.py
-#	    create tileindex for RGBI DOPs for Rhineland-Palatine (RLP)
+#	    create tileindex for RGBI DOPs for Rhineland-Palatine (RLP/ RP)
 #
 # author: Victoria-Leandra Brunn
 #       following: openNRW_DOP_tindex.py 
@@ -14,7 +14,7 @@
 #
 # data source: https://geobasis-rlp.de/data/dop20rgbi/current/meta4/dop20rgbi_jp2_07.meta4
 #
-# copyright? requirements?
+# requirements: wget, BeautifulSoup from bs4
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -92,21 +92,22 @@ for num, dop in enumerate(urls):
 with open("tindex.geojson", "w") as f:
     json.dump(geojson_dict, f, indent=4)
 
+filepath = os.path.join(parent_dir, "/RLP_DOP20_tileindex.gpkg")
 # create GPKG from GeoJson
-stream = os.popen("ogr2ogr " + parent_dir + "/RLP_DOP20_tileindex.gpkg tindex.geojson")
+stream = os.popen("ogr2ogr " + filepath + " tindex.geojson")
 ogr2ogr_out = stream.read()
 
 # verify
 print("Verifying vector tile index:")
-stream = os.popen("ogrinfo -so -al " + parent_dir + "/RLP_DOP20_tileindex.gpkg")
+stream = os.popen("ogrinfo -so -al " + filepath)
 tindex_verification = stream.read()
 print(tindex_verification)
 
 # zip .gpkg
 # package
-if os.path.isfile(parent_dir +"RLP_DOP20_tileindex.gpkg.gz"):
-    os.remove(parent_dir +"RLP_DOP20_tileindex.gpkg.gz")
-stream = os.popen("gzip " + parent_dir + "/RLP_DOP20_tileindex.gpkg")
+if os.path.isfile(filepath + ".gz"):
+    os.remove(filepath + ".gz")
+stream = os.popen("gzip " + filepath)
 create_gz = stream.read()
 print("<RLP_DOP20_tileindex.gpkg.gz> created")
 

@@ -9,7 +9,7 @@ on:
     - cron:  '0 15 09 * *'
 
 jobs:
-  update-tindex-dop-nw:
+  update-tindex-dop-sn:
     runs-on: ubuntu-latest
     env:
       CI_COMMIT_MESSAGE: Update SN DOP tile index
@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Creation of tindex
       run: |
-        sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install selenium pyperclip+g" docker/Dockerfile
+        sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install selenium+g" docker/Dockerfile
         sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN python3 DOP/SN/DOP_tileindex_SN.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
@@ -31,6 +31,8 @@ jobs:
         echo ${ID}
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-        git add DOP/SN/DOP_20_tileindex_SN.gpkg.gz
+        git config pull.rebase false
+        git add DOP/SN/DOP20_tileindex_SN.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git pull origin main
         git push
