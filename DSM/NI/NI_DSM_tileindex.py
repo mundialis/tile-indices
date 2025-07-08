@@ -8,7 +8,7 @@
 #
 # PURPOSE:      Download and modify tile index of Niedersachsen DSM files
 #
-# Data source:  https://daten-hamburg.de/geographie_geologie_geobasisdaten/
+# Data source:  https://ni-lgln-opengeodata.hub.arcgis.com/
 #
 # COPYRIGHT:    (C) 2025 Johannes Halbauer, mundialis
 #

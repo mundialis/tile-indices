@@ -1,12 +1,12 @@
 ############################################################################
 #
-# NAME:         NI_DTM_tindex.py
+# NAME:         NI_DOP_tindex.py
 #
 # AUTHOR(S):    Johannes Halbauer
 #               mundialis GmbH & Co. KG, Bonn
 #               https://www.mundialis.de
 #
-# PURPOSE:      Download and modify tile index of Niedersachsen DTM files
+# PURPOSE:      Download and modify tile index of Niedersachsen DOP files
 #
 # Data source:  https://ni-lgln-opengeodata.hub.arcgis.com/
 #
@@ -27,38 +27,61 @@
 ############################################################################
 # Usage:
 # Then call script like this:
-#   python3 DTM/NI/NI_DTM_tindex.py
+#   python3 DOP/NI/NI_DOP_tindex.py
 # Output:
-#   DTM/NI/NI_DTM_tindex_proj.gpkg.gz
+#   DOP/NI/NI_DOP_tindex_proj.gpkg.gz
 
 
 import os
 import json
+from datetime import datetime
 import wget
 
 
 # parameters
 URL = (
     "https://arcgis-geojson.s3.eu-de.cloud-object-storage.appdomain.cloud/"
-    "dgm1/lgln-opengeodata-dgm1.geojson"
+    "dop20/lgln-opengeodata-dop20.geojson"
 )
-OUTPUT_FILE = "NI_DTM_tindex_proj.gpkg.gz"
-os.chdir("DTM/NI/")
-
-# download tileindex
-wget.download(URL, "tindex_orig.geojson", bar=None)
+OUTPUT_FILE = "NI_DOP_tindex_proj.gpkg.gz"
+os.chdir("DOP/NI/")
 
 # define geojson keys to rename
-rename = {"dgm1": "location"}
+rename = {"rgbi": "location"}
 
 # define geojson keys to keep
 keep = ["location"]
+
+# download tileindex
+wget.download(URL, "tindex_orig.geojson", bar=None)
 
 # read geojson
 with open("tindex_orig.geojson", "r") as f:
     geojson = json.load(f)
 
+# only keep latest tiles from overlapping tiles
+latest_tiles = {}
 for feature in geojson.get("features", []):
+    props = feature.get("properties", {})
+    tile_id = props.get("tile_id")
+    aktualitaet_str = props.get("Aktualitaet")
+
+    if not tile_id or not aktualitaet_str:
+        continue
+
+    try:
+        aktualitaet = datetime.strptime(aktualitaet_str[:10], "%Y-%m-%d")
+    except ValueError as e:
+        print(f"An error while parsing date string: {e}")
+        continue
+
+    # compare and possibly replace
+    if tile_id not in latest_tiles or aktualitaet > latest_tiles[tile_id][0]:
+        latest_tiles[tile_id] = (aktualitaet, feature)
+
+filtered_features = [entry[1] for entry in latest_tiles.values()]
+
+for feature in filtered_features:
     properties = feature.get("properties", {})
 
     # rename
@@ -70,6 +93,9 @@ for feature in geojson.get("features", []):
     delete_keys = set(properties.keys()) - set(keep)
     for key in delete_keys:
         del properties[key]
+
+# update features
+geojson["features"] = filtered_features
 
 # write updated geojson
 with open("tindex.geojson", "w", encoding="utf-8") as f:
