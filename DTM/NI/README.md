@@ -6,7 +6,7 @@ Tileindex:
 - download links of the GeoTIFFs are stored as attribute ("location")
 
 Download script:
-- `NI_DTM_tileindex.py`
+- `NI_DTM_tindex.py`
 - downloads tileindex (GeoJSON) from [OpenGeoData.NI](https://ni-lgln-opengeodata.hub.arcgis.com/apps/lgln-opengeodata::digitales-gel%C3%A4ndemodell-dgm1/about)
 - removes not needed attributes and creates "location" attribute
 - converts modified GeoJSON tileindex into GPKG format

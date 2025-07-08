@@ -6,7 +6,7 @@ Tileindex:
 - download links of the GeoTIFFs are stored as attribute ("location")
 
 Download script:
-- `NI_DOP_tileindex.py`
+- `NI_DOP_tindex.py`
 - downloads tileindex (GeoJSON) from [OpenGeoData.NI](https://ni-lgln-opengeodata.hub.arcgis.com/apps/lgln-opengeodata::digitales-orthophoto-dop/about)
 - filters overlapping tiles and only keeps latest ones
 - removes not needed attributes and creates "location" attribute
