@@ -17,7 +17,7 @@ jobs:
     - name: Creation of DSM tindex
       run: |
         sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install wget+g" docker/Dockerfile
-        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN python3 DSM/NI/NI_DSM_tileindex.py+g" docker/Dockerfile
+        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN python3 DSM/NI/NI_DSM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex-dsm .
         ID=$(docker create test-tindex-dsm)
         echo $ID
@@ -25,7 +25,7 @@ jobs:
     # Commit and push all changed files.
     - name: Creation of DTM tindex
       run: |
-        sed -i "s+RUN python3 DSM/NI/NI_DSM_tileindex.py+RUN python3 DTM/NI/NI_DTM_tileindex.py+g" docker/Dockerfile
+        sed -i "s+RUN python3 DSM/NI/NI_DSM_tileindex.py+RUN python3 DTM/NI/NI_DTM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex-dtm .
         ID=$(docker create test-tindex-dtm)
         echo $ID
