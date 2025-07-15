@@ -40,5 +40,5 @@ jobs:
         git add DTM/NI/NI_DTM_tindex_proj.gpkg.gz
         git add DSM/NI/NI_DSM_tindex_proj.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
-        git config pull.rebase false
+        git pull origin main
         git push
