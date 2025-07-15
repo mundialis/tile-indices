@@ -2,8 +2,7 @@ name: Update DSM NI Tile Index
 
 on:
   push:
-    branches: [ NI_fix_DSM_DTM_workflow ]
-    # branches: [ main ]
+    branches: [ main ]
   schedule:
     # run tile index creation every month
     - cron:  '0 2 11 * *'
