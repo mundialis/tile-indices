@@ -1,0 +1,38 @@
+name: Update DOP NI Tile Index
+
+on:
+  push:
+    branches:
+    - main
+  schedule:
+    # run tile index creation every month (Min HH DD Month DayOfWeek)
+    - cron:  '0 15 10 * *'
+
+jobs:
+  update-tindex-dop-ni:
+    runs-on: ubuntu-latest
+    env:
+      CI_COMMIT_MESSAGE: Update NI DOP tile index
+    steps:
+    - uses: actions/checkout@v4
+    - name: Creation of tindex
+      run: |
+        sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install wget+g" docker/Dockerfile
+        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN python3 DOP/NI/NI_DOP_tindex.py+g" docker/Dockerfile
+        docker build -f docker/Dockerfile -t test-tindex .
+        ID=$(docker create test-tindex)
+        echo $ID
+        docker cp $ID:/src/tile-indices/DOP/NI/NI_DOP_tindex_proj.gpkg.gz DOP/NI/
+    # Commit and push all changed files.
+    - name: Upload tindex
+      # Only run on main branch push (e.g. after pull request merge).
+      run: |
+        ID=$(docker create test-tindex)
+        echo ${ID}
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config pull.rebase false
+        git add DOP/NI/NI_DOP_tindex_proj.gpkg.gz
+        git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git pull origin main
+        git push
