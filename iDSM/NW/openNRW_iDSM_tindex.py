@@ -77,7 +77,8 @@ for num, idsm in enumerate(idsm_list):
         }
     }
     geojson_dict["features"].append(feat)
-print(geojson_dict)
+# For debugging:
+# print(geojson_dict)
 
 with open("tindex.geojson", "w") as f:
     json.dump(geojson_dict, f, indent=4)
