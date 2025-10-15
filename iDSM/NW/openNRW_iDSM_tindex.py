@@ -6,7 +6,7 @@
 #               mundialis GmbH & Co. KG, Bonn
 #               https://www.mundialis.de
 #
-# PURPOSE:      Create tile index of openNRW iDSM .tif files
+# PURPOSE:      Create tile index of openNRW iDSM .laz files
 #
 # Data source:  https://www.opengeodata.nrw.de/produkte/geobasis/hm/bdom50_las/bdom50_las/
 #
