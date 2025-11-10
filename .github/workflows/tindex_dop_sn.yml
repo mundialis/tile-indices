@@ -14,7 +14,7 @@ jobs:
     env:
       CI_COMMIT_MESSAGE: Update SN DOP tile index
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Creation of tindex
       run: |
         sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install selenium+g" docker/Dockerfile
