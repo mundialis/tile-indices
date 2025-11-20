@@ -13,7 +13,7 @@ jobs:
     env:
       CI_COMMIT_MESSAGE: Update NI DSM and DTM tile index
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Creation of DSM tindex
       run: |
         sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install wget+g" docker/Dockerfile
