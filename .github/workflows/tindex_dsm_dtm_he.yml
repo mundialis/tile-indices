@@ -15,7 +15,7 @@ jobs:
     env:
       CI_COMMIT_MESSAGE: Update HE DSM and DTM tile index
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Creation of DSM tindex
       run: |
         sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/HE_DSM --exec python3 DSM/HE/HE_DSM_tindex.py+g" docker/Dockerfile
