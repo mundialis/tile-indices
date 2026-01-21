@@ -1,52 +1,50 @@
 ############################################################################
 #
 # MODULE:      DOP_tileindex_BE_BB
-# AUTHOR(S):   Johannes Halbauer
+# AUTHOR(S):   Johannes Halbauer, Anika Weinmann
 #
-# PURPOSE:     Creats a DOP tile index for Brandenburg and Berlin based on the file names of DOPs from https://geoportal.brandenburg.de/de/cms/portal/start stored in a .csv file.
-# COPYRIGHT:   (C) 2023 by mundialis GmbH & Co. KG
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# PURPOSE:     Creates a DOP tile index for Brandenburg and Berlin based on the
+#              file names of DOPs from hhttps://data.geobasis-bb.de/geobasis/
+#              daten/dop/rgbi_tif/.
+# SPDX-FileCopyrightText: (c) 2023-2025 by mundialis GmbH & Co. KG
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
 #############################################################################
 
 
 # import required packages
-import pandas as pd
+import os
+from pathlib import Path
+
 import geopandas as gpd
+import pandas as pd
 from shapely.geometry import Polygon
 
+URL = "https://data.geobasis-bb.de/geobasis/daten/dop/rgbi_tif/"
+OUTPUT_FILE = "DOP20_tileindex_BE_BB.gpkg.gz"
 
-# define csv file with DOP URLs
-
-# All DOP download URLs stored in a .csv file are required. Each URL is
-# stored in a new line without any seperator between the lines.
-# Depending on the URLs length the indexing in line 33 and 34 should be adjusted.
-csv_file = "/path/to/csv/file.csv"
-
-# define path for tileindex GeoPackage
-geopackage = "/path/to/output/tileindex/geopackage.gpkg"
-
-# import csv of DOP URLs as list
-URLs = open(csv_file).readlines()
+# list of DOPs
+GET_DOP_CMD = (
+    f"lynx -dump -nonumbers -listonly {URL} | grep {URL} | grep 'dop_' | "
+    "sed 's+^+/vsizip/vsicurl/+g'"
+)
+stream = os.popen(GET_DOP_CMD)
+DOP_str = stream.read()
+DOP_list = DOP_str.split()
 
 # create lists for GeoDataframe
 attr_url = []
 polygons = []
 
 print("Extracting coordinates of DOP tiles...")
-for record in URLs:
-    #extract coordinates of lower left corner (sw), write them to list
-    east_sw = int(record[97:100]) * 1000
-    north_sw = int(record[101:105]) * 1000
+for dop_url in DOP_list:
+
+    dop_name = Path(dop_url).stem
+
+    # extract coordinates of lower left corner (sw), write them to list
+    x, y = dop_name.split("_")[-1].split("-")
+    east_sw = (int(x) - 33000) * 1000
+    north_sw = int(y) * 1000
     corner_sw = (east_sw, north_sw)
 
     # calculate coordinates for remaining corners (DOP = 1000 x 1000 m)
@@ -72,7 +70,7 @@ for record in URLs:
     polygons.append(polygon)
 
     # write download URL to list for becoming an attribute of the tileindex
-    attr_url.append(record)
+    attr_url.append(f"{dop_url}/{dop_name}.tif")
 
 
 print("Creating dataframe and write it to GeoPackage...")
@@ -86,6 +84,14 @@ df = pd.DataFrame(list(zip(polygons, attr_url)), columns=columns, index=None)
 gdf = gpd.GeoDataFrame(df, geometry="coordinates", crs="EPSG:25833")
 
 # write GeoDataFrame to GeoPackage
-gdf.to_file(geopackage, layer="geoportalBB_DOP20_tileindex", driver="GPKG")
+tindex_gpkg = OUTPUT_FILE.rsplit(".", 1)[0]
+gdf.to_file(tindex_gpkg, layer="geoportalBB_DOP20_tileindex", driver="GPKG")
+
+# package
+if Path(OUTPUT_FILE).is_file():
+    Path(OUTPUT_FILE).unlink()
+stream = os.popen(f"gzip {tindex_gpkg}")
+stream.read()
+print(f"<{OUTPUT_FILE}> created")
 
 print("Done!")
