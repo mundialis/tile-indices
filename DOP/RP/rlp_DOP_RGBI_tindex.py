@@ -53,7 +53,7 @@ for tag in Bs_data.find_all():
 # keep only .jp2 files
 urls = []
 for item in extracted_data:
-    if item.find('_rp.jp2') != -1:
+    if item.find('.jp2') != -1:
         urls.append(item)
 
 ## --- create tileindex --- ##
@@ -92,7 +92,7 @@ for num, dop in enumerate(urls):
 with open("tindex.geojson", "w") as f:
     json.dump(geojson_dict, f, indent=4)
 
-filepath = os.path.join(parent_dir, "/RLP_DOP20_tileindex.gpkg")
+filepath = os.path.join(parent_dir, "RLP_DOP20_tileindex.gpkg")
 # create GPKG from GeoJson
 stream = os.popen("ogr2ogr " + filepath + " tindex.geojson")
 ogr2ogr_out = stream.read()
@@ -112,6 +112,8 @@ create_gz = stream.read()
 print("<RLP_DOP20_tileindex.gpkg.gz> created")
 
 # cleanup
+if os.path.isfile(metadata):
+    os.remove(metadata)
 if os.path.isfile("tindex.geojson"):
     os.remove("tindex.geojson")
 if os.path.isfile("RLP_DOP20_tileindex.gpkg"):
