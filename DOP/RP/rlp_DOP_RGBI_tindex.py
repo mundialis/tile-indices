@@ -53,7 +53,7 @@ for tag in Bs_data.find_all():
 # keep only .jp2 files
 urls = []
 for item in extracted_data:
-    if item.find('_rp.jp2') != -1:
+    if item.find('.jp2') != -1:
         urls.append(item)
 
 ## --- create tileindex --- ##
