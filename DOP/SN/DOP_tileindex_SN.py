@@ -74,7 +74,11 @@ driver.execute_script(
 
 # select option by index ("Digitale Orthophotos 4-Kanal (RGBI) (DOP_RGBI)")
 dropdown_product = Select(dropdown_product_element)
-dropdown_product.select_by_index(10)
+for option in dropdown_product.options:
+    if "RGBI" in option.text and not "Quick" in option.text:
+        selected_option = option.text
+print(f"Selecting product: {selected_option}")
+dropdown_product.select_by_visible_text(selected_option)
 time.sleep(1)
 
 # select and click button to copy dop URLs to clipboard
@@ -83,7 +87,6 @@ button.click()
 
 # wait for download links to become visible
 time.sleep(5)
-
 # find all download links (assuming they are in anchor tags after clicking the button)
 download_links = driver.find_elements(By.TAG_NAME, "a")
 urls_list = []
@@ -91,7 +94,7 @@ urls_list = []
 # filter out links that contain "dop20rgbi" and "tiff" in the href attribute
 for link in download_links:
     href = link.get_attribute("href")
-    if href and "download" in href and "dop20rgbi" in href and "tiff" in href:
+    if href and "dop20rgbi" in href and "tiff" in href:
         urls_list.append(href)
 
 # close webdriver
@@ -113,7 +116,7 @@ print("Creating tileindex from DOP names...")
 for num, dop in enumerate(urls_list):
     splitted_dop_name = os.path.basename(dop).split("_")
     dop_file_name = (
-        os.path.basename(dop).split("=")[2].replace("_tiff.zip", ".tif")
+        os.path.basename(dop).replace("_tiff.zip", ".tif")
     )
     x1 = int(splitted_dop_name[1][2:]) * 1000
     y1 = int(splitted_dop_name[2]) * 1000
