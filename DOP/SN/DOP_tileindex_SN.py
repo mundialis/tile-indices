@@ -87,6 +87,7 @@ button.click()
 
 # wait for download links to become visible
 time.sleep(5)
+
 # find all download links (assuming they are in anchor tags after clicking the button)
 download_links = driver.find_elements(By.TAG_NAME, "a")
 urls_list = []
