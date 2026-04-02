@@ -1,17 +1,13 @@
 ############################################################################
 #
-# MODULE:       DOP_tileindex_SN
+# MODULE:      DOP_tileindex_HH
+# AUTHOR(S):   Johannes Halbauer, Leon Louwarts
 #
-# AUTHOR(S):    Johannes Halbauer, Leon Louwarts
-#
-# PURPOSE:      Creates a DOP tile index for Sachsen based on the file names
-#               of DOPs from https://transparenz.hamburg.de/das-transparenzportal
-#
-# Data source:  https://suche.transparenz.hamburg.de/dataset/luftbilder-hamburg-dop-zeitreihe-unbelaubt3
-#
-# COPYRIGHT:    (C) 2024-2026 by mundialis GmbH & Co. KG
-#
-# REQUIREMENTS: selenium, gdal
+# PURPOSE:     Creates a DOP tile index for Hamburg based on the file names
+#              of DOPs from https://suche.transparenz.hamburg.de/dataset/
+#              luftbilder-hamburg-dop-zeitreihe-unbelaubt3
+# COPYRIGHT:   (C) 2026 by mundialis GmbH & Co. KG and the GRASS
+#              Development Team
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,7 +18,6 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-#
 #############################################################################
 
 import os
