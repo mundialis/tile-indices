@@ -12,7 +12,7 @@ Download script:
 
 License:
 - `license.txt`
-- data can be used citing the "Datenlizent Deutschland - Namensnennung - Version 2.0"
+- data can be used citing the "Datenlizenz Deutschland - Namensnennung - Version 2.0"
 - see file for complete license
 
 Links:
