@@ -1,14 +1,14 @@
-This folder contains a tileindex for DOPs (R-G-B-NIR, 20 cm, TIFF format) of Sachsen. It was created by using a python script.
+This folder contains a tileindex for DOPs (R-G-B-NIR, 20 cm, TIFF format) of Hamburg. It was created by using a python script.
 
 Tile index:
 - `DOP20_tileindex_HH.gpkg.gz`
-- contains one polygon for every DOP
-- download URL for each polygon is stored as attribute
+- may contain multiple DOPs in one polygon
+- download URLs for each polygon are stored as comma-separated attribute
 
 Download script:
 - `DOP20_tileindex_HH.py`
-- extracts DOP download URLs using `selenium`
-- creates tile index based on the DOP names in download URLs using `gdal`
+- extracts DOPs using URLs of zip-folders
+- creates tile index based on the DOP coordinates in download URLs using `gdal`
 
 License:
 - `license.txt`

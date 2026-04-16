@@ -2,22 +2,13 @@
 #
 # MODULE:      DOP_tileindex_HH
 # AUTHOR(S):   Johannes Halbauer, Leon Louwarts
-#
 # PURPOSE:     Creates a DOP tile index for Hamburg based on the file names
 #              of DOPs from https://suche.transparenz.hamburg.de/dataset/
 #              luftbilder-hamburg-dop-zeitreihe-unbelaubt3
-# COPYRIGHT:   (C) 2026 by mundialis GmbH & Co. KG and the GRASS
-#              Development Team
+# SPDX-FileCopyrightText: (c) 2026 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
 #############################################################################
 
 import os
@@ -25,83 +16,19 @@ import json
 import time
 
 from osgeo import gdal
-# from selenium import webdriver
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import Select
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
 
 # DOP URLs
-DOP_URL = ["https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Altona.zip",
-           "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Bergedorf.zip",
-           "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Eimsbuettel.zip",
-           "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Mitte.zip",
-           "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Nord.zip",
-           "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Harburg.zip",
-           "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Wandsbek.zip"]
+DOP_URL = [
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Altona.zip",
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Bergedorf.zip",
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Eimsbuettel.zip",
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Mitte.zip",
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Nord.zip",
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Harburg.zip",
+    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Wandsbek.zip",
+]
 
 os.chdir("DOP/HH/")
-
-# initalize firefox webdriver in headless mode
-# options = webdriver.FirefoxOptions()
-# options.add_argument("-headless")
-# driver = webdriver.Firefox(options=options)
-# driver.get(DOP_URL)
-
-# print(f"Extracting DOP URLs from {DOP_URL}...")
-
-# wait til drop down menu is visible
-# wait = WebDriverWait(driver, 10)
-
-# scroll to first drop down menu (landkreis)
-# dropdown_landkreis_element = wait.until(
-#     EC.visibility_of_element_located((By.ID, "select_municipality"))
-# )
-# driver.execute_script(
-#     "arguments[0].scrollIntoView(true);", dropdown_landkreis_element
-# )
-
-# select option by index ("Alle (Freistaat Sachsen)")
-# dropdown_landkreis = Select(dropdown_landkreis_element)
-# dropdown_landkreis.select_by_index(1)
-# time.sleep(1)
-
-# scroll to second drop down menu (product)
-# dropdown_product_element = wait.until(
-#     EC.visibility_of_element_located((By.ID, "select_product"))
-# )
-# driver.execute_script(
-#     "arguments[0].scrollIntoView(true);", dropdown_product_element
-# )
-
-# select option by index ("Digitale Orthophotos 4-Kanal (RGBI) (DOP_RGBI)")
-# dropdown_product = Select(dropdown_product_element)
-# for option in dropdown_product.options:
-#     if "RGBI" in option.text and not "Quick" in option.text:
-#         selected_option = option.text
-# print(f"Selecting product: {selected_option}")
-# dropdown_product.select_by_visible_text(selected_option)
-# time.sleep(1)
-
-# select and click button to copy dop URLs to clipboard
-# button = wait.until(EC.element_to_be_clickable((By.ID, "button_downloads")))
-# button.click()
-
-# wait for download links to become visible
-# time.sleep(5)
-
-# find all download links (assuming they are in anchor tags after clicking the button)
-# download_links = driver.find_elements(By.TAG_NAME, "a")
-# urls_list = []
-
-# filter out links that contain "dop20rgbi" and "tiff" in the href attribute
-# for link in download_links:
-#     href = link.get_attribute("href")
-#     if href and "dop20rgbi" in href and "tiff" in href:
-#         urls_list.append(href)
-
-# close webdriver
-# driver.close()
 
 # create list and fill with tif-paths
 urls_list = []
@@ -141,8 +68,11 @@ geojson_dict = {
 }
 
 print("Creating tileindex from DOP names...")
+
+temp_dict = dict()
+num = -1
 # loop through URLs and create tile from dop names
-for num, (zip_url, subfolder, tif_name) in enumerate(urls_list):
+for zip_url, subfolder, tif_name in urls_list:
     splitted_dop_name = tif_name.split("_")
     # dop_file_name = (
     #     os.path.basename(dop).replace("_tiff.zip", ".tif")
@@ -151,20 +81,37 @@ for num, (zip_url, subfolder, tif_name) in enumerate(urls_list):
     y1 = int(splitted_dop_name[3]) * 1000
     x2 = x1 + 1000
     y2 = y1 + 1000
-    feat = {
-        "type": "Feature",
-        "properties": {
-            "fid": num + 1,
-            "location": f"/vsizip/vsicurl/{zip_url}/{subfolder}/{tif_name}",
-        },
-        "geometry": {
-            "type": "Polygon",
-            "coordinates": [
-                [[x1, y1], [x2, y1], [x2, y2], [x1, y2], [x1, y1]]
-            ],
-        },
-    }
-    geojson_dict["features"].append(feat)
+    tile_num = f"tile_{x1}_{y1}"
+    location = f"/vsizip/vsicurl/{zip_url}/{subfolder}/{tif_name}"
+    if tile_num in temp_dict:
+        feat_idx = temp_dict[tile_num]
+        geojson_dict["features"][feat_idx]["properties"]["location"].append(
+            location
+        )
+    else:
+        num += 1
+        temp_dict[tile_num] = num
+        feat = {
+            "type": "Feature",
+            "properties": {
+                "fid": num + 1,
+                "tile_num": tile_num,
+                "location": [location],
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [[x1, y1], [x2, y1], [x2, y2], [x1, y2], [x1, y1]]
+                ],
+            },
+        }
+        geojson_dict["features"].append(feat)
+
+# change location from list to string
+for feat in geojson_dict["features"]:
+    loc = feat["properties"]["location"]
+    if isinstance(loc, list):
+        feat["properties"]["location"] = ",".join(loc)
 
 # write dict to JSON
 with open("tindex.geojson", "w") as f:
