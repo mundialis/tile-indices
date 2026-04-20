@@ -39,8 +39,8 @@ import re
 import os
 
 SN_URL = "https://www.geodaten.sachsen.de/batch-download-4719.html"
-DATA_TYPE = "DGM1_TIFF"
-TILESIZE = 1000
+DATA_TYPE = "DGM1_TIFF_2km"
+TILESIZE = 2000
 TINDEX = "SN_DGM_tileindex_proj.gpkg.gz"
 
 os.chdir("DTM/SN/")
@@ -80,8 +80,12 @@ products = batchConfig_products[DATA_TYPE]
 product_id = products["share_id"]
 filename_tpl = products["filename"]
 # resolution = int(products["packagesize"])  / 1000.
-existing_not_computed = get_all_grid_ids(products["existing_not_computed"])
-computed_not_existing = get_all_grid_ids(products["computed_not_existing"])
+existing_not_computed = list()
+computed_not_existing = list()
+if "existing_not_computed" in products:
+    existing_not_computed = get_all_grid_ids(products["existing_not_computed"])
+if "computed_not_existing" in products:
+    computed_not_existing = get_all_grid_ids(products["computed_not_existing"])
 ## mapping
 batchConfig_mapping_str = "{" + re.findall(r"batchConfig.mapping={(.*?)}*\n", js_script)[0].strip()
 batchConfig_mapping = json.loads(batchConfig_mapping_str)
@@ -110,6 +114,11 @@ for map in batchConfig_mapping.values():
             ):
                 rechtswert = str(grid_id)[:3]
                 hochwert = str(grid_id)[3:]
+                # wenn keine geraden Werte dann überspringen,
+                # da diese nicht existieren (auf 2km Kacheln aktualisiert)
+                # (sind in der js suche noch mit enthalten)
+                if not (int(rechtswert) % 2 == 0 and int(hochwert) % 2 == 0):
+                    continue
                 filename = filename_tpl.replace("$Rechtswert$", rechtswert).replace("$Hochwert$", hochwert)
                 url = data_base_url.replace("productId", product_id).replace("filename", filename)
                 vsi_url = f"/vsizip/vsicurl/{url}/{filename.replace('_tiff', '').replace('.zip', '.tif')}"
