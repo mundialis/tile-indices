@@ -135,6 +135,8 @@ def create_urls(type, krs, gem):
                 [
                     requote_uri(f"{BASE_URL}/{type_var} {krs}/{gem_var} - DOM1.zip"),
                     requote_uri(f"{BASE_URL}/{type_var} {krs.split(' ')[0]}/{gem_var} - DOM1.zip"),
+                    requote_uri(f"{BASE_URL}/{type_var} {krs}/{type_var} {gem_var} - DOM1.zip"),
+                    requote_uri(f"{BASE_URL}/{type_var} {krs.split(' ')[0]}/{type_var} {gem_var} - DOM1.zip"),
                     requote_uri(f"{BASE_URL}/{krs}/{gem_var} - DOM1.zip"),
                     requote_uri(f"{BASE_URL}/{krs}/{gem_var.split(' ')[0]} - DOM1.zip"),
                 ]
@@ -169,6 +171,8 @@ def generate_gem_var(gem):
         gem_vars.append(f"{gem} am Rhein")
     if gem == "Heppenheim":
         gem_vars.append(f"{gem} (Bergstraße)")
+    if " " in gem:
+        gem_vars.append(gem.replace(" ", "_"))
     return gem_vars
 
 
@@ -280,6 +284,11 @@ def main():
         krs_type = val[0]
         krs = val[1]
         gem = val[2]
+        # seit 1.1.26 -> Hanau kreisfreie Stadt
+        # TODO: if Abfrage rausnehmen, wenn auch in vg5000_0101 aktualsiert
+        if gem == "Hanau":
+            krs_type = "Kreisfreie Stadt"
+            krs = "Hanau"
 
         # create url for krs and gem
         print(krs_type, krs, gem)
