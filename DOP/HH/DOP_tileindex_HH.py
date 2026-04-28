@@ -1,7 +1,7 @@
 ############################################################################
 #
 # MODULE:      DOP_tileindex_HH
-# AUTHOR(S):   Johannes Halbauer, Leon Louwarts
+# AUTHOR(S):   Leon Louwarts
 # PURPOSE:     Creates a DOP tile index for Hamburg based on the file names
 #              of DOPs from https://suche.transparenz.hamburg.de/dataset/
 #              luftbilder-hamburg-dop-zeitreihe-unbelaubt3
@@ -74,9 +74,6 @@ num = -1
 # loop through URLs and create tile from dop names
 for zip_url, subfolder, tif_name in urls_list:
     splitted_dop_name = tif_name.split("_")
-    # dop_file_name = (
-    #     os.path.basename(dop).replace("_tiff.zip", ".tif")
-    # )
     x1 = int(splitted_dop_name[2]) * 1000
     y1 = int(splitted_dop_name[3]) * 1000
     x2 = x1 + 1000
@@ -84,6 +81,8 @@ for zip_url, subfolder, tif_name in urls_list:
     tile_num = f"tile_{x1}_{y1}"
     location = f"/vsizip/vsicurl/{zip_url}/{subfolder}/{tif_name}"
     if tile_num in temp_dict:
+        # for some tiles multiple URLs: if URLs of different districts within
+        # same tile
         feat_idx = temp_dict[tile_num]
         geojson_dict["features"][feat_idx]["properties"]["location"].append(
             location
