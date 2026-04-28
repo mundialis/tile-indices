@@ -1,28 +1,12 @@
 ############################################################################
 #
-# NAME:         openNRW_nDSM_tindex.py
-#
+# MODULE:       openNRW_nDSM_tindex.py
 # AUTHOR(S):    Anika Weinmann
-#               mundialis GmbH & Co. KG, Bonn
-#               https://www.mundialis.de
-#
-# PURPOSE:      Create tile index of openNRW nDSM imagery files
-#
-# Data source:  https://www.opengeodata.nrw.de/produkte/geobasis/ndom50_tiff/ndom50_tiff/
-#
-# COPYRIGHT:    (C) 2023 by Markus Neteler, Anika Weinmann, mundialis
-#
-# REQUIREMENTS: lynx, gdal, gzip, sed
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
+# PURPOSE:      Create tile index of openNRW nDSM imagery files from
+#               https://www.opengeodata.nrw.de/produkte/geobasis/ndom50_tiff/ndom50_tiff/
+# SPDX-FileCopyrightText: (c) 2023 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
 ############################################################################
 

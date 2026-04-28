@@ -1,0 +1,2 @@
+remotezip
+pip install requests

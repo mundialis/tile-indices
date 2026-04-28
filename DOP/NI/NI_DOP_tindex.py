@@ -1,28 +1,12 @@
 ############################################################################
 #
-# NAME:         NI_DOP_tindex.py
-#
+# MODULE:       NI_DOP_tindex.py
 # AUTHOR(S):    Johannes Halbauer
-#               mundialis GmbH & Co. KG, Bonn
-#               https://www.mundialis.de
-#
 # PURPOSE:      Download and modify tile index of Niedersachsen DOP files
-#
-# Data source:  https://ni-lgln-opengeodata.hub.arcgis.com/
-#
-# COPYRIGHT:    (C) 2025 Johannes Halbauer, mundialis
-#
-# REQUIREMENTS: wget
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
+#               from https://ni-lgln-opengeodata.hub.arcgis.com/
+# SPDX-FileCopyrightText: (c) 2025 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
 ############################################################################
 # Usage:

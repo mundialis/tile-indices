@@ -1,0 +1,4 @@
+lynx
+gdal
+gzip
+sed

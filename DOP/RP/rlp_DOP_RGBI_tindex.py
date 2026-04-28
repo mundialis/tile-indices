@@ -2,31 +2,14 @@
 #
 ################################################################################
 #
-# name: rlp_DOP_RGBI_tindex.py
-#	    create tileindex for RGBI DOPs for Rhineland-Palatine (RLP/ RP)
+# MODULE:       rlp_DOP_RGBI_tindex.py
+# AUTHOR(S):    Victoria-Leandra Brunn
+# PURPOSE:      Create tileindex for RGBI DOPS for Rhineland-Palatinate (RLP/RP)
+#               from https://geobasis-rlp.de/data/dop20rgbi/current/meta4/dop20rgbi_jp2_07.meta4
+# SPDX-FileCopyrightText: (c) 2026 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
-# author: Victoria-Leandra Brunn
-#       following: openNRW_DOP_tindex.py 
-#                  by Anika Weinmann
-#	               mundialis GmbH & Co. KG, Bonn
-#	               https://www.mundialis.de
-#
-#
-# data source: https://geobasis-rlp.de/data/dop20rgbi/current/meta4/dop20rgbi_jp2_07.meta4
-#
-# requirements: wget, BeautifulSoup from bs4
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-# output: RLP_DOP20_tileindex.gpkg
 ##################################################################################
 
 
