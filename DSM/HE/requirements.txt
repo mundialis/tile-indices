@@ -1,2 +1,2 @@
 remotezip
-pip install requests
+requests

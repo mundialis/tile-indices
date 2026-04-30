@@ -1,2 +1,2 @@
 wget
-BeautifulSoup from bs4
+bs4
