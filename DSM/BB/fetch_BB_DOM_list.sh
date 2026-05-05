@@ -2,30 +2,13 @@
 
 ############################################################################
 #
-# NAME:        fetch_BB_DOM_list.sh
-#
-# AUTHOR(S):    Markus Neteler <neteler at mundialis.de>
-#               Veronica Koess <koess at mundialis.de>
-#               mundialis GmbH & Co. KG, Bonn
-#               https://www.mundialis.de
-#
-# PURPOSE:      Fetch list of Brandenburg, Germany DOM files
-#
-# Data source:  https://data.geobasis-bb.de/geobasis/daten/bdom/
-#
-# COPYRIGHT:    (C) 2023 by Markus Neteler, mundialis
-#
-# REQUIREMENTS: lynx, gdal, gTILE, sed
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
+# MODULE:       fetch_BB_DOM_list.sh
+# AUTHOR(S):    Markus Neteler, Veronica Koess
+# PURPOSE:      Fetch list of Brandenburg, Germany DOM files from
+#               https://data.geobasis-bb.de/geobasis/daten/bdom/
+# SPDX-FileCopyrightText: (c) 2023 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
 ############################################################################
 

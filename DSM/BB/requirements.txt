@@ -1,5 +1,4 @@
-remotezip
 lynx 
 gdal 
-gzip
+gTILE
 sed

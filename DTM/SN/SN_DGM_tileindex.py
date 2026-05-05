@@ -1,28 +1,12 @@
 ############################################################################
 #
-# NAME:         SN_DGM_tileindex.py
-#
+# MODULE:       SN_DGM_tileindex.py
 # AUTHOR(S):    Anika Weinmann
-#               mundialis GmbH & Co. KG, Bonn
-#               https://www.mundialis.de
-#
-# PURPOSE:      Create tile index of DGM tiff files
-#
-# Data source:  https://www.geodaten.sachsen.de/batch-download-4719.html
-#
-# COPYRIGHT:    (C) 2023 by Anika Weinmann, mundialis
-#
-# REQUIREMENTS: gdal, gzip
-#
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
+# PURPOSE:      Create tile index of DGM tiff files from
+#               https://www.geodaten.sachsen.de/batch-download-4719.html#
+# SPDX-FileCopyrightText: (c) 2023 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
 #
 ############################################################################
 

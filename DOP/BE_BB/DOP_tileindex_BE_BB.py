@@ -2,7 +2,6 @@
 #
 # MODULE:      DOP_tileindex_BE_BB
 # AUTHOR(S):   Johannes Halbauer, Anika Weinmann
-#
 # PURPOSE:     Creates a DOP tile index for Brandenburg and Berlin based on the
 #              file names of DOPs from hhttps://data.geobasis-bb.de/geobasis/
 #              daten/dop/rgbi_tif/.
