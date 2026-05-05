@@ -85,9 +85,7 @@ data_list = []
 for URL in URLS:
     with RemoteZip(URL) as zip:
         for zip_info in zip.infolist():
-            # Skips subfolders
-            split_file_name = zip_info.filename.split("/")
-            file_name = split_file_name[-1]
+            file_name = zip_info.filename
             if file_name.endswith(FILE_EXTENSION):
                 data_list.append(file_name)
 # create tindex
