@@ -1,4 +1,4 @@
-This folder contains a tileindex for DSM tiles (in this case bDOM with size of 1000 x 1000 m) of Hamburg. It was created by using a python script.
+This folder contains a tileindex for iDSM tiles (in this case bDOM with size of 1000 x 1000 m) of Hamburg. It was created by using a python script.
 
 Tile index:
 - `hh_dom_tindex_proj.gpkg.gz`
