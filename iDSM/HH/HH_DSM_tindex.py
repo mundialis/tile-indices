@@ -22,7 +22,7 @@ import json
 from remotezip import RemoteZip
 
 
-# Parameter for Hamburg DOM xyz files
+# Parameter for Hamburg bDOM xyz files
 URL = (
     "https://daten-hamburg.de/geographie_geologie_geobasisdaten/"
     "digitales_hoehenmodell_bdom/DOM1_XYZ_HH_2020_04_30.zip"

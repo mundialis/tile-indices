@@ -1,14 +1,14 @@
-This folder contains a tileindex for a DSM ("DOM") of Brandenburg. It was created by using a bash shell script.
+This folder contains a tileindex for a iDSM ("bDOM") of Brandenburg. It was created by using a bash shell script.
 
 Tile index:
 - `BB_tileindex_dom_proj.gpkg.gz`
-- contains one poylgon for every DSM
+- contains one poylgon for every iDSM
 - download URL for each poylgon is stored as attribute
 
 Download script:
 - `fetch_BB_DOM_list.sh`
 - fetches URLs to DSM tif files in https://data.geobasis-bb.de/geobasis/daten/bdom/tif/ 
-- creates an ziped output csv file with a list of all URLs: BB_DOM_tiles.csv.gz
+- creates a zipped output csv file with a list of all URLs: BB_DOM_tiles.csv.gz
 
 Generate Tile_index with Download script:
 - as the listed zip files cannot be recognized as a supported file format by gdal ("error 4"), the respecitve tif files in the zip folders must be specified. Accodingly, the .csv list was manually changed by adding the single .tif files to each line to e.g: /vsizip/vsicurl/https://data.geobasis-bb.de/geobasis/daten/bdom/tif/bdom_33256-5886.zip/bdom_33256-5886.tif
@@ -28,7 +28,7 @@ Links:
 
 BB:
 
-# Brandenburg (BB) Tile index of Digital Surface Model from Brandenburg Geobasis data
+# Brandenburg (BB) Tile index of image based Digital Surface Model from Brandenburg Geobasis data
 
 * Geobasis data: image based Digital Surface Model, 1m resolution, EPSG:25833
 * [Scripts](https://github.com/mundialis/tile-indices/tree/main/DTM/BB) to create the tile index
