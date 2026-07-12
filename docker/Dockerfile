@@ -1,5 +1,8 @@
 FROM osgeo/grass-gis:current-alpine
 
+# install python and pip3
+RUN apk add python3 py3-pip
+
 # installations for DOP NW tindex
 RUN apk add lynx parallel
 
