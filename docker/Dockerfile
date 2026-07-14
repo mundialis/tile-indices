@@ -13,7 +13,6 @@ RUN apk add firefox
 ENV PATH="/opt/venv/bin:$PATH"
 RUN /usr/bin/python3 -m venv --system-site-packages /opt/venv
 
-
 # installations for ALKIS LK HE tindex
 RUN pip3 install requests remotezip
 
