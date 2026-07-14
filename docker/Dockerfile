@@ -10,11 +10,9 @@ RUN apk add lynx parallel
 RUN apk add firefox
 
 # python3 + pip3
-RUN apk add --no-cache python3 py3-pip
-RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN /usr/bin/python3 -m venv --system-site-packages --without-pip /opt/venv
-RUN python3 -m ensurepip
+RUN /usr/bin/python3 -m venv --system-site-packages /opt/venv
+
 
 # installations for ALKIS LK HE tindex
 RUN pip3 install requests remotezip
