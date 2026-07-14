@@ -9,6 +9,13 @@ RUN apk add lynx parallel
 # install firefox and xsel for DOP SN tindex
 RUN apk add firefox
 
+# python3 + pip3
+RUN apk add --no-cache python3 py3-pip
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN /usr/bin/python3 -m venv --system-site-packages --without-pip /opt/venv
+RUN python3 -m ensurepip
+
 # installations for ALKIS LK HE tindex
 RUN pip3 install requests remotezip
 
