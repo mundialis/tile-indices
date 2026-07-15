@@ -3,6 +3,9 @@ FROM osgeo/grass-gis:current-alpine
 # install python and pip3
 RUN apk add python3 py3-pip
 
+# installations for DOP BB/BE tindex
+RUN apk add --no-cache gcc musl-dev python3-dev g++ libffi-dev
+
 # installations for DOP NW tindex
 RUN apk add lynx parallel
 
