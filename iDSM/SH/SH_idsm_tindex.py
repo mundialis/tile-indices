@@ -12,14 +12,14 @@
 import os
 import json
 
-URL = ("https://github.com/kimariak/tile-indices/blob/main/iDSM/SH/bDOM_SH_tindex.geojson")
-OUTPUT_FILE = "sh_bdom_tindex_proj.gpkg.gz"
+URL = ("https://github.com/kimariak/tile-indices/raw/sh_tindex/iDSM/SH/bDOM_SH_tindex.geojson")
+OUTPUT_FILE = []
 os.chdir("iDSM/SH/")
 
 # create GPKG from GeoJson
-tindex_gpkg = OUTPUT_FILE.rsplit(".", 1)[0]
+tindex_gpkg = "sh_bdom_tindex_proj.gpkg"
 stream = os.popen(f"ogr2ogr {tindex_gpkg} {URL}")
-stream.read()
+ogr2ogr_out = stream.read()
 
 # verify
 print("Verifying vector tile index:")
@@ -28,14 +28,13 @@ tindex_verification = stream.read()
 print(tindex_verification)
 
 # package
+OUTPUT_FILE = (f"{tindex_gpkg}.gz")
 if os.path.isfile(OUTPUT_FILE):
     os.remove(OUTPUT_FILE)
 stream = os.popen(f"gzip {tindex_gpkg}")
-stream.read()
+create_gz = stream.read()
 print(f"<{OUTPUT_FILE}> created")
 
 # cleanup
-if os.path.isfile("tindex.geojson"):
-    os.remove("tindex.geojson")
 if os.path.isfile(tindex_gpkg):
     os.remove(tindex_gpkg)
