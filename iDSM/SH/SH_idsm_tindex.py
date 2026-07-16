@@ -12,7 +12,7 @@
 import os
 import json
 
-URL = ("https://github.com/kimariak/tile-indices/raw/sh_tindex/iDSM/SH/bDOM_SH_tindex.geojson")
+URL = ("https://github.com/mundialis/tile-indices/raw/main/iDSM/SH/bDOM_SH_tindex.geojson")
 OUTPUT_FILE = []
 os.chdir("iDSM/SH/")
 
