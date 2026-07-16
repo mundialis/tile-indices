@@ -10,15 +10,18 @@
 #############################################################################
 
 import os
-import json
 
-URL = ("https://github.com/mundialis/tile-indices/raw/main/iDSM/SH/bDOM_SH_tindex.geojson")
+URL = ("https://geodaten.schleswig-holstein.de/gaialight-sh/_apps/dladownload/single.php?file=bDOM_SH_Massendownload.geojson&id=4")
 OUTPUT_FILE = []
 os.chdir("iDSM/SH/")
 
+# get GeoJson from URL
+tmp_geojson = "/tmp/bDOM_SH__Massendownload.geojson"
+os.system(f'curl -L "{URL}" -o "{tmp_geojson}"')
+
 # create GPKG from GeoJson
 tindex_gpkg = "sh_bdom_tindex_proj.gpkg"
-stream = os.popen(f"ogr2ogr {tindex_gpkg} {URL}")
+stream = os.popen(f"ogr2ogr {tindex_gpkg} {tmp_geojson}")
 ogr2ogr_out = stream.read()
 
 # verify
@@ -38,3 +41,5 @@ print(f"<{OUTPUT_FILE}> created")
 # cleanup
 if os.path.isfile(tindex_gpkg):
     os.remove(tindex_gpkg)
+if os.path.isfile(tmp_geojson):
+    os.remove(tmp_geojson)
