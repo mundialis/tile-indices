@@ -22,6 +22,8 @@ from shapely.geometry import Polygon
 URL = "https://data.geobasis-bb.de/geobasis/daten/dop/rgbi_tif/"
 OUTPUT_FILE = "DOP20_tileindex_BE_BB.gpkg.gz"
 
+os.chdir("DOP/BE_BB/")
+
 # list of DOPs
 GET_DOP_CMD = (
     f"lynx -dump -nonumbers -listonly {URL} | grep {URL} | grep 'dop_' | "
