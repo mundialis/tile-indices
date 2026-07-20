@@ -18,7 +18,8 @@ jobs:
     - uses: actions/checkout@v7
     - name: Creation of DSM tindex
       run: |
-        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/HE_DSM --exec python3 DSM/HE/HE_DSM_tindex.py+g" docker/Dockerfile
+        sed -i "s+# federal state specific required pip installations, to be replaced within workflow yaml+RUN pip3 install remotezip+g" docker/Dockerfile
+        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN grass -c epsg:25832 /grassdb/HE_DSM --exec python3 DSM/HE/HE_DSM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex-dsm .
         ID=$(docker create test-tindex-dsm)
         echo $ID
