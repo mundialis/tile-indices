@@ -11,7 +11,7 @@
 
 import os
 
-URL = ("https://geodaten.schleswig-holstein.de/gaialight-sh/_apps/dladownload/single.php?file=DGM1_SH__Massendownload.geojson&id=4")
+URL = "https://geodaten.schleswig-holstein.de/gaialight-sh/_apps/dladownload/single.php?file=DGM1_SH__Massendownload.geojson&id=4"
 OUTPUT_FILE = []
 os.chdir("DTM/SH/")
 
