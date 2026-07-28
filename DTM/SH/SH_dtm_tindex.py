@@ -31,7 +31,7 @@ tindex_verification = stream.read()
 print(tindex_verification)
 
 # package
-OUTPUT_FILE = (f"{tindex_gpkg}.gz")
+OUTPUT_FILE = f"{tindex_gpkg}.gz"
 if os.path.isfile(OUTPUT_FILE):
     os.remove(OUTPUT_FILE)
 stream = os.popen(f"gzip {tindex_gpkg}")
