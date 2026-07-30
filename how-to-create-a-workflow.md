@@ -27,6 +27,6 @@ Optinal parameters are:
 
 * `alpine_packages`: A list with alpine packages which need to be installed for tile index creation (seperated by space); e.g. _"firefox lynx"_
 * `python_libs`: : A list with python libraries which need to be installed for tile index creation (seperated by space); e.g."selenium pandas"
-* `epsg_for_grass`: The number of the EPSG code if GRASS GIS has to be used to run the python script; e.g. _25832_ or _25833_
+* `epsg_for_grass`: The number of the [EPSG code](https://spatialreference.org/) if GRASS GIS has to be used to run the python script; e.g. _25832_ or _25833_
 
 If a new federal state is added, the workflow has to be added in the [main.yml](./.github/workflows/main.yml).
