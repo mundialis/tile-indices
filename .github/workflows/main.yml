@@ -13,7 +13,7 @@ jobs:
     uses: ./.github/workflows/tindices_nw.yml
 
   # commit all updated tile indices
-  commit_changes:
+  upload_tile_indices:
     needs: [nw]
     uses: ./.github/workflows/update_tindices.yml
     with:

@@ -7,14 +7,9 @@ on:
         required: true
         type: string
 
-jobs:
-  nw:
-    uses: ./.github/workflows/tindices_nw.yml
-
   # commit all updated tile indices
-  commit_changes:
+  upload:
     runs-on: ubuntu-latest
-    needs: [nw]
 
     if: always()
     steps:
@@ -28,12 +23,12 @@ jobs:
         with:
           path: artifacts
 
-      - name: List files
-        run: ls -R artifacts
+      - name: List .gpkg.gz files
+        run: ls artifacts/*.gpkg.gz
 
       - name: copy artifacts
         run: |
-          for ART in $(ls -R artifacts) ; do cp $ART ${ART//__//} ; done
+          for ART in $(ls artifacts/*.gpkg.gz) ; do cp $ART ${ART//__//} ; done
 
       - name: Configure git
         run: |
