@@ -27,7 +27,7 @@ jobs:
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
-        docker cp $ID:/src/tile-indices/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz nDSM__NW__nrw_ndom_tindex_proj.gpkg.gz
+        docker cp $ID:/src/tile-indices/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz .
     - name: Set output
       id: meta
       run: |
@@ -35,7 +35,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        path: nDSM__NW__nrw_ndom_tindex_proj.gpkg.gz
+        name: nDSM__NW
+        path: nrw_ndom_tindex_proj.gpkg.gz
 
   # DOP
   update-tindex-dop-nw:
@@ -49,7 +50,7 @@ jobs:
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
-        docker cp $ID:/src/tile-indices/DOP/NW/openNRW_DOP10_tileindex.gpkg.gz DOP__NW__openNRW_DOP10_tileindex.gpkg.gz
+        docker cp $ID:/src/tile-indices/DOP/NW/openNRW_DOP10_tileindex.gpkg.gz .
     - name: Set output
       id: meta
       run: |
@@ -57,5 +58,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: dop-nw
-        path: DOP__NW__openNRW_DOP10_tileindex.gpkg.gz
+        name: DOP__NW
+        path: openNRW_DOP10_tileindex.gpkg.gz
