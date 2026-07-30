@@ -23,10 +23,6 @@ on:
         description: "Tile index"
         value: ${{ jobs.update-tindex.outputs.artifact_name }}
 
-concurrency:
-  group: commit-main
-  cancel-in-progress: false
-
 jobs:
 
   update-tindex:
