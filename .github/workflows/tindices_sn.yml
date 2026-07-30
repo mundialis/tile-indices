@@ -1,0 +1,25 @@
+name: Update SN Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "SN Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  # DOP
+  update-tindex-dop-sn:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: SN
+      script: DOP_tileindex_SN.py
+      tindex_file: DOP20_tileindex_SN.gpkg.gz
+      alpine_packages: "firefox"
+      python_libs: "selenium"

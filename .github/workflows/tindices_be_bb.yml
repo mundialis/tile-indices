@@ -1,0 +1,25 @@
+name: Update BE/BB Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "BE/BB Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  # DOP
+  update-tindex-dop-be-bb:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: BE_BB
+      script: DOP_tileindex_BE_BB.py
+      tindex_file: DOP20_tileindex_BE_BB.gpkg.gz
+      alpine_packages: "gcc musl-dev python3-dev g++ libffi-dev lynx"
+      python_libs: "pandas geopandas shapely fiona"

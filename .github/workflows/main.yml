@@ -8,8 +8,18 @@ on:
     - cron: '0 1 10 * *'
 
 jobs:
+  be-bb:
+    uses: ./.github/workflows/tindices_be_be.yml
+  he:
+    uses: ./.github/workflows/tindices_he.yml
+  hh:
+    uses: ./.github/workflows/tindices_hh.yml
+  ni:
+    uses: ./.github/workflows/tindices_ni.yml
   nw:
     uses: ./.github/workflows/tindices_nw.yml
+  sn:
+    uses: ./.github/workflows/tindices_sn.yml
 
   # commit all updated tile indices
   upload_tile_indices:

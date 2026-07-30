@@ -1,0 +1,36 @@
+name: Update HH Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "HH Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-hh:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: HH
+      script: HH_DTM_tindex.py
+      tindex_file: hh_dgm1_tindex_proj.gpkg.gz
+      python_libs: "remotezip"
+
+  # iDSM
+  update-tindex-idsm-hh:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: iDSM
+      state: HH
+      script: HH_DSM_tindex.py
+      tindex_file: hh_dom_tindex_proj.gpkg.gz
+      python_libs: "remotezip"
+
+  # DOP TODO

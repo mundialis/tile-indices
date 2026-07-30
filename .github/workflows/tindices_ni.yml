@@ -1,0 +1,44 @@
+name: Update NI Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "NI Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-ni:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: NI
+      script: NI_DTM_tindex.py
+      tindex_file: NI_DTM_tindex_proj.gpkg.gz
+      python_libs: "wget"
+
+  # DSM
+  update-tindex-dsm-ni:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DSM
+      state: NI
+      script: NI_DSM_tindex.py
+      tindex_file: NI_DSM_tindex_proj.gpkg.gz
+      python_libs: "wget"
+
+  # DOP
+  update-tindex-dop-ni:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: NI
+      script: NI_DOP_tindex.py
+      tindex_file: NI_DOP_tindex_proj.gpkg.gz
+      python_libs: "wget"
