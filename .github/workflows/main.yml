@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   schedule:
     # run tile index creation every month
-    - cron: '0 1 9 * *'
+    - cron: '0 1 10 * *'
 
 jobs:
   nw:
