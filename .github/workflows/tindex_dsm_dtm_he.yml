@@ -3,11 +3,10 @@ name: Update DSM and DTM HE Tile Index
 
 on:
   push:
-    branches: [ HE_DTM_DSM ]
-    # branches: [ main ]
-  # schedule:
-  #   # run tile index creation every month
-  #   - cron:  '0 2 10 * *'
+    branches: [ main ]
+  schedule:
+    # run tile index creation every month
+    - cron:  '0 2 10 * *'
 
 jobs:
   update-tindex-dsm-and-dtm-hh:
