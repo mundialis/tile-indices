@@ -1,7 +1,7 @@
 name: Update ALKIS Liegenschaftskataster Hessen Tile Index
 
 on:
-  push:
+  # push:
     # branches:
     # - main
   schedule:

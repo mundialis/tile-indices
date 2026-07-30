@@ -1,0 +1,56 @@
+name: Tile index creation
+
+on:
+  workflow_call:
+    inputs:
+      type:
+        required: true
+        type: string
+      state:
+        required: true
+        type: string
+      script:
+        required: true
+        type: string
+      tindex_file:
+        required: true
+        type: string
+      alpine_packages:
+        required: true
+        type: string
+    outputs:
+      artifact_name:
+        description: "Tile index"
+        value: ${{ jobs.update-tindex.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  update-tindex:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact_name: ${{ steps.set-artifact-name.outputs.artifact_name }}
+    steps:
+    - uses: actions/checkout@v7
+    - name: Creation of tindex
+      env:
+        TINDEX_TYPE: ${{ inputs.type }}
+        FEDERAL_STATE: ${{ inputs.state }}
+        SCRIPT: ${{ inputs.script }}
+        TINDEX: ${{ inputs.tindex_file }}
+        PACKAGES: ${{ inputs.alpine_packages }}
+      run: |
+        sed -i "s+# federal state specific required apk installations, to be replaced within workflow yaml+RUN apk add ${PACKAGES}+g" docker/Dockerfile
+        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN python3 ${TINDEX_TYPE}/${FEDERAL_STATE}/${SCRIPT}+g" docker/Dockerfile
+        docker build -f docker/Dockerfile -t test-tindex .
+        ID=$(docker create test-tindex)
+        echo $ID
+        docker cp $ID:/src/tile-indices/${TINDEX_TYPE}/${FEDERAL_STATE}/${TINDEX} .
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.type }}__${{ inputs.state }}
+        path: ${{ inputs.tindex_file }}
