@@ -28,10 +28,6 @@ jobs:
         ID=$(docker create test-tindex)
         echo $ID
         docker cp $ID:/src/tile-indices/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz .
-    - name: Set output
-      id: meta
-      run: |
-        echo "artifact_name=ndsm-nw" >> "$GITHUB_OUTPUT"
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
@@ -51,10 +47,6 @@ jobs:
         ID=$(docker create test-tindex)
         echo $ID
         docker cp $ID:/src/tile-indices/DOP/NW/openNRW_DOP10_tileindex.gpkg.gz .
-    - name: Set output
-      id: meta
-      run: |
-        echo "artifact_name=dop-nw" >> "$GITHUB_OUTPUT"
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
