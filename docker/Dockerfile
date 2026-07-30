@@ -9,11 +9,11 @@ RUN apk add python3 py3-pip gzip
 ENV PATH="/opt/venv/bin:$PATH"
 RUN /usr/bin/python3 -m venv --system-site-packages /opt/venv
 
-# federal state specific required pip installations, to be replaced within workflow yaml by setting python_libs
+RUN pip3 install remotezip
 
 # copy scripts
 COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-# federal state specific python script, to be replaced within workflow yaml
+RUN grass -c epsg:25832 /grassdb/HE_DTM --exec python3 DTM/HE/HE_DTM_tindex.py
