@@ -27,7 +27,7 @@ jobs:
     # Commit and push all changed files.
     - name: Creation of DTM tindex
       run: |
-        sed -i "s+RUN grass -c epsg:25832 /grassdb/HE_DSM --exec python3 DSM/HE/HE_DSM_tindex.py+RUN grass -c epsg:25832 /grassdb/HE_DSM --exec python3 DTM/HE/HE_DTM_tindex.py+g" docker/Dockerfile
+        sed -i "s+RUN grass -c epsg:25832 /grassdb/HE_DSM --exec python3 DSM/HE/HE_DSM_tindex.py+RUN grass -c epsg:25832 /grassdb/HE_DTM --exec python3 DTM/HE/HE_DTM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex-dtm .
         ID=$(docker create test-tindex-dtm)
         echo $ID
