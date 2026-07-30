@@ -20,6 +20,7 @@ jobs:
       type: DTM
       state: HH
       script: HH_DTM_tindex.py
+      epsg_for_grass: 25832
       tindex_file: hh_dgm1_tindex_proj.gpkg.gz
       python_libs: "remotezip"
 
@@ -30,6 +31,7 @@ jobs:
       type: iDSM
       state: HH
       script: HH_DSM_tindex.py
+      epsg_for_grass: 25832
       tindex_file: hh_dom_tindex_proj.gpkg.gz
       python_libs: "remotezip"
 

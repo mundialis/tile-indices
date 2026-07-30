@@ -20,6 +20,7 @@ jobs:
       type: DTM
       state: HE
       script: HE_DTM_tindex.py
+      epsg_for_grass: 25832
       tindex_file: HE_DTM_tindex.gpkg.gz
       python_libs: "remotezip"
 
@@ -30,6 +31,7 @@ jobs:
       type: DSM
       state: HE
       script: HE_DSM_tindex.py
+      epsg_for_grass: 25832
       tindex_file: HE_DSM_tindex.gpkg.gz
       python_libs: "remotezip"
 
@@ -42,5 +44,6 @@ jobs:
   #     type: ALKIS/Liegenschaftskataster
   #     state: HE
   #     script: HE_ALKIS_LK_tindex.py
+  #     epsg_for_grass: 25832
   #     tindex_file: HE_ALKIS_LK_tindex.gpkg.gz
   #     python_libs: "requests remotezip"
