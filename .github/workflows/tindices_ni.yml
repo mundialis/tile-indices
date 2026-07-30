@@ -7,10 +7,6 @@ on:
         description: "NI Tile Indices"
         value: ${{ jobs.build.outputs.artifact_name }}
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.sha }}    # ← Pro Commit, nicht pro Ref
-  cancel-in-progress: false
-
 jobs:
 
   # DTM
