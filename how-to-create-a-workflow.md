@@ -1,6 +1,6 @@
 # How to create a new workflow for a tile index
 
-For each federal state the is a `./.github/workflow/tindices_<FS>.yml` (e.g. [tindices_nw.yml](./.github/workflows/tindices_nw.yml)) in this file the jobs for each tile index is defined by using the [tindex_creation](./.github/workflows/tindex_creation.yml) workflow. E.g. by
+For each federal state there is a `./.github/workflow/tindices_<FS>.yml` (e.g. [tindices_nw.yml](./.github/workflows/tindices_nw.yml)). In this file the jobs for each tile index are defined by using the [tindex_creation](./.github/workflows/tindex_creation.yml) workflow. E.g. by
 
 ```yaml
   # DOP
