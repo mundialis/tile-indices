@@ -4,7 +4,7 @@ on:
   workflow_call:
     outputs:
       artifact_name:
-        description: "Name des Artefakts"
+        description: "NW Tile Indices"
         value: ${{ jobs.build.outputs.artifact_name }}
 
 concurrency:
@@ -12,6 +12,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+
+  # DTM
+  update-tindex-dtm-nw:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: NW
+      script: openNRW_DTM_tindex.py
+      tindex_file: nw_dtm_tindex_proj.gpkg.gz
+      alpine_packages: "lynx"
 
   # nDSM
   update-tindex-ndsm-nw:

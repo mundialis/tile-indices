@@ -1,0 +1,46 @@
+name: Update HE Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "HE Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-he:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: HE
+      script: HE_DTM_tindex.py
+      tindex_file: HE_DTM_tindex.gpkg.gz
+      python_libs: "remotezip"
+
+  # DSM
+  update-tindex-dsm-he:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DSM
+      state: HE
+      script: HE_DSM_tindex.py
+      tindex_file: HE_DSM_tindex.gpkg.gz
+      python_libs: "remotezip"
+
+  # DOP TODO
+
+  # # ALKIS TODO fix
+  # update-tindex-alkis-lk-he:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: ALKIS/Liegenschaftskataster
+  #     state: HE
+  #     script: HE_ALKIS_LK_tindex.py
+  #     tindex_file: HE_ALKIS_LK_tindex.gpkg.gz
+  #     python_libs: "requests remotezip"
