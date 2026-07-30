@@ -39,8 +39,8 @@ jobs:
       - name: Commit and push with retry
         run: |
           set -e
-          git fetch origin main
-          git rebase origin/main || exit 1
+          git fetch origin workflow_improvement
+          git rebase origin/workflow_improvement || exit 1
 
           git add **/**/*.gpkg.gz
           if git diff --cached --quiet; then
@@ -48,6 +48,6 @@ jobs:
             exit 0
           fi
           git commit -m "${{ inputs.commit_message }}"
-          if git push origin HEAD:main; then
+          if git push origin HEAD:workflow_improvement; then
             exit 0
           fi
