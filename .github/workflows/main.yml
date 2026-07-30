@@ -23,7 +23,7 @@ jobs:
 
   # commit all updated tile indices
   upload_tile_indices:
-    needs: [nw]
+    needs: [be-bb,he,hh,ni,nw,sn]
     uses: ./.github/workflows/update_tindices.yml
     with:
       commit_message: "Update tile indices"

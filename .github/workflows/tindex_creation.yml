@@ -44,12 +44,12 @@ jobs:
         PY_LIBS: ${{ inputs.python_libs }}
       run: |
         if [ -n "${PACKAGES}" ]; then
-          sed -i "s+# federal state specific required apk installations, to be replaced within workflow yaml by setting alpine_packages+RUN apk add ${PACKAGES}+g" docker/Dockerfile
+          sed -i "s|# federal state specific required apk installations, to be replaced within workflow yaml by setting alpine_packages|RUN apk add ${PACKAGES}|g" docker/Dockerfile
         fi
         if [ -n "${PY_LIBS}" ]; then
-          sed -i "s+# federal state specific required pip installations, to be replaced within workflow yaml by setting python_libs+RUN pip3 install ${PY_LIBS}+g" docker/Dockerfile
+          sed -i "s|# federal state specific required pip installations, to be replaced within workflow yaml by setting python_libs|RUN pip3 install ${PY_LIBS}|g" docker/Dockerfile
         fi
-        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN python3 ${TINDEX_TYPE}/${FEDERAL_STATE}/${SCRIPT}+g" docker/Dockerfile
+        sed -i "s|# federal state specific python script, to be replaced within workflow yaml|RUN python3 ${TINDEX_TYPE}/${FEDERAL_STATE}/${SCRIPT}|g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
