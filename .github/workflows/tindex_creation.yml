@@ -17,7 +17,7 @@ on:
         type: string
       epsg_for_grass:
         required: false
-        type: integer
+        type: string
       alpine_packages:
         required: false
         type: string
