@@ -129,7 +129,6 @@ download_and_unzip(URL_GERMANY_DATA, "tmp")
 # importing Hessen
 file_path = os.path.join(
     "tmp",
-    "vg5000_01-01.utm32s.shape.ebenen",
     "vg5000_ebenen_0101",
 )
 grass.run_command(

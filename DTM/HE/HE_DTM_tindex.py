@@ -24,6 +24,7 @@ from datetime import datetime
 from time import sleep
 from io import BytesIO
 import ssl
+from requests.utils import requote_uri
 from urllib.request import urlopen, HTTPError
 from urllib.error import URLError
 from zipfile import ZipFile
@@ -31,7 +32,6 @@ from zipfile import ZipFile
 import grass.script as grass
 
 from remotezip import RemoteZip
-from requests.utils import requote_uri
 
 
 """CONSTANT VARIABLES"""
@@ -188,7 +188,6 @@ def main():
     # importing Hessen
     file_path = os.path.join(
         "tmp",
-        "vg5000_01-01.utm32s.shape.ebenen",
         "vg5000_ebenen_0101",
     )
     grass.run_command(
