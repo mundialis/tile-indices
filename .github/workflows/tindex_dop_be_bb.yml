@@ -9,7 +9,7 @@ on:
     - cron:  '0 15 18 * *'
 
 jobs:
-  update-tindex-dop-nw:
+  update-tindex-dop-be-bb:
     runs-on: ubuntu-latest
     env:
       CI_COMMIT_MESSAGE: Update BE/BB DOP tile index
