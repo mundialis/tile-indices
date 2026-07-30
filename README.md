@@ -21,3 +21,8 @@ Overview of the tile-indices:
 | **Sachsen-Anhalt** | **ST** | | | | | |
 | **Schleswig-Holstein** | **SH** | | | [SH tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/SH/sh_dtm_tindex_proj.gpkg.gz) | | [SH tindex](https://github.com/mundialis/tile-indices/blob/main/iDSM/SH/sh_bdom_tindex_proj.gpkg.gz) |
 | **Thüringen** | **TH** | | | [TH tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/TH/TH_DGM_tileindex_proj.gpkg.gz) | [TH tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/TH/TH_DOM_tileindex_proj.gpkg.gz) | |
+
+
+## Automated Workflows
+
+For the creation of a new automated workflow for a tile index see [how-to-create-a-workflow.md](./how-to-create-a-workflow.md).
