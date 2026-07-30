@@ -53,7 +53,7 @@ jobs:
   # commit all updated tile indices
   commit_changes:
     runs-on: ubuntu-latest
-    needs: [update-tindex-ndsm-nw, job_b]
+    needs: [update-tindex-ndsm-nw, update-tindex-dop-nw]
     if: always()
     steps:
       - uses: actions/checkout@v4
