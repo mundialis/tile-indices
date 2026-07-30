@@ -9,7 +9,7 @@ on:
 
 jobs:
   be-bb:
-    uses: ./.github/workflows/tindices_be_be.yml
+    uses: ./.github/workflows/tindices_be_bb.yml
   he:
     uses: ./.github/workflows/tindices_he.yml
   hh:
