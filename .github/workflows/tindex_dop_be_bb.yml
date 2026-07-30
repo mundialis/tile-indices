@@ -33,7 +33,7 @@ jobs:
         git config user.name "$GITHUB_ACTOR"
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
         git config pull.rebase false
-        git add DOP/NW/openNRW_DOP10_tileindex.gpkg.gz
+        git add DOP/BE_BB/DOP20_tileindex_BE_BB.gpkg.gz
         git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
         git pull origin main
         git push
