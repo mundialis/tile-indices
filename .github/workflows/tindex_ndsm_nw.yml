@@ -15,7 +15,8 @@ jobs:
     - uses: actions/checkout@v7
     - name: Creation of tindex
       run: |
-        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/NW/openNRW_nDSM_tindex.py+g" docker/Dockerfile
+        sed -i "s+# federal state specific required apk installations, to be replaced within workflow yaml+RUN apk add lynx+g" docker/Dockerfile
+        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/NW/openNRW_nDSM_tindex.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID

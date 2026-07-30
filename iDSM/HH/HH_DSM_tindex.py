@@ -11,9 +11,9 @@
 ############################################################################
 # Usage:
 # Then call script like this:
-#   python3 DSM/HH/HH_DSM_tindex.py
+#   python3 iDSM/HH/HH_DSM_tindex.py
 # Output:
-#   DSM/HH/hh_dom_tindex_proj.gpkg.gz
+#   iDSM/HH/hh_dom_tindex_proj.gpkg.gz
 
 
 import os
@@ -31,7 +31,7 @@ EPSG_CODE = 25832
 FILE_EXTENSION = ".xyz"
 TILE_SIZE = 1000
 OUTPUT_FILE = "hh_dom_tindex_proj.gpkg.gz"
-os.chdir("DSM/HH/")
+os.chdir("iDSM/HH/")
 
 
 def create_tindex_by_filename(data_list):

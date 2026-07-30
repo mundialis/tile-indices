@@ -17,8 +17,9 @@ jobs:
     - uses: actions/checkout@v7
     - name: Creation of tindex
       run: |
-        sed -i "s+RUN pip3 install requests remotezip+RUN pip3 install pandas geopandas shapely fiona+g" docker/Dockerfile
-        sed -i "s+RUN python3 DOP/NW/openNRW_DOP_tindex.py+RUN python3 DOP/BE_BB/DOP20_tileindex_BE_BB.py+g" docker/Dockerfile
+        sed -i "s|# federal state specific required apk installations, to be replaced within workflow yaml|RUN apk add --no-cache gcc musl-dev python3-dev g++ libffi-dev|g" docker/Dockerfile
+        sed -i "s+# federal state specific required pip installations, to be replaced within workflow yaml+RUN pip3 install pandas geopandas shapely fiona+g" docker/Dockerfile
+        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN python3 DOP/BE_BB/DOP_tileindex_BE_BB.py+g" docker/Dockerfile
         docker build -f docker/Dockerfile -t test-tindex .
         ID=$(docker create test-tindex)
         echo $ID
