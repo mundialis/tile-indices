@@ -35,7 +35,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: nDSM/NW
+        name: nDSM__NW
         path: nrw_ndom_tindex_proj.gpkg.gz
 
   # DOP
@@ -58,5 +58,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: DOP/NW
+        name: DOP__NW
         path: openNRW_DOP10_tileindex.gpkg.gz
