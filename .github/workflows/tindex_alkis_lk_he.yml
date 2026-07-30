@@ -2,8 +2,8 @@ name: Update ALKIS Liegenschaftskataster Hessen Tile Index
 
 on:
   push:
-    branches:
-    - main
+    # branches:
+    # - main
   schedule:
     # run tile index creation every month
     - cron:  '0 1 6 * *'
