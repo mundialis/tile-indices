@@ -1,7 +1,8 @@
 name: Update nDSM NW Tile Index
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
   schedule:
     # run tile index creation every month
     - cron:  '0 1 9 * *'
