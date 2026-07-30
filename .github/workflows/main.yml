@@ -2,8 +2,7 @@ name: Update all Tile Indices
 
 on:
   push:
-    # TODO main branch !!!
-    branches: [ workflow_improvement ]
+    branches: [ main ]
   schedule:
     # run tile index creation every month
     - cron: '0 1 9 * *'
