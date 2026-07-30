@@ -1,0 +1,62 @@
+name: Update NW Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "Name des Artefakts"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+concurrency:
+  group: commit-main
+  cancel-in-progress: false
+
+jobs:
+
+  # nDSM
+  update-tindex-ndsm-nw:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact_name: ${{ steps.meta.outputs.artifact_name }}
+    steps:
+    - uses: actions/checkout@v7
+    - name: Creation of tindex
+      run: |
+        sed -i "s+# federal state specific required apk installations, to be replaced within workflow yaml+RUN apk add lynx+g" docker/Dockerfile
+        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN grass -c epsg:25832 /grassdb/NW_nDSM --exec python3 nDSM/NW/openNRW_nDSM_tindex.py+g" docker/Dockerfile
+        docker build -f docker/Dockerfile -t test-tindex .
+        ID=$(docker create test-tindex)
+        echo $ID
+        docker cp $ID:/src/tile-indices/nDSM/NW/nrw_ndom_tindex_proj.gpkg.gz nDSM__NW__nrw_ndom_tindex_proj.gpkg.gz
+    - name: Set output
+      id: meta
+      run: |
+        echo "artifact_name=ndsm-nw" >> "$GITHUB_OUTPUT"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ndsm-nw
+        path: nDSM__NW__nrw_ndom_tindex_proj.gpkg.gz
+
+  # DOP
+  update-tindex-dop-nw:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - name: Creation of tindex
+      run: |
+        sed -i "s+# federal state specific required apk installations, to be replaced within workflow yaml+RUN apk add lynx parallel+g" docker/Dockerfile
+        sed -i "s+# federal state specific python script, to be replaced within workflow yaml+RUN python3 DOP/NW/openNRW_DOP_tindex.py+g" docker/Dockerfile
+        docker build -f docker/Dockerfile -t test-tindex .
+        ID=$(docker create test-tindex)
+        echo $ID
+        docker cp $ID:/src/tile-indices/DOP/NW/openNRW_DOP10_tileindex.gpkg.gz DOP__NW__openNRW_DOP10_tileindex.gpkg.gz
+    - name: Set output
+      id: meta
+      run: |
+        echo "artifact_name=dop-nw" >> "$GITHUB_OUTPUT"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: dop-nw
+        path: DOP__NW__openNRW_DOP10_tileindex.gpkg.gz

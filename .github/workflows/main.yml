@@ -1,0 +1,20 @@
+name: Update all Tile Indices
+
+on:
+  push:
+    # TODO main branch !!!
+    branches: [ workflow_improvement ]
+  schedule:
+    # run tile index creation every month
+    - cron:  '0 1 9 * *'
+
+jobs:
+  nw:
+    uses: ./.github/workflows/tindices_nw.yml
+
+  # commit all updated tile indices
+  commit_changes:
+    needs: [nw]
+    uses: ./.github/workflows/update_tindices.yml
+    with:
+      commit_message: "Update tile indices"
