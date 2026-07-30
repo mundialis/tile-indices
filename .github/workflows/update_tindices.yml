@@ -25,7 +25,7 @@ jobs:
           path: artifacts
 
       - name: List .gpkg.gz files
-        run: ls artifacts/*.gpkg.gz
+        run: apt install tree | tree artifacts
 
       - name: copy artifacts
         run: |
