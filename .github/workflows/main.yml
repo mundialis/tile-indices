@@ -6,7 +6,7 @@ on:
     branches: [ workflow_improvement ]
   schedule:
     # run tile index creation every month
-    - cron:  '0 1 9 * *'
+    - cron: '0 1 9 * *'
 
 jobs:
   nw:
