@@ -1,6 +1,6 @@
 # How to create a new workflow for a tile index
 
-For each federal state the is a `./.github/workflow/tindices_<FS.yml` in this file the jobs for each tile index is defined by using the [tindex_creation](./.github/workflows/tindex_creation.yml) workflow. E.g. by
+For each federal state the is a `./.github/workflow/tindices_<FS>.yml` (e.g. [tindices_nw.yml](./.github/workflows/tindices_nw.yml)) in this file the jobs for each tile index is defined by using the [tindex_creation](./.github/workflows/tindex_creation.yml) workflow. E.g. by
 
 ```yaml
   # DOP
@@ -28,3 +28,5 @@ Optinal parameters are:
 * `alpine_packages`: A list with alpine packages which need to be installed for tile index creation (seperated by space); e.g. _"firefox lynx"_
 * `python_libs`: : A list with python libraries which need to be installed for tile index creation (seperated by space); e.g."selenium pandas"
 * `epsg_for_grass`: The number of the EPSG code if GRASS GIS has to be used to run the python script; e.g. _25832_ or _25833_
+
+If a new federal state is added, the workflow has to be added in the [main.yml](./.github/workflows/main.yml).
