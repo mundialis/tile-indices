@@ -29,7 +29,7 @@ jobs:
 
       - name: copy artifacts
         run: |
-          for ART in $(ls artifacts/*.gpkg.gz) ; do cp $ART ${ART//__//} ; done
+          for ART in $(ls artifacts/**/**/*.gpkg.gz) ; do DEST=${ART/artifacts\/} ; cp $ART $DEST ; done
 
       - name: Configure git
         run: |
