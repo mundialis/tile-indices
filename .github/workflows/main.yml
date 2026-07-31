@@ -10,8 +10,9 @@ on:
 jobs:
   be-bb:
     uses: ./.github/workflows/tindices_be_bb.yml
-  he:
-    uses: ./.github/workflows/tindices_he.yml
+  # TODO HE: tindex creation takes over 6 h so that the job is canceled
+  # he:
+  #   uses: ./.github/workflows/tindices_he.yml
   hh:
     uses: ./.github/workflows/tindices_hh.yml
   ni:
@@ -23,7 +24,7 @@ jobs:
 
   # commit all updated tile indices
   upload_tile_indices:
-    needs: [be-bb,he,hh,ni,nw,sn]
+    needs: [be-bb,hh,ni,nw,sn]
     uses: ./.github/workflows/update_tindices.yml
     with:
       commit_message: "Update tile indices"
