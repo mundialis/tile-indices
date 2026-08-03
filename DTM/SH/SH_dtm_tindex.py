@@ -10,6 +10,7 @@
 #############################################################################
 
 import os
+from osgeo import ogr
 
 URL = "https://geodaten.schleswig-holstein.de/gaialight-sh/_apps/dladownload/single.php?file=DGM1_SH__Massendownload.geojson&id=4"
 OUTPUT_FILE = []
@@ -23,6 +24,18 @@ os.system(f'curl -L "{URL}" -o "{tmp_geojson}"')
 tindex_gpkg = "sh_dtm_tindex_proj.gpkg"
 stream = os.popen(f"ogr2ogr {tindex_gpkg} {tmp_geojson}")
 ogr2ogr_out = stream.read()
+
+# Rename link column to expected column name
+ds = ogr.Open(tindex_gpkg, update=1)
+LAYERNAME = ds.GetLayer(0).GetName()
+OLD_COLUMN_NAME = "link_data"
+NEW_COLUMN_NAME = "location"
+sql = (
+    f"ALTER TABLE {LAYERNAME} "
+    f"RENAME COLUMN {OLD_COLUMN_NAME} TO {NEW_COLUMN_NAME}"
+)
+ds.ExecuteSQL(sql, dialect="SQLite")
+ds = None
 
 # verify
 print("Verifying vector tile index:")
