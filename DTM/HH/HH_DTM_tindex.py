@@ -21,14 +21,13 @@ import json
 
 from remotezip import RemoteZip
 
-
 # Parameter for Hamburg DGM xyz files
 URL = (
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/"
-    "Digitales_Hoehenmodell/DGM1/dgm1_2x2km_XYZ_hh_2021_04_01.zip"
+    "https://www.daten-hamburg.de/opendata/fernerkundung_hoehenmodelle/dgm/"
+    "dgm1_hh_2022-04-30.zip"
 )
 EPSG_CODE = 25832
-FILE_EXTENSION = ".xyz"
+FILE_EXTENSION = ".tif"
 TILE_SIZE = 1000
 OUTPUT_FILE = "hh_dgm1_tindex_proj.gpkg.gz"
 os.chdir("DTM/HH/")
@@ -43,31 +42,30 @@ def create_tindex_by_filename(data_list):
             "type": "name",
             "properties": {"name": f"urn:ogc:def:crs:EPSG::{EPSG_CODE}"},
         },
-        "features": []
+        "features": [],
     }
 
     for num, data in enumerate(data_list):
-        splitted_data_name = os.path.basename(
-            data
-        ).replace(FILE_EXTENSION, "").split("_")
+        splitted_data_name = (
+            os.path.basename(data).replace(FILE_EXTENSION, "").split("_")
+        )
         x1 = int(splitted_data_name[2]) * 1000
         y1 = int(splitted_data_name[3]) * 1000
         x2 = x1 + TILE_SIZE
         y2 = y1 + TILE_SIZE
+        data_location = os.path.join(f"/vsizip/vsicurl/{URL}", data)
         feat = {
-            "type": "Feature", "properties": {
+            "type": "Feature",
+            "properties": {
                 "fid": num + 1,
-                "location": data,
+                "location": data_location,
             },
             "geometry": {
-                "type": "Polygon", "coordinates": [[
-                    [x1, y1],
-                    [x2, y1],
-                    [x2, y2],
-                    [x1, y2],
-                    [x1, y1]
-                ]],
-            }
+                "type": "Polygon",
+                "coordinates": [
+                    [[x1, y1], [x2, y1], [x2, y2], [x1, y2], [x1, y1]]
+                ],
+            },
         }
         geojson_dict["features"].append(feat)
 
@@ -84,8 +82,7 @@ def create_tindex_by_filename(data_list):
 # get XYZ data list
 data_list = []
 with RemoteZip(URL) as zip:
-    for zip_info in zip.infolist():
-        file_name = zip_info.filename
+    for file_name in zip.namelist():
         if file_name.endswith(FILE_EXTENSION):
             data_list.append(file_name)
 
