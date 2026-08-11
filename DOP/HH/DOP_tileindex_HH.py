@@ -3,8 +3,8 @@
 # MODULE:      DOP_tileindex_HH
 # AUTHOR(S):   Leon Louwarts
 # PURPOSE:     Creates a DOP tile index for Hamburg based on the file names
-#              of DOPs from https://suche.transparenz.hamburg.de/dataset/
-#              luftbilder-hamburg-dop-zeitreihe-unbelaubt3
+#              of DOPs from https://www.govdata.de/suche/daten/
+#              luftbilder-hamburg-dop-zeitreihe-unbelaubt
 # SPDX-FileCopyrightText: (c) 2026 by mundialis GmbH & Co. KG and the
 #                             GRASS Development Team
 # SPDX-License-Identifier: GPL-3.0-or-later.
@@ -19,13 +19,13 @@ from osgeo import gdal
 
 # DOP URLs
 DOP_URL = [
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Altona.zip",
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Bergedorf.zip",
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Eimsbuettel.zip",
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Mitte.zip",
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Nord.zip",
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Harburg.zip",
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/digitale_orthophotos/DOP_unbelaubt/DOP2025_unbelaubt_Hamburg_Wandsbek.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Altona.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Bergedorf.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Eimsbuettel.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Mitte.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Hamburg-Nord.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Harburg.zip",
+    "https://daten-hamburg.de/opendata/fernerkundung_luftbilder/dop_unbelaubt/DOP2025_unbelaubt_Hamburg_Wandsbek.zip",
 ]
 
 os.chdir("DOP/HH/")
