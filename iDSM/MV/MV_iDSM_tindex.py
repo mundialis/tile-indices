@@ -15,8 +15,7 @@ import json
 from urllib.parse import urlparse, parse_qs
 import xml.etree.ElementTree as ET
 
-
-# Parameter for MV gtiff files
+# Parameter for MV laz files
 URL = (
     "https://www.geodaten-mv.de/dienste/"
     "bdom20_atom?type=dataset&id=fafe490e-f9ff-4738-ac2a-7cb190cda49b"
@@ -58,13 +57,9 @@ def create_tindex_by_filename(data_list):
             },
             "geometry": {
                 "type": "Polygon",
-                "coordinates": [[
-                    [x1, y1],
-                    [x2, y1],
-                    [x2, y2],
-                    [x1, y2],
-                    [x1, y1]
-                ]],
+                "coordinates": [
+                    [[x1, y1], [x2, y1], [x2, y2], [x1, y2], [x1, y1]]
+                ],
             },
         }
         geojson_dict["features"].append(feat)
@@ -78,9 +73,9 @@ def create_tindex_by_filename(data_list):
     stream.read()
     return tindex_gpkg
 
-
+ 
 # get xml from URL
-tmp_xml = "/tmp/mv_dgm_tindex.xml"
+tmp_xml = "/tmp/mv_idsm_tindex.xml"
 os.system(f'curl -L "{URL}" -o "{tmp_xml}"')
 
 # create tile index list with file URLs
