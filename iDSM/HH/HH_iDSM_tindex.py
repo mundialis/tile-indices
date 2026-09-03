@@ -1,19 +1,19 @@
 ############################################################################
 #
-# MODULE:       HH_DSM_tindex.py
-# AUTHOR(S):    Anika Weinmann
-# PURPOSE:      Create tile index of Hamburg DOM/DSM xyz files from
+# MODULE:       HH_iDSM_tindex.py
+# AUTHOR(S):    Anika Weinmann, Kim Kaiser
+# PURPOSE:      Create tile index of Hamburg DOM/DSM tif files from
 #               https://daten-hamburg.de/geographie_geologie_geobasisdaten/
-# SPDX-FileCopyrightText: (c) 2024 by mundialis GmbH & Co. KG and the
+# SPDX-FileCopyrightText: (c) 2024-2026 by mundialis GmbH & Co. KG and the
 #                             GRASS Development Team
 # SPDX-License-Identifier: GPL-3.0-or-later.
 #
 ############################################################################
 # Usage:
 # Then call script like this:
-#   python3 iDSM/HH/HH_DSM_tindex.py
+#   python3 iDSM/HH/HH_iDSM_tindex.py
 # Output:
-#   iDSM/HH/hh_dom_tindex_proj.gpkg.gz
+#   iDSM/HH/hh_bdom_tindex_proj.gpkg.gz
 
 
 import os
@@ -22,15 +22,15 @@ import json
 from remotezip import RemoteZip
 
 
-# Parameter for Hamburg bDOM xyz files
+# Parameter for Hamburg bDOM tif files
 URL = (
-    "https://daten-hamburg.de/geographie_geologie_geobasisdaten/"
-    "digitales_hoehenmodell_bdom/DOM1_XYZ_HH_2020_04_30.zip"
+    "https://daten-hamburg.de/opendata/Digitales_Hoehenmodell_bDOM/"
+    "dom1_hh_2022-11-21.zip"
 )
 EPSG_CODE = 25832
-FILE_EXTENSION = ".xyz"
+FILE_EXTENSION = ".tif"
 TILE_SIZE = 1000
-OUTPUT_FILE = "hh_dom_tindex_proj.gpkg.gz"
+OUTPUT_FILE = "hh_bdom_tindex_proj.gpkg.gz"
 os.chdir("iDSM/HH/")
 
 
@@ -81,12 +81,12 @@ def create_tindex_by_filename(data_list):
     return tindex_gpkg
 
 
-# get XYZ data list
+# get tif data list
 data_list = []
 with RemoteZip(URL) as zip:
-    for zip_info in zip.infolist():
-        file_name = zip_info.filename
-        data_list.append(file_name)
+    for file_name in zip.namelist():
+        if file_name.endswith(FILE_EXTENSION):
+            data_list.append(file_name)
 
 # create tindex
 tindex_gpkg = create_tindex_by_filename(data_list)
