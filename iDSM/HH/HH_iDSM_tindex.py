@@ -54,10 +54,11 @@ def create_tindex_by_filename(data_list):
         y1 = int(splitted_data_name[3]) * 1000
         x2 = x1 + TILE_SIZE
         y2 = y1 + TILE_SIZE
+        data_location = os.path.join(f"/vsizip/vsicurl/{URL}", data)
         feat = {
             "type": "Feature", "properties": {
                 "fid": num + 1,
-                "location": data,
+                "location": data_location,
             },
             "geometry": {
                 "type": "Polygon", "coordinates": [[
