@@ -2,9 +2,9 @@
 #
 # MODULE:       HH_DTM_tindex.py
 # AUTHOR(S):    Anika Weinmann
-# PURPOSE:      Create tile index of Hamburg DGM/DTM txt files from
+# PURPOSE:      Create tile index of Hamburg DGM/DTM tif files from
 #               https://daten-hamburg.de/geographie_geologie_geobasisdaten/
-# SPDX-FileCopyrightText: (c) 2024 by mundialis GmbH & Co. KG and the
+# SPDX-FileCopyrightText: (c) 2024-2026 by mundialis GmbH & Co. KG and the
 #                             GRASS Development Team
 # SPDX-License-Identifier: GPL-3.0-or-later.
 #
@@ -21,7 +21,7 @@ import json
 
 from remotezip import RemoteZip
 
-# Parameter for Hamburg DGM xyz files
+# Parameter for Hamburg DGM tif files
 URL = (
     "https://www.daten-hamburg.de/opendata/fernerkundung_hoehenmodelle/dgm/"
     "dgm1_hh_2022-04-30.zip"
@@ -79,7 +79,7 @@ def create_tindex_by_filename(data_list):
     return tindex_gpkg
 
 
-# get XYZ data list
+# get tif data list
 data_list = []
 with RemoteZip(URL) as zip:
     for file_name in zip.namelist():
