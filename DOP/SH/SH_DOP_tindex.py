@@ -1,0 +1,58 @@
+############################################################################
+#
+# MODULE:      SH_dop_tindex
+# AUTHOR(S):   Kim Kaiser, Leon Louwarts
+# PURPOSE:     Creates a tile index of Schleswig-Holstein iDSM files
+# SPDX-FileCopyrightText: (c) 2026 by mundialis GmbH & Co. KG and the
+#                             GRASS Development Team
+# SPDX-License-Identifier: GPL-3.0-or-later.
+#
+#############################################################################
+
+import os
+from osgeo import ogr
+
+URL = ("https://geodaten.schleswig-holstein.de/gaialight-sh/_apps/dladownload/single.php?file=DOP20_SH__Massendownload.geojson&id=4")
+OUTPUT_FILE = []
+os.chdir("DOP/SH/")
+
+# get GeoJson from URL
+tmp_geojson = "/tmp/DOP20_SH__Massendownload.geojson"
+os.system(f'curl -L "{URL}" -o "{tmp_geojson}"')
+
+# create GPKG from GeoJson
+tindex_gpkg = "DOP20_tileindex_SH.gpkg"
+stream = os.popen(f"ogr2ogr {tindex_gpkg} {tmp_geojson}")
+ogr2ogr_out = stream.read()
+
+# Rename link column to expected column name
+ds = ogr.Open(tindex_gpkg, update=1)
+LAYERNAME = ds.GetLayer(0).GetName()
+OLD_COLUMN_NAME = "link_data"
+NEW_COLUMN_NAME = "location"
+sql = (
+    f"ALTER TABLE {LAYERNAME} "
+    f"RENAME COLUMN {OLD_COLUMN_NAME} TO {NEW_COLUMN_NAME}"
+)
+ds.ExecuteSQL(sql, dialect="SQLite")
+ds = None
+
+# verify
+print("Verifying vector tile index:")
+stream = os.popen(f"ogrinfo -so -al {tindex_gpkg}")
+tindex_verification = stream.read()
+print(tindex_verification)
+
+# package
+OUTPUT_FILE = (f"{tindex_gpkg}.gz")
+if os.path.isfile(OUTPUT_FILE):
+    os.remove(OUTPUT_FILE)
+stream = os.popen(f"gzip {tindex_gpkg}")
+create_gz = stream.read()
+print(f"<{OUTPUT_FILE}> created")
+
+# cleanup
+if os.path.isfile(tindex_gpkg):
+    os.remove(tindex_gpkg)
+if os.path.isfile(tmp_geojson):
+    os.remove(tmp_geojson)
