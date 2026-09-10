@@ -7,6 +7,9 @@ on:
     # run tile index creation every month
     - cron: '0 1 10 * *'
 
+# the workflow does not require permissions, but to avoid a code security warning this should be explicitly defined:
+permissions: {}
+
 jobs:
   be-bb:
     uses: ./.github/workflows/tindices_be_bb.yml
