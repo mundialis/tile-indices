@@ -7,6 +7,9 @@ on:
         description: "SN Tile Indices"
         value: ${{ jobs.build.outputs.artifact_name }}
 
+# the workflow does not require permissions, but to avoid a code security warning this should be explicitly defined:
+permissions: {}
+
 jobs:
 
   # DOP
