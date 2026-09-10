@@ -1,4 +1,4 @@
-This folder contains a tileindex for DTM tiles (in this case DTM20 with size of 1000 x 1000 m) of Rheinland-Pfalz. It was created by using a python script.
+This folder contains a tileindex for DTM tiles (in this case DGM1 with size of 1000 x 1000 m) of Rheinland-Pfalz. It was created by using a python script.
 
 Tile index:
 - `rp_dtm_tindex_proj.gpkg.gz`
