@@ -1,0 +1,34 @@
+name: Collecting all requirements
+
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  collect_all_requirements:
+    name: collect_all_requirements
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - name: Generate requirements_all.txt
+      run: |
+        cp requirements.txt requirements_all.txt
+        find . -name "Makefile" -type f -exec grep -hoP '(?<=pip install )[^\n]+' {} \; | tr ' ' '\n' >> requirements_all.txt
+        sed -i '/^-/d' requirements_all.txt
+        sed -i '/\.txt/d' requirements_all.txt
+        sort -u requirements_all.txt -o requirements_all.txt
+    - name: Commit and push if changed
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git add requirements_all.txt
+        # if nothing changed no commit, otherwise commit
+        if git diff --cached --quiet; then
+          echo "Nothing to commit"
+          exit 0
+        fi
+        git commit -m "update requirements_all.txt"
+        if git push origin HEAD:main; then
+          exit 0
+        fi
