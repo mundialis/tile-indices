@@ -1,0 +1,16 @@
+name: Generate Third-Party Licenses
+
+on:
+  release:
+    types: [published]
+
+# the workflow does not require permissions, but to avoid a code security warning this should be explicitly defined:
+permissions: {}
+
+jobs:
+  collect_all_requirements:
+    uses: ./.github/workflows/requirements-all.yml
+  generate-third-party-licenses:
+    uses: mundialis/github-workflows/.github/workflows/third-party-licenses.yml@main
+    with:
+      requirements: requirements_all.txt
