@@ -7,7 +7,7 @@ on:
 
 jobs:
   codeql:
-    uses: mundialis/github-workflows/.github/workflows/codeql.yml@cra_workflows_new
+    uses: mundialis/github-workflows/.github/workflows/codeql.yml@main
     # the workflow requires permissions that need to be granted by the parent job:
     permissions:
       # required for all workflows
