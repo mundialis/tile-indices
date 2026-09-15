@@ -7,24 +7,40 @@ on:
     # run tile index creation every month
     - cron: '0 1 10 * *'
 
+# the workflow does not require permissions, but to avoid a code security warning this should be explicitly defined:
+permissions: {}
+
 jobs:
   be-bb:
+    permissions:
+      contents: read
     uses: ./.github/workflows/tindices_be_bb.yml
   # TODO HE: tindex creation takes over 6 h so that the job is canceled
   # he:
   #   uses: ./.github/workflows/tindices_he.yml
   hh:
+    permissions:
+      contents: read
     uses: ./.github/workflows/tindices_hh.yml
   ni:
+    permissions:
+      contents: read
     uses: ./.github/workflows/tindices_ni.yml
   nw:
+    permissions:
+      contents: read
     uses: ./.github/workflows/tindices_nw.yml
   sn:
+    permissions:
+      contents: read
     uses: ./.github/workflows/tindices_sn.yml
 
   # commit all updated tile indices
   upload_tile_indices:
     needs: [be-bb,hh,ni,nw,sn]
+    permissions:
+      contents: write
+      actions: read
     uses: ./.github/workflows/update_tindices.yml
     with:
       commit_message: "Update tile indices"

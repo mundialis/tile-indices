@@ -67,3 +67,5 @@ jobs:
       with:
         name: ${{ inputs.type }}__${{ inputs.state }}
         path: ${{ inputs.tindex_file }}
+  permissions:
+    contents: read
