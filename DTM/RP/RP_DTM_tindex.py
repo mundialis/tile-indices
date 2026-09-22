@@ -78,8 +78,9 @@ root = tree.getroot()
 ns = {"ml": "urn:ietf:params:xml:ns:metalink"}
 data_list = []
 for file in root.findall("ml:file", ns):
-    file_url = file.find("ml:url", ns)
-    data_list.append(file_url.text)
+    for file_url in file.findall("ml:url", ns):
+        if file_url.text.endswith(".tif"):
+            data_list.append(file_url.text)
 
 # create tindex
 tindex_gpkg = create_tindex_by_filename(data_list)
