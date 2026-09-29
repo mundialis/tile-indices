@@ -71,7 +71,7 @@ def create_tindex_from_features(tiles):
         "name": "tindex",
         "crs": {
             "type": "name",
-            "properties": {"name": f"urn:ogc:def:crs:EPSG::{EPSG_CODE}"},
+            "properties": {"name": f"urn:ogc:def:crs:EPSG::4647"},
         },
         "features": [],
     }
@@ -97,7 +97,9 @@ def create_tindex_from_features(tiles):
         json.dump(geojson_dict, f, indent=4)
 
     tindex_gpkg = "st_dop_tindex_proj.gpkg"
-    stream = os.popen(f"ogr2ogr {tindex_gpkg} tindex.geojson")
+    stream = os.popen(
+        f"ogr2ogr -s_srs EPSG:4647 -t_srs EPSG:{EPSG_CODE} {tindex_gpkg} tindex.geojson"
+    )
     stream.read()
     return tindex_gpkg
 
