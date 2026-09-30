@@ -3,8 +3,6 @@ name: Collecting all requirements
 on:
   workflow_call:
 
-permissions: {}
-
 jobs:
   collect_all_requirements:
     name: collect_all_requirements
