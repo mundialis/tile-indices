@@ -13,10 +13,11 @@ jobs:
     - uses: actions/checkout@v7
     - name: Generate requirements_all.txt
       run: |
-        cp requirements.txt requirements_all.txt
-        find . -name "Makefile" -type f -exec grep -hoP '(?<=pip install )[^\n]+' {} \; | tr ' ' '\n' >> requirements_all.txt
-        sed -i '/^-/d' requirements_all.txt
-        sed -i '/\.txt/d' requirements_all.txt
+        # find all requirements.txt within repo and append to single file
+        find . -type f -name "requirements.txt" -print0 | xargs -0 cat > requirements_all.txt
+        # remove spaces at end of lines
+        sed -i 's/[[:space:]]*$//' requirements_all.txt
+        # remove duplicates (note: different versions of same packages are not duplicated, and are kept)
         sort -u requirements_all.txt -o requirements_all.txt
     - name: Commit and push if changed
       run: |
