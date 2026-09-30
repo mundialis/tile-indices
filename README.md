@@ -3,7 +3,6 @@
 Tile indices for different open data sets covering selected federal states in Germany including the scripts to create these indices.
 
 Overview of the tile-indices:
-
 | Federal state | Abbreviation | ALKIS - Liegenschaftskataster | Digital Orthophoto (DOP) | Digital Terrain Model (DTM) | Digital Surface Model (DSM) | Image based DSM (iDSM) | Normalized DSM (nDSM) |
 | - | - | - | - | - | - | - | - |
 | **Baden-Württemberg** | **BW** | | | | | |
