@@ -1,6 +1,6 @@
 bs4
 fiona==1.9.5
-geopandas==0.14.3
+geopandas==0.14.4
 pandas==2.2.0
 remotezip
 requests
