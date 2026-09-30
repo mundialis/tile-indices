@@ -20,6 +20,8 @@ EPSG_CODE = 25832
 TILE_SIZE = 2000
 os.chdir("DOP/ST/")
 
+# Server needs a browser-like User-Agent; default/non-browser UA strings
+# will be blocked with HTTP 503
 session = requests.Session()
 session.headers.update({
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:155.0) Gecko/20100101 Firefox/155.0",
@@ -42,27 +44,6 @@ if not match:
 
 tiles = json.loads(match.group(1))
 print(f"{len(tiles['features'])} Kacheln gefunden, CRS: {tiles['crs']['properties']['name']}")
-
-
-def download_tile(session, item_id, output_dir, fmt="zip"):
-    prepare_url = (
-        "https://www.lvermgeo.sachsen-anhalt.de/de/mod/4,1962,501/ajax/1/prepare/"
-        f"?items={item_id}&format={fmt}"
-    )
-    resp = session.get(prepare_url, headers={"X-Requested-With": "XMLHttpRequest"})
-    resp.raise_for_status()
-
-    download_url = resp.text.strip()
-    if not download_url.startswith("http"):
-        raise RuntimeError(f"Unerwartete prepare-Antwort für Item {item_id}: {download_url}")
-
-    dl_resp = session.get(download_url)
-    dl_resp.raise_for_status()
-
-    out_path = output_dir / f"dop20_{item_id}.zip"
-    with open(out_path, "wb") as f:
-        f.write(dl_resp.content)
-    return out_path
 
 
 def create_tindex_from_features(tiles):
