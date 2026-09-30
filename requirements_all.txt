@@ -1,17 +1,9 @@
 bs4
 fiona==1.9.5
 geopandas==0.14.3
-gzip
-json
-lynx
-os
 pandas==2.2.0
-re
 remotezip
 requests
-sed
 selenium
 shapely==2.0.2
-urllib.parse
 wget
-xml.etree.ElementTree
