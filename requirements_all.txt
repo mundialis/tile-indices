@@ -1,6 +1,5 @@
 bs4
 fiona==1.9.5
-gTILE
 geopandas==0.14.3
 gzip
 json
