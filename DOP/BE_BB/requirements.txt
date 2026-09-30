@@ -1,4 +1,4 @@
 pandas==2.2.0
-geopandas==1.1.2
+geopandas==1.2.0
 shapely==2.0.2
 pyogrio>=0.9.0
