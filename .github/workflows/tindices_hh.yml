@@ -7,8 +7,7 @@ on:
         description: "HH Tile Indices"
         value: ${{ jobs.build.outputs.artifact_name }}
 
-# the workflow does not require permissions, but to avoid a code security warning this should be explicitly defined:
-permissions: read
+permissions: {}
 
 jobs:
 
@@ -29,9 +28,9 @@ jobs:
     with:
       type: iDSM
       state: HH
-      script: HH_DSM_tindex.py
+      script: HH_iDSM_tindex.py
       epsg_for_grass: 25832
-      tindex_file: hh_dom_tindex_proj.gpkg.gz
+      tindex_file: hh_bdom_tindex_proj.gpkg.gz
       python_libs: "remotezip"
 
   # DOP TODO

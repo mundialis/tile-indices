@@ -29,6 +29,10 @@ on:
         description: "Tile index"
         value: ${{ jobs.update-tindex.outputs.artifact_name }}
 
+# only read access to the repository content is required (checkout):
+permissions:
+  contents: read
+
 jobs:
 
   update-tindex:
@@ -67,5 +71,3 @@ jobs:
       with:
         name: ${{ inputs.type }}__${{ inputs.state }}
         path: ${{ inputs.tindex_file }}
-  permissions:
-    contents: read

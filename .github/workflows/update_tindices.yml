@@ -7,12 +7,18 @@ on:
         required: true
         type: string
 
+# write access is required to push the updated tile indices,
+# read access to actions is required to download the artifacts:
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   # commit all updated tile indices
   upload:
     runs-on: ubuntu-latest
 
-    if: ${{ !cancelled() }}     # ← läuft immer, außer wenn der Workflow abgebrochen wurde
+    if: ${{ !cancelled() }}     # runs always, except when the workflow was cancelled
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,10 +56,8 @@ jobs:
             echo "Nothing to commit"
             exit 0
           fi
+
           git commit -m "${{ inputs.commit_message }}"
           if git push origin HEAD:main; then
             exit 0
           fi
-  permissions:
-    contents: write
-    actions: read
