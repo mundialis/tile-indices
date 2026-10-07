@@ -18,7 +18,7 @@ os.chdir("DOP/SH/")
 
 # get GeoJson from URL
 tmp_geojson = "/tmp/DOP20_SH__Massendownload.geojson"
-os.system(f'curl -L "{URL}" -o "{tmp_geojson}"')
+os.system(f'curl -k -L "{URL}" -o "{tmp_geojson}"')
 
 # create GPKG from GeoJson
 tindex_gpkg = "DOP20_tileindex_SH.gpkg"
