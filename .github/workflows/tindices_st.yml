@@ -1,0 +1,44 @@
+name: Update ST Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "ST Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+permissions:
+  contents: read
+
+jobs:
+
+  # DTM (TODO)
+  # update-tindex-dtm-st:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: DTM
+  #     state: ST
+  #     script: .py
+  #     tindex_file: .gpkg.gz
+  #     alpine_packages: "gzip"
+  
+  # DSM (TODO)
+  # update-tindex-dsm-st:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: DSM
+  #     state: ST
+  #     script: .py
+  #     tindex_file: .gpkg.gz
+  #     alpine_packages: "gzip"
+  
+  # DOP
+  update-tindex-dop-st:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: ST
+      script: ST_DOP_tindex.py
+      tindex_file: st_dop_tindex_proj.gpkg.gz
+      python_libs: "requests"
+      alpine_packages: "gzip"

@@ -12,6 +12,26 @@ permissions:
 
 jobs:
 
+  # DTM
+  update-tindex-dtm-sn:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: SN
+      script: SN_DGM_tileindex.py
+      tindex_file: SN_DGM_tileindex_proj.gpkg.gz
+      alpine_packages: "gzip"
+  
+  # DSM
+  update-tindex-dsm-sn:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DSM
+      state: SN
+      script: SN_DOM_tileindex.py
+      tindex_file: SN_DOM_tileindex_proj.gpkg.gz
+      alpine_packages: "gzip"
+  
   # DOP
   update-tindex-dop-sn:
     uses: ./.github/workflows/tindex_creation.yml
@@ -20,5 +40,4 @@ jobs:
       state: SN
       script: DOP_tileindex_SN.py
       tindex_file: DOP20_tileindex_SN.gpkg.gz
-      alpine_packages: "firefox"
       python_libs: "selenium"

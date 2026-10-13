@@ -20,7 +20,7 @@ jobs:
       state: NW
       script: openNRW_DTM_tindex.py
       tindex_file: nw_dtm_tindex_proj.gpkg.gz
-      alpine_packages: "lynx"
+      alpine_packages: "gzip lynx sed"
 
   # nDSM
   update-tindex-ndsm-nw:
@@ -30,7 +30,7 @@ jobs:
       state: NW
       script: openNRW_nDSM_tindex.py
       tindex_file: nrw_ndom_tindex_proj.gpkg.gz
-      alpine_packages: "lynx"
+      alpine_packages: "gzip lynx sed"
 
   # DOP
   update-tindex-dop-nw:
@@ -40,4 +40,4 @@ jobs:
       state: NW
       script: openNRW_DOP_tindex.py
       tindex_file: openNRW_DOP10_tileindex.gpkg.gz
-      alpine_packages: "lynx parallel"
+      alpine_packages: "gzip lynx sed"

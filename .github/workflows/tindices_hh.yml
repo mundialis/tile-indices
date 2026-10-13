@@ -34,4 +34,12 @@ jobs:
       tindex_file: hh_bdom_tindex_proj.gpkg.gz
       python_libs: "remotezip"
 
-  # DOP TODO
+  # DOP
+  update-tindex-dop-hh:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: HH
+      script: DOP_tileindex_HH.py
+      epsg_for_grass: 25832
+      tindex_file: DOP20_tileindex_HH.gpkg.gz
