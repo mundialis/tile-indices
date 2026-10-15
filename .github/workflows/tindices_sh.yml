@@ -1,0 +1,40 @@
+name: Update SH Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "SH Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+permissions:
+  contents: read
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-sh:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: SH
+      script: SH_dtm_tindex.py
+      tindex_file: sh_dtm_tindex_proj.gpkg.gz
+  
+  # iDSM
+  update-tindex-idsm-sh:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: iDSM
+      state: SH
+      script: SH_idsm_tindex.py
+      tindex_file: sh_bdom_tindex_proj.gpkg.gz
+  
+  # DOP
+  update-tindex-dop-sh:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: SH
+      script: SH_DOP_tindex.py
+      tindex_file: DOP20_tileindex_SH.gpkg.gz

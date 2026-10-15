@@ -1,0 +1,34 @@
+name: Update TH Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "TH Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+permissions:
+  contents: read
+
+jobs:
+
+  # DTM (new Tindex script needs to be created first)
+  # update-tindex-dtm-th:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: DTM
+  #     state: TH
+  #     script: TH_dgm_list.csv # gdaltindex -f GPKG TH_DOM_tileindex.gpkg --optfile TH_dgm_list.csv?
+  #     tindex_file: TH_DGM_tileindex_proj.gpkg.gz
+  #     python_libs: "remotezip"
+  
+  # DSM (new Tindex script needs to be created first)
+  # update-tindex-dsm-th:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: DSM
+  #     state: TH
+  #     script: TH_dom_list.csv # gdaltindex -f GPKG TH_DOM_tileindex.gpkg --optfile TH_dom_list.csv?
+  #     tindex_file: TH_DOM_tileindex_proj.gpkg.gz
+  
+  # DOP (not needed)
