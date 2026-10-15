@@ -20,7 +20,6 @@ jobs:
       state: SH
       script: SH_dtm_tindex.py
       tindex_file: sh_dtm_tindex_proj.gpkg.gz
-      alpine_packages: "gzip"
   
   # iDSM
   update-tindex-idsm-sh:
@@ -30,7 +29,6 @@ jobs:
       state: SH
       script: SH_idsm_tindex.py
       tindex_file: sh_bdom_tindex_proj.gpkg.gz
-      alpine_packages: "gzip"
   
   # DOP
   update-tindex-dop-sh:
@@ -40,4 +38,3 @@ jobs:
       state: SH
       script: SH_DOP_tindex.py
       tindex_file: DOP20_tileindex_SH.gpkg.gz
-      alpine_packages: "gzip"

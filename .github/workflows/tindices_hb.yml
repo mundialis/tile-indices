@@ -21,7 +21,6 @@ jobs:
       script: HB_DTM_tindex.py
       tindex_file: hb_dgm1_tindex_proj.gpkg.gz
       python_libs: "remotezip"
-      alpine_packages: "gzip"
   
   # DSM
   update-tindex-dsm-hb:
@@ -32,6 +31,5 @@ jobs:
       script: HB_DSM_tindex.py
       tindex_file: hb_dom1_tindex_proj.gpkg.gz
       python_libs: "remotezip"
-      alpine_packages: "gzip"
   
   # DOP (not needed)

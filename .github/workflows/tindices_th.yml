@@ -12,24 +12,23 @@ permissions:
 
 jobs:
 
-  # DTM
-  update-tindex-dtm-th:
-    uses: ./.github/workflows/tindex_creation.yml
-    with:
-      type: DTM
-      state: TH
-      script: TH_dgm_list.csv # gdaltindex -f GPKG TH_DOM_tileindex.gpkg --optfile TH_dgm_list.csv?
-      tindex_file: TH_DGM_tileindex_proj.gpkg.gz
-      python_libs: "remotezip"
-      alpine_packages: "gzip"
+  # DTM (new Tindex script needs to be created first)
+  # update-tindex-dtm-th:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: DTM
+  #     state: TH
+  #     script: TH_dgm_list.csv # gdaltindex -f GPKG TH_DOM_tileindex.gpkg --optfile TH_dgm_list.csv?
+  #     tindex_file: TH_DGM_tileindex_proj.gpkg.gz
+  #     python_libs: "remotezip"
   
-  # DSM
-  update-tindex-dsm-th:
-    uses: ./.github/workflows/tindex_creation.yml
-    with:
-      type: DSM
-      state: TH
-      script: TH_dom_list.csv # gdaltindex -f GPKG TH_DOM_tileindex.gpkg --optfile TH_dom_list.csv?
-      tindex_file: TH_DOM_tileindex_proj.gpkg.gz
+  # DSM (new Tindex script needs to be created first)
+  # update-tindex-dsm-th:
+  #   uses: ./.github/workflows/tindex_creation.yml
+  #   with:
+  #     type: DSM
+  #     state: TH
+  #     script: TH_dom_list.csv # gdaltindex -f GPKG TH_DOM_tileindex.gpkg --optfile TH_dom_list.csv?
+  #     tindex_file: TH_DOM_tileindex_proj.gpkg.gz
   
   # DOP (not needed)

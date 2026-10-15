@@ -20,7 +20,6 @@ jobs:
       state: MV
       script: MV_DTM_tindex.py
       tindex_file: mv_dtm_tindex_proj.gpkg.gz
-      alpine_packages: "gzip"
   
   # iDSM
   update-tindex-idsm-mv:
@@ -30,7 +29,6 @@ jobs:
       state: MV
       script: MV_iDSM_tindex.py
       tindex_file: mv_idsm_tindex_proj.gpkg.gz
-      alpine_packages: "gzip"
   
   # DOP
   update-tindex-dop-mv:
@@ -40,4 +38,3 @@ jobs:
       state: MV
       script: MV_DOP_tindex.py
       tindex_file: mv_dop_tindex_proj.gpkg.gz
-      alpine_packages: "gzip"

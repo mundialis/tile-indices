@@ -20,7 +20,6 @@ jobs:
       state: SN
       script: SN_DGM_tileindex.py
       tindex_file: SN_DGM_tileindex_proj.gpkg.gz
-      alpine_packages: "gzip"
   
   # DSM
   update-tindex-dsm-sn:
@@ -30,7 +29,6 @@ jobs:
       state: SN
       script: SN_DOM_tileindex.py
       tindex_file: SN_DOM_tileindex_proj.gpkg.gz
-      alpine_packages: "gzip"
   
   # DOP
   update-tindex-dop-sn:
