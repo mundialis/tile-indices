@@ -1,0 +1,35 @@
+name: Update HB Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "HB Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+permissions:
+  contents: read
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-hb:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: HB
+      script: HB_DTM_tindex.py
+      tindex_file: hb_dgm1_tindex_proj.gpkg.gz
+      python_libs: "remotezip"
+  
+  # DSM
+  update-tindex-dsm-hb:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DSM
+      state: HB
+      script: HB_DSM_tindex.py
+      tindex_file: hb_dom1_tindex_proj.gpkg.gz
+      python_libs: "remotezip"
+  
+  # DOP (not needed)
