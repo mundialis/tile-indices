@@ -26,7 +26,7 @@ SERVICE_URL = (
 EPSG_CODE = 25832
 TILE_SIZE = 1000
 NS = {"atom": "http://www.w3.org/2005/Atom"}
-# dom1_32_561_5609_1_th_2020-2025.zip  (aeltere Jahrgaenge ohne "32", z.B. dom1_561_5609_1_th_2014-2019.zip)
+# e.g. dom1_32_561_5609_1_th_2020-2025.zip  (older years without "32", e.g. dom1_561_5609_1_th_2014-2019.zip)
 TILE_RE = re.compile(r"dom\d_(?:32_)?(\d+)_(\d+)_\d+_th_(\d{4})-(\d{4})\.zip$")
 
 
@@ -36,7 +36,7 @@ def fetch_xml(url, path):
 
 
 def get_tile_urls(root_service):
-    """Service-Feed -> Dataset-Feed -> ZIP link of wanted year"""
+    """Gets URLs of dataset feed"""
     ds_urls= [
         link.attrib["href"]
         for link in root_service.findall("atom:entry/atom:link", NS)
@@ -55,6 +55,7 @@ def parse_dataset_feed(root):
             continue
         x, y = int(m.group(1)), int(m.group(2))
         years = (int(m.group(3)), int(m.group(4)))
+        # tuple comparison: (2020, 2025) > (2014, 2019)
         if (x, y) not in newest or years > newest[(x, y)][0]:
             newest[(x, y)] = (years, href)
     return newest
@@ -98,11 +99,9 @@ def create_tindex_by_filename(newest):
                 ]],
             },
         })
-        # geojson_dict["features"].append(feat)
 
     with open("tindex.geojson", "w") as f:
         json.dump(geojson_dict, f)
-    return len(geojson_dict["features"])
 
 
 def main():
@@ -113,6 +112,8 @@ def main():
     ds_urls = get_tile_urls(fetch_xml(SERVICE_URL, tmp_service))
     if not ds_urls:
         raise RuntimeError("Not dataset service found in service feed")
+    # Data feed currently provides data for 2010-2013, 2014-2019 and 2020-2025.
+    # For each tile the newest DSM is selected
     newest = parse_dataset_feed(fetch_xml(ds_urls[0], tmp_dataset))
     if not newest:
         raise RuntimeError("No tiles found - check regex/feed structure")
@@ -135,12 +136,14 @@ def main():
     print(subprocess.run(["ogrinfo", "-so", "-al", tindex_gpkg],
                          capture_output=True, text=True, check=True).stdout)
 
+    # Package
     output_file = f"{tindex_gpkg}.gz"
     if os.path.isfile(output_file):
         os.remove(output_file)
     subprocess.run(["gzip", tindex_gpkg], check=True)
     print(f"<{output_file}> created")
 
+    # Cleanup: remove temp/intermediate files, only .gpkg.gz is kept
     for f in ("tindex.geojson", tindex_gpkg, tmp_service, tmp_dataset):
         if os.path.isfile(f):
             os.remove(f)

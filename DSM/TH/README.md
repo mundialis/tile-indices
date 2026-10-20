@@ -1,7 +1,7 @@
 This folder contains a tileindex for a DSM (DSM1 with size 1000 x 1000 m) of Thüringen. It was created by using a python script.
 
 Tile index:
-- `TH_dsm_tindex_proj.gpkg.gz`
+- `th_dsm_tindex_proj.gpkg.gz`
 - contains one poylgon for every tile
 - download URL for each poylgon is stored as attribute "location"
 
