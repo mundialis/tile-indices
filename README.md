@@ -5,7 +5,7 @@ Tile indices for different open data sets covering selected federal states in Ge
 Overview of the tile-indices:
 | Federal state | Abbreviation | ALKIS - Liegenschaftskataster | Digital Orthophoto (DOP) | Digital Terrain Model (DTM) | Digital Surface Model (DSM) | Image based DSM (iDSM) | Normalized DSM (nDSM) |
 | - | - | - | - | - | - | - | - |
-| **Baden-Württemberg** | **BW** | | | | | |
+| **Baden-Württemberg** | **BW** | | | | [BW tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/BW/BW_DSM_tindex_proj.gpkg.gz) | |
 | **Bayern** | **BY** | | | | | |
 | **Berlin** | **BE** | | [automated BE tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/BE_BB/DOP20_tileindex_BE_BB.gpkg.gz) | [BE tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/BE/be_dgm_tindex_proj.gpkg.gz) | [BE tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/BE/be_dom_tindex_proj.gpkg.gz) | |
 | **Brandenburg** | **BB** | | [automated BB tindex](https://github.com/mundialis/tile-indices/blob/main/DOP/BE_BB/DOP20_tileindex_BE_BB.gpkg.gz) | [BB tindex](https://github.com/mundialis/tile-indices/blob/main/DTM/BB/BB_tileindex_dgm_proj.gpkg.gz) | | [BB tindex](https://github.com/mundialis/tile-indices/blob/main/DSM/BB/BB_tileindex_dom_proj.gpkg.gz) | |
