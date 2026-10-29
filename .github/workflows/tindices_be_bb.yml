@@ -20,7 +20,7 @@ jobs:
       state: BB
       script: fetch_BB_DGM_list.sh
       tindex_file: BB_tileindex_dgm_proj.gpkg.gz
-      alpine_packages: "gTILE lynx sed"
+      alpine_packages: "bash lynx sed"
 
   update-tindex-dtm-be:
     uses: ./.github/workflows/tindex_creation.yml
@@ -48,10 +48,9 @@ jobs:
     with:
       type: iDSM
       state: BB
-      script: fetch_BB_DOM_list.sh
+      script: BB_iDSM_tindex.py
       tindex_file: BB_tileindex_dom_tif_proj.gpkg.gz
-      alpine_packages: "gTILE lynx sed"
-      python_libs: "pandas geopandas shapely fiona"
+      alpine_packages: "sed"
   
   # DOP
   update-tindex-dop-be-bb:
@@ -61,4 +60,6 @@ jobs:
       state: BE_BB
       script: DOP_tileindex_BE_BB.py
       tindex_file: DOP20_tileindex_BE_BB.gpkg.gz
-      python_libs: "pandas geopandas shapely pyogrio"
+      alpine_packages: "lynx sed py3-pandas py3-shapely python3-dev"
+      python_libs: "geopandas pyogrio"
+      # python_libs: requirements.txt

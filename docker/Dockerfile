@@ -22,6 +22,6 @@ WORKDIR /src/tile-indices
 ARG TINDEX_PATH
 RUN set -e; \
     gunzip -c "${TINDEX_PATH}" > /tmp/tindex_test.gpkg; \
-    orginfo -so -al /tmp/tindex_test.gpkg | tee /tmp/ogrinfo.txt; \
+    ogrinfo -so -al /tmp/tindex_test.gpkg | tee /tmp/ogrinfo.txt; \
     grep -Eq "Feature Count: [1-9]" /tmp/ogrinfo.txt; \
     rm -f /tmp/tindex_test.gpkg /tmp/ogrinfo.txt

@@ -1,10 +1,9 @@
 ############################################################################
 #
 # MODULE:       BE_DSM_tindex.py
-# AUTHOR(S):    Anika Weinmann
-# PURPOSE:      Create tile index of Berlin DOM/DSM txt files from
-#               https://www.opengeodata.nrw.de/produkte/geobasis/dop/dop/
-# SPDX-FileCopyrightText: (c) 2023 by mundialis GmbH & Co. KG and the
+# AUTHOR(S):    Anika Weinmann, Leon Louwarts
+# PURPOSE:      Create tile index of Berlin DOM/DSM txt files
+# SPDX-FileCopyrightText: (c) 2023-2026 by mundialis GmbH & Co. KG and the
 #                             GRASS Development Team
 # SPDX-License-Identifier: GPL-3.0-or-later.
 #
@@ -24,21 +23,21 @@
 import os
 import json
 
+import urllib.request
+import xml.etree.ElementTree as ET
+
 from osgeo import gdal
 from remotezip import RemoteZip
 
 
 # Parameter for Berlin DOM txt files
-URL = (
-    "https://fbinter.stadt-berlin.de/fb/berlin/service_intern.jsp?"
-    "id=a_dom1@senstadt&type=FEED"
-)
-GREP_STR = "https://fbinter.stadt-berlin.de/fb/atom/DOM/DOM1"
+URL = "https://gdi.berlin.de/data/dom/atom/0.atom"
+ATOM_NS = {"atom": "http://www.w3.org/2005/Atom"}
 EPSG_CODE = 25833
 FILE_EXTENSION = ".txt"
 TILE_SIZE = 2000
 OUTPUT_FILE = "be_dom_tindex_proj.gpkg.gz"
-GDALTINDEX = True
+GDALTINDEX = False
 VSI_PART = "/vsizip/vsicurl/"
 os.chdir("DSM/BE/")
 
@@ -56,24 +55,17 @@ def create_tindex_by_filename(data_list):
     }
 
     for num, data in enumerate(data_list):
-        ds = gdal.Open(data)
-        if ds is None:
-            print(
-                f"<{data}> is not a valid file and will be left out for "
-                "tindex creation."
-            )
-            continue
         splitted_data_name = os.path.basename(
             data
         ).replace(FILE_EXTENSION, "").split("_")
-        x1 = int(splitted_data_name[1]) * 1000
-        y1 = int(splitted_data_name[2]) * 1000
+        x1 = int(splitted_data_name[2]) * 1000
+        y1 = int(splitted_data_name[3]) * 1000
         x2 = x1 + TILE_SIZE
         y2 = y1 + TILE_SIZE
         feat = {
             "type": "Feature", "properties": {
                 "fid": num + 1,
-                "location": data,
+                "location": data.split(".zip")[0] + ".zip",
             },
             "geometry": {
                 "type": "Polygon", "coordinates": [[
@@ -114,25 +106,26 @@ def create_tindex_by_gdaltindex(data_list):
     return tindex_gpkg
 
 
-# check if we have lynx tool
-stream = os.popen("which lynx")
-output = stream.read()
-if output is None or output == "":
-    raise Exception("lynx required, please install lynx first")
+def inner_name(zip_url):
+    # DOM1_372_5828.zip -> dom1_33_372_5828_2_be.txt
+    base = os.path.basename(zip_url).replace(".zip", "")
+    _, x, y = base.split("_")
+    return f"dgm1_33_{x}_{y}_2_be{FILE_EXTENSION}"
 
-# full tile index with 35860 NRW DOPs
-get_data_cmd = (
-    f"lynx -dump -nonumbers -listonly '{URL}' | grep {GREP_STR} | grep 'zip$' "
-    f"| sed 's+^+{VSI_PART}+g'"
-)
-stream = os.popen(get_data_cmd)
-data_str = stream.read()
-data_list = []
-for data in data_str.split():
-    with RemoteZip(data.replace(VSI_PART, "")) as zip:
-        for zip_info in zip.infolist():
-            file_name = zip_info.filename
-            data_list.append(f"{data}/{file_name}")
+
+# get tile URLs from the atom feed
+with urllib.request.urlopen(URL, timeout=60) as response:
+    root = ET.fromstring(response.read())
+
+zip_urls = [
+    link.attrib["href"]
+    for link in root.findall(".//atom:link", ATOM_NS)
+    if link.attrib.get("href", "").lower().endswith(".zip")
+]
+data_list = [f"{VSI_PART}{x}/{inner_name(x)}" for x in zip_urls]
+if not data_list:
+    raise SystemExit("Not tiles found - check URL/feed structure")
+print(f"{len(data_list)} tiles found")
 
 # create tindex
 if GDALTINDEX:
