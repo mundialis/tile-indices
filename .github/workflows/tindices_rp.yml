@@ -1,0 +1,41 @@
+name: Update RP Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "RP Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+permissions:
+  contents: read
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-rp:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: RP
+      script: RP_DTM_tindex.py
+      tindex_file: rp_dtm_tindex_proj.gpkg.gz
+  
+  # iDSM
+  update-tindex-idsm-rp:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: iDSM
+      state: RP
+      script: RP_iDSM_tindex.py
+      tindex_file: rp_idsm_tindex_proj.gpkg.gz
+  
+  # DOP
+  update-tindex-dop-rp:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DOP
+      state: RP
+      script: rlp_DOP_RGBI_tindex.py
+      tindex_file: RLP_DOP20_tileindex.gpkg.gz
+      python_libs: "bs4 wget"

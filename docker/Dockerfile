@@ -16,4 +16,12 @@ COPY . /src/tile-indices
 
 WORKDIR /src/tile-indices
 
-# federal state specific python script, to be replaced within workflow yaml
+# federal state specific python/bash script, to be replaced within workflow yaml
+
+# Test: Unzip tindex and check with ogrinfo
+ARG TINDEX_PATH
+RUN set -e; \
+    gunzip -c "${TINDEX_PATH}" > /tmp/tindex_test.gpkg; \
+    ogrinfo -so -al /tmp/tindex_test.gpkg | tee /tmp/ogrinfo.txt; \
+    grep -Eq "Feature Count: [1-9]" /tmp/ogrinfo.txt; \
+    rm -f /tmp/tindex_test.gpkg /tmp/ogrinfo.txt
