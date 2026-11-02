@@ -32,7 +32,7 @@ os.chdir("DSM/BW/")
 def create_tindex_by_filename(tmp_json):
 
     # fetch data from tmp_json
-    with open("BW_DOM1.geojson", encoding="utf-8") as f:
+    with open(tmp_json, encoding="utf-8") as f:
         data = json.load(f)
 
     # create GeoJson
