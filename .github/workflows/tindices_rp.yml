@@ -38,4 +38,5 @@ jobs:
       state: RP
       script: rlp_DOP_RGBI_tindex.py
       tindex_file: RLP_DOP20_tileindex.gpkg.gz
+      alpine_packages: "py3-lxml"
       python_libs: "bs4 wget"

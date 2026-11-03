@@ -1,9 +1,15 @@
 FROM osgeo/grass-gis:current-alpine
 
-# install python and pip3 and gzip
-RUN apk add python3 py3-pip gzip
+# install python and pip3, gzip and ca-certificates
+RUN apk add python3 py3-pip gzip ca-certificates
 
 # federal state specific required apk installations, to be replaced within workflow yaml by setting alpine_packages
+
+# register additional CA certificates (e.g. for SH: the server does not send
+# its intermediate certificate, so curl fails with error 60 without it)
+# see docker/certs/README.md
+COPY docker/certs/ /usr/local/share/ca-certificates/
+RUN update-ca-certificates
 
 # python3 + pip3
 ENV PATH="/opt/venv/bin:$PATH"
