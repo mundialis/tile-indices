@@ -21,7 +21,7 @@ jobs:
       script: HE_DTM_tindex.py
       epsg_for_grass: 25832
       tindex_file: HE_DTM_tindex.gpkg.gz
-      python_libs: "remotezip"
+      python_libs: "remotezip requests"
 
   # DSM
   update-tindex-dsm-he:
@@ -32,9 +32,9 @@ jobs:
       script: HE_DSM_tindex.py
       epsg_for_grass: 25832
       tindex_file: HE_DSM_tindex.gpkg.gz
-      python_libs: "remotezip"
+      python_libs: "remotezip requests"
 
-  # DOP TODO
+  # DOP (not needed)
 
   # # ALKIS TODO fix
   # update-tindex-alkis-lk-he:

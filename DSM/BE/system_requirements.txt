@@ -1,3 +1,2 @@
-lynx 
-gzip
+lynx
 sed

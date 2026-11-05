@@ -1,0 +1,33 @@
+name: Update TH Tile Indices
+
+on:
+  workflow_call:
+    outputs:
+      artifact_name:
+        description: "TH Tile Indices"
+        value: ${{ jobs.build.outputs.artifact_name }}
+
+permissions:
+  contents: read
+
+jobs:
+
+  # DTM
+  update-tindex-dtm-th:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DTM
+      state: TH
+      script: TH_DTM_tindex.py
+      tindex_file: th_dtm_tindex_proj.gpkg.gz
+  
+  # DSM
+  update-tindex-dsm-th:
+    uses: ./.github/workflows/tindex_creation.yml
+    with:
+      type: DSM
+      state: TH
+      script: TH_DSM_tindex.py
+      tindex_file: th_dsm_tindex_proj.gpkg.gz
+  
+  # DOP (not needed)
