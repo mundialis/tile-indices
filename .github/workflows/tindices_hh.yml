@@ -20,7 +20,7 @@ jobs:
       state: HH
       script: HH_DTM_tindex.py
       tindex_file: hh_dgm1_tindex_proj.gpkg.gz
-      python_libs: "remotezip"
+      python_libs: requirements.txt
 
   # iDSM
   update-tindex-idsm-hh:
@@ -30,7 +30,7 @@ jobs:
       state: HH
       script: HH_iDSM_tindex.py
       tindex_file: hh_bdom_tindex_proj.gpkg.gz
-      python_libs: "remotezip"
+      python_libs: requirements.txt
 
   # DOP
   update-tindex-dop-hh:

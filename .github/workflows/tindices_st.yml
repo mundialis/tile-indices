@@ -24,5 +24,4 @@ jobs:
       state: ST
       script: ST_DOP_tindex.py
       tindex_file: st_dop_tindex_proj.gpkg.gz
-      python_libs: "requests"
-      alpine_packages: "gzip"
+      python_libs: requirements.txt

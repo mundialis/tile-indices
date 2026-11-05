@@ -51,11 +51,12 @@ jobs:
         PACKAGES: ${{ inputs.alpine_packages }}
         PY_LIBS: ${{ inputs.python_libs }}
       run: |
+        DIR="${TINDEX_TYPE}/${FEDERAL_STATE}"
         if [ -n "${PACKAGES}" ]; then
-          sed -i "s|# federal state specific required apk installations, to be replaced within workflow yaml by setting alpine_packages|RUN apk add ${PACKAGES}|g" docker/Dockerfile
+          sed -i "s|# federal state specific required apk installations, to be replaced within workflow yaml by setting alpine_packages|COPY ${DIR}/${PACKAGES} /tmp/system_requirements.txt\nRUN xargs apk add < /tmp/system_requirements.txt|g" docker/Dockerfile
         fi
         if [ -n "${PY_LIBS}" ]; then
-          sed -i "s|# federal state specific required pip installations, to be replaced within workflow yaml by setting python_libs|RUN pip3 install ${PY_LIBS}|g" docker/Dockerfile
+          sed -i "s|# federal state specific required pip installations, to be replaced within workflow yaml by setting python_libs|COPY ${DIR}/${PY_LIBS} /tmp/requirements.txt\nRUN pip3 install -r /tmp/requirements.txt|g" docker/Dockerfile
         fi
         case "${SCRIPT##*.}" in
           py)
