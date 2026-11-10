@@ -15,6 +15,10 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_be_bb.yml
+  hb:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tindices_hb.yml
   # TODO HE: tindex creation takes over 6 h so that the job is canceled
   # he:
   #   uses: ./.github/workflows/tindices_he.yml
@@ -22,6 +26,10 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_hh.yml
+  mv:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tindices_mv.yml
   ni:
     permissions:
       contents: read
@@ -30,14 +38,30 @@ jobs:
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_nw.yml
+  rp:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tindices_rp.yml
+  sh:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tindices_sh.yml
   sn:
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_sn.yml
+  st:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tindices_st.yml
+  th:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tindices_th.yml
 
   # commit all updated tile indices
   upload_tile_indices:
-    needs: [be-bb,hh,ni,nw,sn]
+    needs: [be-bb,hb,hh,mv,ni,nw,rp,sh,sn,st,th]
     permissions:
       contents: write
       actions: read

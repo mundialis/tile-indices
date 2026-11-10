@@ -20,7 +20,7 @@ jobs:
       state: NI
       script: NI_DTM_tindex.py
       tindex_file: NI_DTM_tindex_proj.gpkg.gz
-      python_libs: "wget"
+      python_libs: requirements.txt
 
   # DSM
   update-tindex-dsm-ni:
@@ -30,7 +30,7 @@ jobs:
       state: NI
       script: NI_DSM_tindex.py
       tindex_file: NI_DSM_tindex_proj.gpkg.gz
-      python_libs: "wget"
+      python_libs: requirements.txt
 
   # DOP
   update-tindex-dop-ni:
@@ -40,4 +40,4 @@ jobs:
       state: NI
       script: NI_DOP_tindex.py
       tindex_file: NI_DOP_tindex_proj.gpkg.gz
-      python_libs: "wget"
+      python_libs: requirements.txt

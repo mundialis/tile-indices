@@ -1,0 +1,5 @@
+lynx
+sed
+py3-pandas
+py3-shapely
+python3-dev
