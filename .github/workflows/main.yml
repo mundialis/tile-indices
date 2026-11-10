@@ -2,7 +2,7 @@ name: Update all Tile Indices
 
 on:
   push:
-    branches: [ main, workflows.update ]
+    branches: [ main ]
   schedule:
     # run tile index creation every month
     - cron: '0 1 10 * *'
