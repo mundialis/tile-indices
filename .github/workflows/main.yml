@@ -62,6 +62,9 @@ jobs:
   # commit all updated tile indices
   upload_tile_indices:
     needs: [be-bb,hb,hh,mv,ni,nw,rp,sh,sn,st,th]
+    # upload if jobs successfull or fail
+    # (update also if few federal states fail)
+    if: ${{ !cancelled() }}
     permissions:
       contents: write
       actions: read
