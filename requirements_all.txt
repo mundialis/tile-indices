@@ -1,6 +1,6 @@
 bs4
 geopandas==1.1.2
-pandas==2.2.0
+pandas==2.3.3
 pyogrio>=0.9.0
 remotezip
 requests
