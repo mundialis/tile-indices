@@ -12,10 +12,12 @@ permissions: {}
 
 jobs:
   be-bb:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_be_bb.yml
   hb:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_hb.yml
@@ -23,38 +25,47 @@ jobs:
   # he:
   #   uses: ./.github/workflows/tindices_he.yml
   hh:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_hh.yml
   mv:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_mv.yml
   ni:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_ni.yml
   nw:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_nw.yml
   rp:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_rp.yml
   sh:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_sh.yml
   sn:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_sn.yml
   st:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_st.yml
   th:
+    if: ${{ github.repository == 'mundialis/tile-indices' }}
     permissions:
       contents: read
     uses: ./.github/workflows/tindices_th.yml
@@ -64,7 +75,7 @@ jobs:
     needs: [be-bb,hb,hh,mv,ni,nw,rp,sh,sn,st,th]
     # upload if jobs successfull or fail
     # (update also if few federal states fail)
-    if: ${{ !cancelled() }}
+    if: ${{ github.repository == 'mundialis/tile-indices' && !cancelled() }}
     permissions:
       contents: write
       actions: read
